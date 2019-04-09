@@ -6,9 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!--  Javascript 넣기 -->
-<script language="javascript">
+<%-- <script language="javascript">
 function checkForm(frm) {
 	var password = frm.password.value;
 	var title = frm.title.value;
@@ -54,6 +57,51 @@ function checkForm(frm) {
 		<input type="text" name="content"><br>
 
 		<input type="button" value="전송" onclick="checkForm(this.form)">
-	</form>
+	</form> --%>
+<head>
+</head>
+
+<body>
+<div class="container">
+<br>
+<br>
+  <h2>글쓰기</h2>
+  <br>
+  <form class="form-inline" action="<%= request.getContextPath()/*ServletStudy*/ %>/board"
+		method="POST">
+		
+	<div class="form-group">
+    <label for="title" class="mb-2 mr-sm-2">제목:</label>
+    <input type="text" class="form-control mb-2 mr-sm-2"  name="title">
+    </div>
+    <br>
+    <br>
+    
+    <div class="form-group">
+    <label for="writer" class="mb-2 mr-sm-2">작성자</label>
+    <input type="writer" class="form-control mb-2 mr-sm-2" name="writer">
+    </div>
+    
+    <div class="form-group">
+    <label for="content" class="mb-2 mr-sm-2">내용</label>
+    <input type="text" class="form-control mb-2 mr-sm-2" name="content">
+    </div>
+    
+    <div class="form-group">
+    <label for="password" class="mb-2 mr-sm-2">비밀번호</label>
+    <input type="password" class="form-control mb-2 mr-sm-2" name="password">
+    </div>
+
+   
+<!--     <div class="form-group">
+    <label for="content" class="mb-2 mr-sm-2">내용</label>
+    <input type="content" class="form-control mb-2 mr-sm-2" name="content">
+    </div> -->
+    
+  <button type="submit" class="btn btn-primary mb-2">완료</button>
+  </form>
+</div>
+
+
 </body>
 </html>
