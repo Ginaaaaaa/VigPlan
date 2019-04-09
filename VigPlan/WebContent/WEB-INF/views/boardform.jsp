@@ -59,6 +59,7 @@ function checkForm(frm) {
 		<input type="button" value="전송" onclick="checkForm(this.form)">
 	</form> --%>
 <head>
+
 </head>
 
 <body>

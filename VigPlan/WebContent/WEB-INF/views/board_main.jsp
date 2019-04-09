@@ -68,6 +68,7 @@ for(BoardVo vo: list) {
 %>
 
 <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='board?a=form'">글쓰기</button>
+
 <!-- <input type="button" value="글쓰기" > -->
 </body>
 </html>
