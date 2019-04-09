@@ -17,18 +17,18 @@ function checkForm(frm) {
 
 	if(password.length == 0) {
 		alert('비번을 입력하세요.');
-		frm.password.focus(); // 커서를 이름 쪽으로 옮겨줌
+		//frm.password.focus(); // 커서를 이름 쪽으로 옮겨줌
 	} else if (title.length == 0) {
 		alert('제목을 입력해 주세요');
-		frm.title.focus();
+		//frm.title.focus();
 		
 	} else if (writer.length == 0) {
 		alert('작성자를 입력해 주세요');
-		frm.writer.focus();
+		//frm.writer.focus();
 		
 	} else if (content.length == 0) {
 		alert('내용을 입력해 주세요');
-		frm.content.focus();
+		//frm.content.focus();
 	}
 
 	else {
@@ -38,6 +38,7 @@ function checkForm(frm) {
 }
 
 </script>
+
 </head>
 <body>
 <form action="<%= request.getContextPath()/*ServletStudy*/ %>/board"

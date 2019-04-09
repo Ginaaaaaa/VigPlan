@@ -1,23 +1,43 @@
 package com.vigplan.vo;
 
 public class BoardVo {
-	private Long id;
+	
+	private String id;
 	private String password;
 	private String writer;
 	private String title;
 	private String content;
-	private int view_cnt;
+	private String view_cnt;
 	private String reg_date;
+
 	
 	
-	public Long getId() {
+
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	
+
+	public String getView_cnt() {
+		return view_cnt;
+	}
+
+	public void setView_cnt(String view_cnt) {
+		this.view_cnt = view_cnt;
+	}
+
+	public String getReg_date() {
+		return reg_date;
+	}
+
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -49,27 +69,14 @@ public class BoardVo {
 		this.content = content;
 	}
 
-	public int getView_cnt() {
-		return view_cnt;
-	}
-
-	public void setView_cnt(int view_cnt) {
-		this.view_cnt = view_cnt;
-	}
-
-	public String getReg_date() {
-		return reg_date;
-	}
-
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
-	}
-
 	@Override
 	public String toString() {
 		return "BoardVo [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", view_cnt="
 				+ view_cnt + ", reg_date=" + reg_date + "]";
 	}
+
+
+
 
 
 

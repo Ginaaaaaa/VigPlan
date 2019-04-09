@@ -26,16 +26,16 @@ public class BoardDao extends BaseDao {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = "SELECT id, title, writer, content, view_cnt, reg_date FROM vigteam_board";
+			String sql = "SELECT id, title, writer, content, view_cnt, reg_date FROM vigteam_board ORDER BY id DESC";
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
 				BoardVo vo = new BoardVo();
-				vo.setId(rs.getLong(1));
+				vo.setId(rs.getString(1));
 				vo.setTitle(rs.getString(2));
 				vo.setWriter(rs.getString(3));
 				vo.setContent(rs.getString(4));
-				vo.setView_cnt(rs.getInt(5));
+				vo.setView_cnt(rs.getString(5));
 				vo.setReg_date(rs.getString(6));
 				list.add(vo);
 				
@@ -75,16 +75,16 @@ public class BoardDao extends BaseDao {
 		
 		try {
 				conn = getConnection();
-				String sql = "INSERT INTO vigteam_board VALUES(seq_log_pk.nextval, ? , ? , ? , ? , default , default )";
+				String sql = "INSERT INTO vigteam_board (id, pw, title, writer, content, view_cnt, reg_date) VALUES(seq_brd_pk.nextval, ? , ? , ? ,?, default, sysdate)";
 				
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setLong(1, vo.getId());
-				pstmt.setString(2, vo.getPassword());
-				pstmt.setString(3, vo.getTitle());
-				pstmt.setString(4, vo.getWriter());
-				pstmt.setString(5, vo.getContent());
-				pstmt.setInt(6,vo.getView_cnt());
-				pstmt.setString(7, vo.getReg_date());
+
+				pstmt.setString(1, vo.getPassword());
+				pstmt.setString(2, vo.getTitle());
+				pstmt.setString(3, vo.getWriter());
+				pstmt.setString(4, vo.getContent());
+
+				
 				
 				insertedCount = pstmt.executeUpdate();
 				

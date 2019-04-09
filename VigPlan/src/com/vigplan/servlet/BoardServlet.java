@@ -41,19 +41,24 @@ public class BoardServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
+		
 		String password = req.getParameter("password");
 		String title = req.getParameter("title");
 		String writer = req.getParameter("writer");
 		String content = req.getParameter("content");
 		
+		
 		resp.setContentType("text/html;charset=UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		
 		BoardVo vo = new BoardVo();
+	
 		vo.setPassword(password);
 		vo.setTitle(title);
 		vo.setWriter(writer);
 		vo.setContent(content);
+
+
 		
 
 //		
