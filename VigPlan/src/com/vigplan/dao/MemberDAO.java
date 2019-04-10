@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 
 import com.vigplan.vo.MemberVO;
 
-public class MemberDAO {
+public class MemberDAO extends BaseDao {
 	
 	public static final int MEMBER_NONEXISTENT = 0;
 	public static final int MEMBER_EXISTENT = 1;
@@ -19,14 +19,8 @@ public class MemberDAO {
 	public static final int MEMBER_LOGIN_SUCCESS = 1;
 	public static final int MEMBER_LOGIN_IS_NOT = -1;
 	
-	private static MemberDAO instance = new MemberDAO();
-	
-	private MemberDAO() {
-		
-	}
-	
-	public static MemberDAO getInstance() {
-		return instance;
+	private MemberDAO(String dbuser, String dbpass) {
+		super(dbuser, dbpass);
 	}
 	
 	public int insertMember(MemberVO vo) {
@@ -43,7 +37,7 @@ public class MemberDAO {
 			pstmt.setString(2,  vo.getPw());
 			pstmt.setString(3,  vo.getName());
 			pstmt.setString(4,  vo.geteMail());
-			pstmt.setString(5,  vo.getrDate());
+//			pstmt.setString(5,  vo.getrDate());
 			pstmt.executeUpdate();
 			ri = MemberDAO.MEMBER_JOIN_SUCCESS;
 		} catch (Exception e) {
@@ -142,7 +136,7 @@ public class MemberDAO {
 		try {
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
-			pstmt = setString(1, id);
+			pstmt.setString(1, id);
 			set = pstmt.executeQuery();
 			
 			if(set.next()) {
@@ -151,7 +145,7 @@ public class MemberDAO {
 				vo.setPw(set.getString("pw"));
 				vo.setName(set.getString("name"));
 				vo.seteMail(set.getString("eMail"));
-				vo.setrDate(set.getString("rDate"));
+//				vo.setrDate(set.getString("rDate"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,21 +189,6 @@ public class MemberDAO {
 		
 		return ri;
 	}
-	
-	private Connection getConnection() {
-		
-		Context context = null;
-		DataSource dataSource = null;
-		Connection connection = null;
-		try{
-		dataSource = (DataSource)context.lookup("java:comp/env/jdbc/Oracle12c");
-		connection = dataSource.getConnection();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	
-	return connection;
-}
 
 }
 
