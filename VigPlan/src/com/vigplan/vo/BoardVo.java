@@ -2,31 +2,31 @@ package com.vigplan.vo;
 
 public class BoardVo {
 	
-	private String id;
+	private Long id;
 	private String password;
 	private String writer;
 	private String title;
 	private String content;
-	private String view_cnt;
+	private Long view_cnt;
 	private String reg_date;
 
 	
 	
 
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getView_cnt() {
+	public Long getView_cnt() {
 		return view_cnt;
 	}
 
-	public void setView_cnt(String view_cnt) {
+	public void setView_cnt(Long view_cnt) {
 		this.view_cnt = view_cnt;
 	}
 

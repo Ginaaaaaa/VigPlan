@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.vigplan.vo.BoardVo;
 
-public class BoardDao extends BaseDao {
+public class BoardDao extends BaseDao implements IBoardDao {
 
 	public BoardDao(String dbuser, String dbpass) {
 		super(dbuser, dbpass);
@@ -31,11 +31,11 @@ public class BoardDao extends BaseDao {
 			
 			while(rs.next()) {
 				BoardVo vo = new BoardVo();
-				vo.setId(rs.getString(1));
+				vo.setId(rs.getLong(1));
 				vo.setTitle(rs.getString(2));
 				vo.setWriter(rs.getString(3));
 				vo.setContent(rs.getString(4));
-				vo.setView_cnt(rs.getString(5));
+				vo.setView_cnt(rs.getLong(5));
 				vo.setReg_date(rs.getString(6));
 				list.add(vo);
 				
@@ -102,5 +102,23 @@ public class BoardDao extends BaseDao {
 		}
 		//	TODO: 데이터베이스에 BoardVo(vo) 저장
 		return insertedCount;
+	}
+
+	@Override
+	public BoardVo getBoardItem(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateBoard(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteBoardItem(Long id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

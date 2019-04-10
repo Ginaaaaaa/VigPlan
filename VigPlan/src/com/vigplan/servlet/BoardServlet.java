@@ -28,11 +28,11 @@ public class BoardServlet extends BaseServlet {
 			List<BoardVo> list = dao.getAllLogs();
 			req.setAttribute("list", list);
 			RequestDispatcher rd =
-					req.getRequestDispatcher("/WEB-INF/views/board_main.jsp");
+					req.getRequestDispatcher("/WEB-INF/views/board/board_main.jsp");
 			rd.forward(req, resp);
 		} else if ("form".equals(action)) {
 			RequestDispatcher rd =
-					req.getRequestDispatcher("/WEB-INF/views/boardform.jsp");
+					req.getRequestDispatcher("/WEB-INF/views/board/boardform.jsp");
 			rd.forward(req, resp);
 		}
 	}
@@ -47,9 +47,9 @@ public class BoardServlet extends BaseServlet {
 		String writer = req.getParameter("writer");
 		String content = req.getParameter("content");
 		
-		
-		resp.setContentType("text/html;charset=UTF-8");
-		resp.setCharacterEncoding("UTF-8");
+		//	필요 없음: 표시용 서블릿이 아님
+//		resp.setContentType("text/html;charset=UTF-8");
+//		resp.setCharacterEncoding("UTF-8");
 		
 		BoardVo vo = new BoardVo();
 	
