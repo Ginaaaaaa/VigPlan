@@ -44,6 +44,7 @@ public class BoardServlet extends BaseServlet {
 			rd.forward(req, resp);
 
 		} else if ("edit".equals(action)) {
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
 			rd.forward(req, resp);
 
@@ -87,16 +88,21 @@ public class BoardServlet extends BaseServlet {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
 
 			// 메인창에서 title 클릭시 넘어가는 창(내용 보여주기)
-		} else if ("edit".equals(action)) {
+		} else if ("editer".equals(action)) {
+			String id = req.getParameter("id");
+			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			
 			BoardVo vo = new BoardVo();
-			vo.getId();
+			vo.setId(Long.valueOf(id));
+			vo.setTitle(title);
 			vo.setContent(content);
+			
 			BoardDao dao = new BoardDao(dbuser,dbpass);
 			dao.updateBoard(vo);
 			
-			req.setAttribute("correct", vo);
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
+	
 		
 			
 			

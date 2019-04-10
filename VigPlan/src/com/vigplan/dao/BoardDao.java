@@ -153,12 +153,25 @@ public class BoardDao extends BaseDao implements IBoardDao {
 	//게시판 내용 수정	
 	@Override
 	public int updateBoard(BoardVo vo) {
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		BoardVo line = null;
+		int update = 0;
+		
 		
 		try {
+			conn = getConnection();
+			String sql = "UPDATE vigteam_board SET title = '?', content = '?' WHERE id = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setLong(3, vo.getId());
+			
+			update = pstmt.executeUpdate();
+			System.out.println(update);
+	
 			
 		} catch(Exception e) {	
 		} finally {
@@ -173,7 +186,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 			
 		}
 		
-		return 0;
+		return update;
 	}
 
 	//게시판 내용 삭제

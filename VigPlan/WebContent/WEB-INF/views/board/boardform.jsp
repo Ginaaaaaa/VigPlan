@@ -73,27 +73,27 @@ function checkForm(frm) {
 		<br>
 		<form class="form-inline"
 			action="<%=request.getContextPath()/*ServletStudy*/%>/board"
-			method="POST">
+			method="POST"> 
 			<input type="hidden" name="a" value="write">
 			<div class="form-group">
-				<label for="title" class="mb-2 mr-sm-2">제목:</label> 
-				<input type="text" class="form-control mb-2 mr-sm-2" name="title">
+				<label for="title" class="mb-2 mr-sm-2">제목:</label> <input
+					type="text" class="form-control mb-2 mr-sm-2" name="title">
 			</div>
 			<br> <br>
 
 			<div class="form-group">
-				<label for="writer" class="mb-2 mr-sm-2">작성자</label> 
-				<input type="text" class="form-control mb-2 mr-sm-2" name="writer">
+				<label for="writer" class="mb-2 mr-sm-2">작성자</label> <input
+					type="text" class="form-control mb-2 mr-sm-2" name="writer">
 			</div>
 
 			<div class="form-group">
-				<label for="content" class="mb-2 mr-sm-2">내용</label> 
-				<input type="text" class="form-control mb-2 mr-sm-2" name="content">
+				<label for="content" class="mb-2 mr-sm-2">내용</label> <input
+					type="text" class="form-control mb-2 mr-sm-2" name="content">
 			</div>
 
 			<div class="form-group">
-				<label for="password" class="mb-2 mr-sm-2">비밀번호</label> 
-				<input type="password" class="form-control mb-2 mr-sm-2" name="password">
+				<label for="password" class="mb-2 mr-sm-2">비밀번호</label> <input
+					type="password" class="form-control mb-2 mr-sm-2" name="password">
 			</div>
 
 

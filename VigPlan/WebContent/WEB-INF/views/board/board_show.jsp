@@ -46,7 +46,7 @@ BoardVo item = (BoardVo)request.getAttribute("item");
 			
 			</tbody>
 			</table>
-			<a href="<%=request.getContextPath()%>/board?a=edit"
+			<a href="<%=request.getContextPath()%>/board?a=edit&id=<%=item.getId()%>"
 			class="btn btn-secondary btn-sm">수정</a>
 			
 			<a href="<%=request.getContextPath()%>/board?a=delete&id=<%=item.getId()%>"
