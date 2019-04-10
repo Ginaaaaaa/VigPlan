@@ -156,24 +156,16 @@ public class BoardDao extends BaseDao implements IBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		BoardVo line = null;
 		
 		try {
-		conn = getConnection();
-		String sql = "UPDATE vigteam_board SET content = ? WHERE id = ?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, vo.getContent());
-		pstmt.setLong(2, vo.getId());
-		rs = pstmt.executeQuery();
-		
-		
-		} catch(Exception e){
-			 
+			
+		} catch(Exception e) {	
 		} finally {
 			try {
 				if (pstmt != null) pstmt.close();
-			} catch (Exception e) {
-				
-			} try {
+			} catch (Exception e) {}
+			try {
 				if (conn != null) conn.close();
 			} catch (Exception e) {
 				

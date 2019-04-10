@@ -80,14 +80,25 @@ public class BoardServlet extends BaseServlet {
 			vo.setContent(content);
 
 			BoardDao dao = new BoardDao(dbuser, dbpass);
-			int insertedCount = dao.insertBoard(vo);
+			/*int insertedCount = */dao.insertBoard(vo);
 
-			System.out.println("SUCCESS?:" + (insertedCount == 1));
+			//System.out.println("SUCCESS?:" + (insertedCount == 1));
 
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
 
 			// 메인창에서 title 클릭시 넘어가는 창(내용 보여주기)
 		} else if ("edit".equals(action)) {
+			String content = req.getParameter("content");
+			
+			BoardVo vo = new BoardVo();
+			vo.getId();
+			vo.setContent(content);
+			BoardDao dao = new BoardDao(dbuser,dbpass);
+			dao.updateBoard(vo);
+			
+			req.setAttribute("correct", vo);
+		
+			
 			
 	
 
