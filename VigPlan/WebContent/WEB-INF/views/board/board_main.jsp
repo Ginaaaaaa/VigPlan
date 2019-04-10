@@ -60,7 +60,7 @@ for(BoardVo vo: list) {
 				%>
 				<tr>
 					<td><%=vo.getId()%></td>
-					<td><%=vo.getTitle()%></td>
+					<td><a href="<%= request.getContextPath() %>/board?a=show&id=<%=vo.getId()%>"><%=vo.getTitle()%></a></td>
 					<td><%=vo.getWriter()%></td>
 					<td><%=vo.getView_cnt()%></td>
 					<td><%=vo.getReg_date()%></td>

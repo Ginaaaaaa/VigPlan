@@ -17,8 +17,7 @@ public class BaseServlet extends HttpServlet {
 		dbuser = context.getInitParameter("dbuser");
 		dbpass = context.getInitParameter("dbpass");
 		
-		System.out.println("dbuser:" + dbuser);
-		System.out.println("dbpass:" + dbpass);
+
 	}
 
 }
