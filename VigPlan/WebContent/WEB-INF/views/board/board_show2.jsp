@@ -1,6 +1,27 @@
 <%@page import="com.vigplan.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<script language = "javascript">
+
+function deleteCheck()
+  {
+   var form = document.deleteform;
+   
+   if( !form.password.value )
+   {
+    alert( "비밀번호를 적어주세요" );
+    form.password.focus();
+    return;
+   }
+ 		form.submit();
+  }
+ </script>
+ 				<%
+					BoardVo item = (BoardVo) request.getAttribute("item");
+					//object로 받아온 것 바꿔줌
+				%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,6 +35,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+
 </head>
 <body>
 	<div class="container">
@@ -31,10 +53,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-					BoardVo item = (BoardVo) request.getAttribute("item");
-					//object로 받아온 것 바꿔줌
-				%>
+
 				<tr>
 					<td><%=item.getTitle()%></td>
 					<td><%=item.getWriter()%></td>
