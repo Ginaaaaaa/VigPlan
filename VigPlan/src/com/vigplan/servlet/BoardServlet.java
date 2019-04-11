@@ -50,6 +50,8 @@ public class BoardServlet extends BaseServlet {
 			req.setAttribute("item", vo);
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
 			rd.forward(req, resp);
+			
+			
 
 		} else if ("delete".equals(action)) {
 			String id = req.getParameter("id");
