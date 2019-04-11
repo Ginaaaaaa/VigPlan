@@ -54,6 +54,7 @@ public class BoardServlet extends BaseServlet {
 			
 
 		} else if ("delete".equals(action)) {
+			
 			String id = req.getParameter("id");
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 			dao.deleteBoardItem(Long.valueOf(id));
@@ -106,6 +107,8 @@ public class BoardServlet extends BaseServlet {
 			}
 			if (content == null || content.length() == 0) {
 				content = vo.getContent();
+			} else if ("password".equals(action)) {
+				
 			}
 			
 		

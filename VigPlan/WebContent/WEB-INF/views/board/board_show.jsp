@@ -1,6 +1,7 @@
 <%@page import="com.vigplan.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.vigplan.vo.BoardVo"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,11 +17,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<div class="container">
 
 		<br> <br>
 		<h2>내용</h2>
 		<br> <br>
+	
 		<table class="table">
 			<thead>
 				<tr>
@@ -55,7 +58,6 @@
 			class="btn btn-secondary btn-sm">삭제</a> --%>
 
 		<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
-			class="btn btn-secondary btn-sm" data-toggle="modal"
 				data-target="#myModal1">수정</button
 				> 
 <%-- 			<a href="<%=request.getContextPath()%>/board?a=delete&id=<%=item.getId()%>"
@@ -113,9 +115,9 @@
 					<div class="modal-footer">
 
 
-						<a
-							href="<%=request.getContextPath()%>/board?a=delete&id=<%=item.getId()%>"
-							button type="button" class="btn btn-primary">YES</a>
+						<a href="<%=request.getContextPath()%>/board?a=delete&id=<%=item.getId()%>"
+						<%-- 	href="<%=request.getContextPath()%>/pwchk.jsp" --%>
+							type="button" class="btn btn-primary">YES</a>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
 					</div>
 
