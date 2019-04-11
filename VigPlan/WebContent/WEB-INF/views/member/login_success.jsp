@@ -12,7 +12,7 @@
 <%
 MemberVO vo = (MemberVO)session.getAttribute("login_info");
 %>
-<h2><%= vo.getNickName() %>님 로그인 되었습니다.</h2><br>
+<h2><%= vo.getNickname() %>님 로그인 되었습니다.</h2><br>
 <input type="button" value="로그아웃" onclick="location.href=/member_servlet/logout'"><p>
 <input type="button" value="회원정보 조회" onclick="location.href=/member_servlet/getMemberInfo'"><p>
 </body>

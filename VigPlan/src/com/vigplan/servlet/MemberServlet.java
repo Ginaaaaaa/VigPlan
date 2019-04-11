@@ -15,16 +15,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.vigplan.dao.MemberDao;
 import com.vigplan.vo.MemberVO;
 
 @WebServlet("/member")
 public class MemberServlet extends BaseServlet {
-//	private Connection conn = null;
-//	private PreparedStatement psmt = null;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-//		doPost(request, response);
+		
 		String action = request.getParameter("a");
 		
 		if (action == null) {
@@ -32,15 +31,26 @@ public class MemberServlet extends BaseServlet {
 			rd.forward(request, response);
 		} else if ("success".equals(action)) {
 			//	가입 성공 VIEW JSP로 포워드
+			request.getRequestDispatcher("/WEB-INF/views/member/register_success.jsp");
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-		String nickName = request.getParameter("nickName");
-		String eMail = request.getParameter("eMail");
-		String rDate = request.getParameter("rDate");
+		String password = request.getParameter("pw");
+		String nickname = request.getParameter("nickname");
+		String email = request.getParameter("email");
+//		String rDate = request.getParameter("rDate");
+		
+		//	TODO: ERROR 체크
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		vo.setPw(password);
+		vo.setNickname(nickname);
+		vo.setEmail(email);
+		
+		MemberDao dao = new MemberDao(dbuser, dbpass);
+		int result = dao.insertMember(vo);
 		
 		/*
 		 * => DAO로 추출
@@ -79,7 +89,6 @@ public class MemberServlet extends BaseServlet {
 			rd.forward(request, response);
 		}
 		*/
-		
 		//	가입 절차 완료 -> /member?a=success 리다이렉트
 	}
 	

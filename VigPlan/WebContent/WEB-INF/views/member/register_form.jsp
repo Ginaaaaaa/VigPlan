@@ -7,30 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/member_servlet/register_member2" method="post">
+	<form action="/VigPlan/register_member" method="post">
 		<table border="2">
 			<tr align="center">
-				<td colspan="2">íìê°ì<hr></td>
 			</tr>
 			<tr>
 			<td>ID</td>
-			<td><input type="text" value="1111" size="20"></td>
+			<td><input type="text" name="id" value="1111" size="20"></td>
 			</tr>
 			<tr>
 			<td>Password></td>
-			<td><input type="password" name="password" value="1111" size="21"></td>
+			<td><input type="password" name="pw" value="1111" size="21"></td>
 			</tr>
 			<tr>
-			<td>ëë¤ì</td>
-			<td><input type="text" name="nickName" value="ë°ëªì" size="20"></td>
+			<td>Nickname</td>
+			<td><input type="text" name="nickname" value="둘리" size="20"></td>
 			</tr>
 			<tr>
-			<td>ì´ë©ì¼></td>
-			<td><input type="text" name="eMail" value="msp@naver.com" size="20"></td>
+			<td>Email</td>
+			<td><input type="text" name="email" value="msp@naver.com" size="20"></td>
 			</tr>
 			<tr align="center">
-			<td colspan="2"><input type="submit" value="ì ì¡">
-			<input type="reset" value="ë¤ììì±"></td>
+			<td colspan="2"><input type="submit" value="확인">
+			<input type="reset" value="취소"></td>
 		</table>
 	</form>
 </body>

@@ -9,7 +9,14 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 	@Override
 	public int insertMember(MemberVO vo) {
-		// TODO Auto-generated method stub
+		// INSERT Logic
+		
 		return 0;
+	}
+
+	@Override
+	public MemberVO getMember(String id, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

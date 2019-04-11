@@ -15,11 +15,11 @@
 <h2>가입 환영합니다.</h2>
 <h3>가입 시 입력하신 정보입니다.</h3>
 ID :<%=vo.getId() %><br>
-Password : <%=vo.getPassword() %><br>
-닉네임 : <%vo.getNickName(); %>
-이메일 : <%=vo.geteMail() %>
-<input type="button" value="로그인" onclick="location.href=/member_servlet/login_form.jsp'"><p>
-<input type="button" value="메인페이지" onclick="location.href=/member_servlet/index.html'"><p>
+Password : <%=vo.getPw() %><br>
+닉네임 : <%vo.getNickname(); %>
+이메일 : <%=vo.getEmail() %>
+<input type="button" value="로그인" onclick="location.href=/VigPlan/WEB-INF/views/memeber/login_form.jsp'"><p>
+<input type="button" value="메인페이지" onclick="location.href=/VigPlan/WEB-INF/views/memeber/index_html'"><p>
 
 
 </body>
