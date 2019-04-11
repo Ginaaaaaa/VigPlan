@@ -1,22 +1,34 @@
 package com.vigplan.vo;
 
 public class MemberVO {
+	private Long no;
 	private String id;
-	private String password;
-	private String nickName;
-	private String eMail;
-	private String rDate;
+	private String pw;
+	private String nickname;
+	private String email;
+	private String regdate;
 
+	//	VO에 기본 생성자는 꼭 있어야 되고
+	//	클래스 내에 생성자 없으면 Java 컴파일러가 기본생성자를 만든다
 	public MemberVO() {
-
+		super();
 	}
 
-	public MemberVO(String id, String password, String nickName, String eMail, String rDate) {
+	public MemberVO(Long no, String id, String pw, String nickname, String email) {
+		super();
+		this.no = no;
 		this.id = id;
-		this.password = password;
-		this.nickName = nickName;
-		this.eMail = eMail;
-		this.rDate = rDate;
+		this.pw = pw;
+		this.nickname = nickname;
+		this.email = email;
+	}
+
+	public Long getNo() {
+		return no;
+	}
+
+	public void setNo(Long no) {
+		this.no = no;
 	}
 
 	public String getId() {
@@ -27,77 +39,42 @@ public class MemberVO {
 		this.id = id;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPw() {
+		return pw;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
-	public String geteMail() {
-		return eMail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getrDate() {
-		return rDate;
+	public String getRegdate() {
+		return regdate;
 	}
 
-	public void setrDate(String rDate) {
-		this.rDate = rDate;
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "회원 정보 [아이디=" + id + ", 비밀번호=" + password + ", 닉네임=" + nickName + 
-				", 이메일=" + eMail +  ", 가입일=" + rDate + "]";
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MemberVO other = (MemberVO) obj;
-		if (id == null) {
-			if(other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (nickName == null) {
-			if(other.nickName != null)
-				return false;
-		} else if (!nickName.equals(other.nickName))
-			return false;
-		if(password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
+		return "MemberVO [no=" + no + ", id=" + id + ", pw=" + pw + ", nickname=" + nickname + ", email=" + email
+				+ ", regdate=" + regdate + "]";
 	}
 }
 

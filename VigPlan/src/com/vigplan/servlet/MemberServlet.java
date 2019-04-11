@@ -6,21 +6,33 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.jws.WebService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vigplan.vo.MemberVO;
 
-public class MemberServlet extends HttpServlet {
-	private Connection conn = null;
-	private PreparedStatement psmt = null;
+@WebServlet("/member")
+public class MemberServlet extends BaseServlet {
+//	private Connection conn = null;
+//	private PreparedStatement psmt = null;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+//		doPost(request, response);
+		String action = request.getParameter("a");
+		
+		if (action == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/register_form.jsp");
+			rd.forward(request, response);
+		} else if ("success".equals(action)) {
+			//	가입 성공 VIEW JSP로 포워드
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -30,6 +42,8 @@ public class MemberServlet extends HttpServlet {
 		String eMail = request.getParameter("eMail");
 		String rDate = request.getParameter("rDate");
 		
+		/*
+		 * => DAO로 추출
 		String sql = "insert into member values(?,?,?,?,?)";
 		
 		ServletContext sct = getServletContext();
@@ -64,6 +78,9 @@ public class MemberServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(resURL);
 			rd.forward(request, response);
 		}
+		*/
+		
+		//	가입 절차 완료 -> /member?a=success 리다이렉트
 	}
 	
 }

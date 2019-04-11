@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import com.vigplan.vo.MemberVO;
 
+//	TODO: 서블릿 요청을 만들고(extends BaseServlet 구조)
+//	TODO: 데이터 접속부는 모두 DAO로 추출
 public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,6 +33,7 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
+		/*
 		// Business Login 처리
 		ServletContext sct = getServletContext();
 		String url = sct.getInitParameter("url");
@@ -81,6 +84,7 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rdp = request.getRequestDispatcher(resURL);
 			rdp.forward(request, response);
 		}
+		*/
 	}
 }
 
