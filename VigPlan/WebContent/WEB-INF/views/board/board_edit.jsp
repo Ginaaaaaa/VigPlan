@@ -24,6 +24,7 @@
 		<br>
 		<form class="form-inline" action="<%=request.getContextPath()%>/board"
 			method="POST">
+			<input type="hidden" name="id" value="<%= item.getId() %>">
 			<input type="hidden" name="a" value="editer">
 			<div class="form-group">
 				<label for="title" class="mb-2 mr-sm-2">제목</label> <input
@@ -35,10 +36,11 @@
 					type="text" class="form-control mb-2 mr-sm-2" name="content">
 			</div>
 
-			<div class="form-group">
+			<!-- div class="form-group">
 				<label for="id" class="mb-2 mr-sm-2">id:</label> <input type="text"
 					class="form-control mb-2 mr-sm-2" name="id">
-			</div>
+			</div -->
+			
 
 			<!--     <div class="form-group">
     <label for="content" class="mb-2 mr-sm-2">내용</label>

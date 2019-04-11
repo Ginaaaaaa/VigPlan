@@ -44,7 +44,10 @@ public class BoardServlet extends BaseServlet {
 			rd.forward(req, resp);
 
 		} else if ("edit".equals(action)) {
-			
+			String id = req.getParameter("id");
+			BoardDao dao = new BoardDao(dbuser, dbpass);
+			BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
+			req.setAttribute("item", vo);
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
 			rd.forward(req, resp);
 
@@ -79,38 +82,55 @@ public class BoardServlet extends BaseServlet {
 			vo.setTitle(title);
 			vo.setWriter(writer);
 			vo.setContent(content);
+			
 
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 			/*int insertedCount = */dao.insertBoard(vo);
 
-			//System.out.println("SUCCESS?:" + (insertedCount == 1));
+//			System.out.println("SUCCESS?:" + (insertedCount == 1));
 
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
 
 			// 메인창에서 title 클릭시 넘어가는 창(내용 보여주기)
 		} else if ("editer".equals(action)) {
+			
+			BoardDao dao = new BoardDao(dbuser,dbpass);
+		
 			String id = req.getParameter("id");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
+				
+			BoardVo vo = dao.getBoardItem(Long.valueOf(id));
 			
-			BoardVo vo = new BoardVo();
+			if (title == null || title.length() == 0) {
+				title = vo.getTitle();
+			}
+			if (content == null || content.length() == 0) {
+				content = vo.getContent();
+			}
+			
+		
+//			
+//			System.out.println(vo.toString());
+//		
 			vo.setId(Long.valueOf(id));
 			vo.setTitle(title);
 			vo.setContent(content);
 			
-			BoardDao dao = new BoardDao(dbuser,dbpass);
-			dao.updateBoard(vo);
 			
+			
+			System.out.println(vo.toString());		
+//			vo.setWriter(writer);
+//			vo.setReg_date(reg_date);
+//			vo.setview_cnt(view_cnt);
+	
+			int result = dao.updateBoard(vo);
+			System.out.println("SUCCESS?:" + (result == 1));
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
-	
-		
-			
-			
-	
+//			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_main.jsp");
+//			rd.forward(req, resp);
 
-				// 메인창에서 title 클릭시 넘어가는 창(내용 보여주기)
-
-			// TODO: 게시물 수정 기능
+			// TODO: board 리스트로 다시 리다이렉트
 		}
 		//
 	}

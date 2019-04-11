@@ -28,8 +28,8 @@ public class BoardDao extends BaseDao implements IBoardDao {
 			stmt = conn.createStatement();
 			String sql = "SELECT id, title, writer, content, view_cnt, reg_date FROM vigteam_board ORDER BY id DESC";
 			rs = stmt.executeQuery(sql);
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				BoardVo vo = new BoardVo();
 				vo.setId(rs.getLong(1));
 				vo.setTitle(rs.getString(2));
@@ -38,7 +38,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 				vo.setView_cnt(rs.getLong(5));
 				vo.setReg_date(rs.getString(6));
 				list.add(vo);
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,162 +64,169 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		}
 		return list;
-		
+
 	}
-	
-	//	저장 메서드
+
+	// 저장 메서드
 	public int insertBoard(BoardVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int insertedCount = 0;
-		
+
 		try {
-				conn = getConnection();
-				String sql = "INSERT INTO vigteam_board (id, pw, title, writer, content, view_cnt, reg_date) VALUES(seq_brd_pk.nextval, ? , ? , ? ,?, default, sysdate)";
-				
-				pstmt = conn.prepareStatement(sql);
+			conn = getConnection();
+			String sql = "INSERT INTO vigteam_board (id, pw, title, writer, content, view_cnt, reg_date) VALUES(seq_brd_pk.nextval, ? , ? , ? ,?, default, sysdate)";
 
-				pstmt.setString(1, vo.getPassword());
-				pstmt.setString(2, vo.getTitle());
-				pstmt.setString(3, vo.getWriter());
-				pstmt.setString(4, vo.getContent());
+			pstmt = conn.prepareStatement(sql);
 
-				
-				
-				insertedCount = pstmt.executeUpdate();
-				System.out.println(insertedCount);
-				
+			pstmt.setString(1, vo.getPassword());
+			pstmt.setString(2, vo.getTitle());
+			pstmt.setString(3, vo.getWriter());
+			pstmt.setString(4, vo.getContent());
+
+			insertedCount = pstmt.executeUpdate();
+			System.out.println(insertedCount);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (pstmt != null) pstmt.close();
-			} catch (Exception e) {}
-			try {
-				if (conn != null) conn.close();
+				if (pstmt != null)
+					pstmt.close();
 			} catch (Exception e) {
-				
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+
 			}
 		}
-		
+
 		return insertedCount;
-		
+
 	}
 
-	//DB에서 특정 id 정보 가져오는 메소드
+	// DB에서 특정 id 정보 가져오는 메소드
 	@Override
 	public BoardVo getBoardItem(Long id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		BoardVo line = null;
-		
+
 		try {
 			conn = getConnection();
-			
+
 			String sql = "SELECT title, writer, reg_date, content FROM vigteam_board where id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, id);
 			rs = pstmt.executeQuery();
 			rs.next();
-			if(rs!=null) {
-				
+			if (rs != null) {
+
 				line = new BoardVo();
 				line.setId(id);
 				line.setTitle(rs.getString(1));
 				line.setWriter(rs.getString(2));
 				line.setReg_date(rs.getString(3));
 				line.setContent(rs.getString(4));
-				
+
 			}
-			
-		} catch(Exception e){
-			
+
+		} catch (Exception e) {
+
 		} finally {
 			try {
-				if (pstmt != null) pstmt.close();
-			} catch (Exception e) {}
-			try {
-				if (conn != null) conn.close();
+				if (pstmt != null)
+					pstmt.close();
 			} catch (Exception e) {
-				
 			}
-			
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+
+			}
+
 		}
 		return line;
-		
+
 	}
-		
-	//게시판 내용 수정	
+
+	// 게시판 내용 수정
 	@Override
 	public int updateBoard(BoardVo vo) {
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int update = 0;
-		
-		
+		int result = 0;
+		// ResultSet rs = null;
+
 		try {
 			conn = getConnection();
-			String sql = "UPDATE vigteam_board SET title = '?', content = '?' WHERE id = ?";
+			String sql = "UPDATE vigteam_board SET title = ?, content = ?, view_cnt = view_cnt + 1 WHERE id = ? ";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
 			pstmt.setLong(3, vo.getId());
-			
-			update = pstmt.executeUpdate();
-			System.out.println(update);
-	
-			
-		} catch(Exception e) {	
+
+			result = pstmt.executeUpdate();
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
-				if (pstmt != null) pstmt.close();
-			} catch (Exception e) {}
-			try {
-				if (conn != null) conn.close();
+				if (pstmt != null)
+					pstmt.close();
 			} catch (Exception e) {
-				
+
 			}
-			
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+
+			}
 		}
-		
-		return update;
+		return result;
+
 	}
 
-	//게시판 내용 삭제
+	// 게시판 내용 삭제
 	@Override
 	public int deleteBoardItem(Long id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
-		conn = getConnection();
-		String sql = "DELETE FROM vigteam_board WHERE id = ?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setLong(1, id);
-		rs = pstmt.executeQuery();
-		
-		
-			
-		} catch(Exception e){
-			 
+			conn = getConnection();
+			String sql = "DELETE FROM vigteam_board WHERE id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, id);
+			rs = pstmt.executeQuery();
+
+		} catch (Exception e) {
+
 		} finally {
 			try {
-				if (pstmt != null) pstmt.close();
+				if (pstmt != null)
+					pstmt.close();
 			} catch (Exception e) {
-				
-			} try {
-				if (conn != null) conn.close();
-			} catch (Exception e) {
-				
+
 			}
-			
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+
+			}
+
 		}
-		
+
 		return 0;
 	}
 }
