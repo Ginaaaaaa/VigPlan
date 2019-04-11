@@ -49,6 +49,7 @@ public class BoardServlet extends BaseServlet {
 			BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
 			req.setAttribute("item", vo);
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
+//			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
 			rd.forward(req, resp);
 			
 			
@@ -58,10 +59,7 @@ public class BoardServlet extends BaseServlet {
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 			dao.deleteBoardItem(Long.valueOf(id));
 			
-			List<BoardVo> list = dao.getAllLogs(); // 다 보여주는것
-			req.setAttribute("list", list);
-			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_main.jsp");
-			rd.forward(req, resp);
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
 		}
 	}
 
