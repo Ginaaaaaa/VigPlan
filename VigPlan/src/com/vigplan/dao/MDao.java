@@ -18,6 +18,50 @@ public class MDao extends BaseDao {
 	}
 
 	
+	public List<MVo> getAllmboard(){
+		List<MVo> list = new ArrayList<>();
+		// DB 로직
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			String sql = " SELECT * FROM mboard ";
+			rs = stmt.executeQuery(sql);
+			
+			// ResultSet -> List
+			while(rs.next()) {
+				MVo vo = new MVo();
+				vo.setmTitle(rs.getString(1));
+				vo.setmDate(rs.getString(2));
+				vo.setmPlace(rs.getString(3));
+				vo.setmContent(rs.getString(4));
+				
+				list.add(vo);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (Exception e) {}
+			try {
+				if (stmt != null) stmt.close();
+			} catch (Exception e) {}
+			try {
+				if (conn != null) conn.close();
+			} catch (Exception e) {}
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+/*	
 	// mlist
 	public List<MVo> list(int begin, int end){
 	    Connection conn = null;
@@ -50,7 +94,7 @@ public class MDao extends BaseDao {
 	    } 
 	    return vlist;
   } 
-
+*/
 
 
 	

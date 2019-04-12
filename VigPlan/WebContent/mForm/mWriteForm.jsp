@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
 <h1>모임 만들기</h1>
 <form action="<%= request.getContextPath() %>/MWriteServlet" method="post" onsubmit="return mList.jsp">
 <table border="1">

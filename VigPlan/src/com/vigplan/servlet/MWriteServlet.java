@@ -1,6 +1,9 @@
 package com.vigplan.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +15,20 @@ import com.vigplan.vo.MVo;
 @WebServlet("/MWriteServlet")
 public class MWriteServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-    public MWriteServlet() {
-    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String action = request.getParameter("a");
+		
+		if (action == null) {	//	리스트 처리
+			MDao dao = new MDao(dbuser, dbpass);
+			List<MVo> list = dao.getAllmboard();
+			request.setAttribute("list", list);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/mForm/mList.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,8 +53,7 @@ public class MWriteServlet extends BaseServlet {
 		MDao dao = new MDao(dbuser, dbpass);
 		int i = dao.insertmBoard(vo);
 		
-		
-		resp.sendRedirect("./mForm/mList.jsp");
+		resp.sendRedirect(req.getContextPath() + "/MWriteServlet");
 	}
 
 }

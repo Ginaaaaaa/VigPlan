@@ -5,9 +5,6 @@
     pageEncoding="UTF-8"%>
     
 <!DOCTYPE html>
-<%
-List<MVo> list = (List<MVo>)request.getAttribute("list");
-%>
 
 
 <html>
@@ -20,6 +17,14 @@ List<MVo> list = (List<MVo>)request.getAttribute("list");
 <div class="col-md-12"><a class="button" href="./mWriteForm.jsp" >모임 만들기</a></div>
 
 
+<%
+List<MVo> list = (List<MVo>)request.getAttribute("list");
+for(MVo vo: list){
+	%>
+	<li><%=vo %></li>
+	<%
+}
+%>
 
 
 
