@@ -75,7 +75,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		try {
 			conn = getConnection();
-			String sql = "INSERT INTO vigteam_board (id, pw, title, writer, content, view_cnt, reg_date) VALUES(seq_brd_pk.nextval, ? , ? , ? ,?, default, sysdate)";
+			String sql = "INSERT INTO vigteam_board (id, pw, title, writer, content, view_cnt, reg_date) VALUES(seq_brd_pk.nextval, ? , ? , ? , ?, default, sysdate)";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -229,4 +229,6 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		return 0;
 	}
+	
+	
 }

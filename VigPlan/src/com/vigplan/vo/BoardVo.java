@@ -1,7 +1,7 @@
 package com.vigplan.vo;
 
 public class BoardVo {
-	
+
 	private Long id;
 	private String password;
 	private String writer;
@@ -10,10 +10,6 @@ public class BoardVo {
 	private Long view_cnt;
 	private String reg_date;
 
-	
-	
-
-	
 	public Long getId() {
 		return id;
 	}
@@ -45,7 +41,7 @@ public class BoardVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getWriter() {
 		return writer;
 	}
@@ -53,6 +49,7 @@ public class BoardVo {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -74,12 +71,5 @@ public class BoardVo {
 		return "BoardVo [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", view_cnt="
 				+ view_cnt + ", reg_date=" + reg_date + "]";
 	}
-
-
-
-
-
-
-	
 
 }
