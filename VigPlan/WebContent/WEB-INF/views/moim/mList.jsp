@@ -17,15 +17,33 @@
 <div class="col-md-12"><a class="button" href="./moim/write" >모임 만들기</a></div>
 
 
+<table>
+      <tr>
+            <td>번호</td>
+            <td>모임명</td>
+            <td>날짜</td>
+            <td>장소</td>
+            <td>소개</td>
+      </tr>
+      <tr>
+      
 <%
 List<MVo> list = (List<MVo>)request.getAttribute("list");
-for(MVo vo: list){
+ for(MVo vo: list){
 	%>
-	<li><%=vo %></li>
+	</tr>
+	<td> <%=vo.getmNo() %></td>
+	<td><a href="#"><%=vo.getmTitle() %></a></td>
+	<!-- <td><a href="view.jsp?mNo=<%= vo.getmNo() %>"><%= vo.getmTitle() %></a></td> -->
+	<td> <%=vo.getmDate() %></td>
+	<td> <%=vo.getmPlace() %></td>
+	<td> <%=vo.getmContent() %></td>
+	<tr>
 	<%
 }
 %>
-
+</tr>
+</table>
 
 
 </body>

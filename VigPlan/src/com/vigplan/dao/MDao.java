@@ -133,7 +133,7 @@ public class MDao extends BaseDao {
 	
 	
 	// getmboard 
-	
+	/*
 	public MVo getmBoard(int mNo) {
 	    MVo vo = new MVo();
 	    Connection conn = null;
@@ -163,10 +163,11 @@ public class MDao extends BaseDao {
 	    } 
 	    return vo;
 	  }
+	  */
 
 	
 	
-	// updatemBoard �Խù� ����
+	// updatemBoard 
 	public int updatemBoard(MVo vo) {
 	    int re = 0;
 	    Connection conn = null;
@@ -193,16 +194,16 @@ public class MDao extends BaseDao {
 
 
 
-	 // deletemBoard �Խù� ����
-	public int deletemBoard(String mTitle) {
+	 // deletemBoard 
+	public int deletemBoard(int mNo) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
-	    String sql = "DELETE FROM board WHERE mTitle=?";
+	    String sql = "DELETE * FROM mboard WHERE mNo=?";
 	    try {
 	      getConnection();
 	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setString(1, mTitle);
+	      pstmt.setInt(1, mNo);
 	      re = pstmt.executeUpdate();
 	    } catch (Exception e) {
 	      e.printStackTrace();
