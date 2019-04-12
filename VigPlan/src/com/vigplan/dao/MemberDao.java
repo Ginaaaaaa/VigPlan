@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import com.vigplan.vo.MemberVO;
+import com.vigplan.vo.MemberVo;
 
 public class MemberDao extends BaseDao implements IMemberDao {
 
@@ -22,9 +22,9 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 	// 맨 첫 화면
 	
-	public List<MemberVO> getAllLogs() {
+	public List<MemberVo> getAllLogs() {
 
-		List<MemberVO> list = new ArrayList<>();
+		List<MemberVo> list = new ArrayList<>();
 
 		Connection conn = null;
 
@@ -44,7 +44,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 			while (rs.next()) {
 
-				MemberVO vo = new MemberVO();
+				MemberVo vo = new MemberVo();
 
 				vo.setNo(rs.getLong(1));
 
@@ -106,7 +106,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 	// 저장 메서드
 
-	public int insertMember(MemberVO vo) {
+	public int insertMember(MemberVo vo) {
 
 		Connection conn = null;
 
@@ -171,7 +171,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 	@Override
 
-	public MemberVO getMember(String id, String pw) {
+	public MemberVo getMember(String id, String pw) {
 
 		Connection conn = null;
 
@@ -179,25 +179,26 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 		ResultSet rs = null;
 
-		MemberVO line = null;
+		MemberVo line = null;
 
 		try {
 
 			conn = getConnection();
 
-			String sql = "SELECT id, nickname, reg_date, FROM vigteam_member where id = ?";
+			String sql = "SELECT id, pw FROM member where id = ? and pw = ?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, id);
-
+			pstmt.setString(2, pw);
+			
 			rs = pstmt.executeQuery();
 
 			rs.next();
 
 			if (rs != null) {
 
-				line = new MemberVO();
+				line = new MemberVo();
 
 				line.setId(id);
 
@@ -212,7 +213,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 			}
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		} finally {
 
 			try {
@@ -245,7 +246,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 	@Override
 
-	public int updateMember(MemberVO vo) {
+	public int updateMember(MemberVo vo) {
 
 		Connection conn = null;
 

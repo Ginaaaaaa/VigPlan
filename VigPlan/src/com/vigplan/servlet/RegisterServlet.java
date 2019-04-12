@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vigplan.dao.MemberDao;
-import com.vigplan.vo.MemberVO;
+import com.vigplan.vo.MemberVo;
 
 @WebServlet("/member")
 public class RegisterServlet extends BaseServlet {
@@ -44,7 +44,7 @@ public class RegisterServlet extends BaseServlet {
 //			PrintWriter writer = resp.getWriter();
 //			writer.println("name=" + name + ", log=" + log);
 //			writer.close();
-			MemberVO vo = new MemberVO();
+			MemberVo vo = new MemberVo();
 			vo.setId(id);
 			vo.setPw(password);
 			vo.setNickname(nickname);

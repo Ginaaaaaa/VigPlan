@@ -1,21 +1,17 @@
 package com.vigplan.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.vigplan.dao.BaseDao;
-import com.vigplan.vo.MemberVO;
+import com.vigplan.dao.MemberDao;
+import com.vigplan.vo.MemberVo;
 
 
 //	TODO: 서블릿 요청을 만들고(extends BaseServlet 구조)
@@ -40,10 +36,25 @@ public class LoginServlet extends BaseServlet {
 		request.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("id");
 		String password = request.getParameter("pw");
-		String nickname = request.getParameter("nickname");
-		String email = request.getParameter("email");
+//		String nickname = request.getParameter("nickname");
+//		String email = request.getParameter("email");
 		
+		/*
+		ResultSet rs = null;
+		String sql = "select id, password, nickname, email, rDate from member where id=?";
 		
+		HttpSession session = request.getSession();
+		*/
+		MemberDao dao = new MemberDao(dbuser, dbpass);
+		
+		MemberVo vo = dao.getMember(id, password);
+		System.out.println("LOGIN: VO = " + vo);
+		if (vo != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("authUser", vo);
+		}
+//		session.setAttribute("id", "pw");
+
 		/*
 		// Business Login 처리
 		ServletContext sct = getServletContext();

@@ -1,4 +1,4 @@
-<%@page import="com.vigplan.vo.MemberVO" %>
+<%@page import="com.vigplan.vo.MemberVo" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <%
-MemberVO vo = (MemberVO)session.getAttribute("login_info");
+MemberVo vo = (MemberVo)session.getAttribute("login_info");
 %>
 <h2><%= vo.getNickname() %>님 로그인 되었습니다.</h2><br>
 <input type="button" value="로그아웃" onclick="location.href=/member_servlet/logout'"><p>

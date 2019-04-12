@@ -1,4 +1,4 @@
-<%@page import="com.vigplan.vo.MemberVO" %>
+<%@page import="com.vigplan.vo.MemberVo" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <%
-	MemberVO vo = (MemberVO)request.getAttribute("mvo");
+	MemberVo vo = (MemberVo)request.getAttribute("mvo");
 %>
 <h2>가입 환영합니다.</h2>
 <h3>가입 시 입력하신 정보입니다.</h3>

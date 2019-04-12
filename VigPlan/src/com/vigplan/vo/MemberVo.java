@@ -1,6 +1,6 @@
 package com.vigplan.vo;
 
-public class MemberVO {
+public class MemberVo {
 	private Long no;
 	private String id;
 	private String pw;
@@ -10,11 +10,11 @@ public class MemberVO {
 
 	//	VO에 기본 생성자는 꼭 있어야 되고
 	//	클래스 내에 생성자 없으면 Java 컴파일러가 기본생성자를 만든다
-	public MemberVO() {
+	public MemberVo() {
 		super();
 	}
 
-	public MemberVO(Long no, String id, String pw, String nickname, String email) {
+	public MemberVo(Long no, String id, String pw, String nickname, String email) {
 		super();
 		this.no = no;
 		this.id = id;

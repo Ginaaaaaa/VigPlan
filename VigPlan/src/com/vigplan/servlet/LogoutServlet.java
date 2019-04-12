@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.vigplan.vo.MemberVO;
+import com.vigplan.vo.MemberVo;
 
 public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		MemberVO vo = (MemberVO)session.getAttribute("login_info");
+		MemberVo vo = (MemberVo)session.getAttribute("login_info");
 		
 		if(vo==null) {
 			request.setAttribute("error_message", "로그인 후 로그아웃 할 수 있습니다.");
