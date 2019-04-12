@@ -34,7 +34,6 @@
 	<div class="container">
 
 		<br> <br>
-		<h2>내용</h2>
 		<br> <br>
 
 		<table class="table">

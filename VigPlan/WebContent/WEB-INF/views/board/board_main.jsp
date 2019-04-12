@@ -41,7 +41,7 @@ for(BoardVo vo: list) {
 
 	<div class="container">
 		<br> <br>
-		<h2>전체 글보기</h2>
+		<h3><strong>전체글보기</strong></h3>
 		<br> <br>
 		<table class="table">
 			<thead>
