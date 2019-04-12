@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="col-md-12"><a class="button" href="./mWriteForm.jsp" >모임 만들기</a></div>
+<div class="col-md-12"><a class="button" href="./moim/write" >모임 만들기</a></div>
 
 
 <%

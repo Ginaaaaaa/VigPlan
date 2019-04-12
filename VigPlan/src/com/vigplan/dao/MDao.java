@@ -34,10 +34,11 @@ public class MDao extends BaseDao {
 			// ResultSet -> List
 			while(rs.next()) {
 				MVo vo = new MVo();
-				vo.setmTitle(rs.getString(1));
-				vo.setmDate(rs.getString(2));
-				vo.setmPlace(rs.getString(3));
-				vo.setmContent(rs.getString(4));
+				vo.setmNo(rs.getInt(1));
+				vo.setmTitle(rs.getString(2));
+				vo.setmDate(rs.getString(3));
+				vo.setmPlace(rs.getString(4));
+				vo.setmContent(rs.getString(5));
 				
 				list.add(vo);
 			}
@@ -109,7 +110,7 @@ public class MDao extends BaseDao {
 		
 		try {
 		conn = getConnection();
-		String sql = " INSERT INTO mboard VALUES(?, ?, ?, ?) ";
+		String sql = " INSERT INTO mboard VALUES(seq_mboard_pk.nextval, ?, ?, ?, ?) ";
 		//	시퀀스 만들고 : 예) 시퀀스 seq_mboard_pk
 		//	INSERT INTO mboard VALUES(seq_mboard_pk.nextval, ?, ?, ?, ?)
 		//	TODO: sql 디렉터리에 데이터베이스 create 문 넣어 주세요
@@ -133,7 +134,7 @@ public class MDao extends BaseDao {
 	
 	// getmboard 
 	
-	public MVo getmBoard(String mTitle) {
+	public MVo getmBoard(int mNo) {
 	    MVo vo = new MVo();
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -141,11 +142,12 @@ public class MDao extends BaseDao {
 	    
 	    try {
 	    conn = getConnection();
-	    String sql = " SELECT * FROM mboard WHERE mTitle=? ";
+	    String sql = " SELECT * FROM mboard WHERE mNo=? ";
 	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setString(1, mTitle);
+	      pstmt.setInt(1, mNo);
 	      rs = pstmt.executeQuery();
 	      if (rs.next()) {
+	    	vo.setmNo(rs.getInt("mNo"));
 	        vo.setmTitle(rs.getString("mTitle"));
 	        vo.setmDate(rs.getString("mDate"));
 	        vo.setmPlace(rs.getString("mPlace"));

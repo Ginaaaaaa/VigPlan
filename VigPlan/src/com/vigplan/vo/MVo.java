@@ -1,12 +1,19 @@
 package com.vigplan.vo;
 
 public class MVo {
-
+	
+	private int mNo;
 	private String mTitle;
 	private String mDate;
 	private String mPlace;
 	private String mContent;
 	
+	public int getmNo() {
+		return mNo;
+	}
+	public void setmNo(int mNo) {
+		this.mNo = mNo;
+	}
 	public String getmTitle() {
 		return mTitle;
 	}
@@ -34,7 +41,9 @@ public class MVo {
 	
 	@Override
 	public String toString() {
-		return "MVo [mTitle=" + mTitle + ", mDate=" + mDate + ", mPlace=" + mPlace + ", mContent=" + mContent + "]";
+		return "MVo [mNo=" + mNo + ", mTitle=" + mTitle + ", mDate=" + mDate + ", mPlace=" + mPlace + ", mContent="
+				+ mContent + "]";
 	}
+	
 	
 }

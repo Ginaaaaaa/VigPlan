@@ -46,7 +46,7 @@ public class MWriteServlet extends BaseServlet {
 		MDao dao = new MDao(dbuser, dbpass);
 		int i = dao.insertmBoard(vo);
 		
-		resp.sendRedirect(req.getContextPath() + "/");
+		resp.sendRedirect(req.getContextPath() + "/moim");
 	}
 
 }
