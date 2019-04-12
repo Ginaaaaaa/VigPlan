@@ -43,17 +43,18 @@ public class BoardServlet extends BaseServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_show.jsp");
 			rd.forward(req, resp);
 
-		} else if ("edit".equals(action)) {
-			String id = req.getParameter("id");
-			BoardDao dao = new BoardDao(dbuser, dbpass);
-			BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
-			req.setAttribute("item", vo);
-			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
-			// RequestDispatcher rd =
-			// req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
-			rd.forward(req, resp);
-
-		}
+		}// else if ("edit".equals(action)) {
+//			String password = req.getParameter("password");
+//			String id = req.getParameter("id");
+//			BoardDao dao = new BoardDao(dbuser, dbpass);
+//			BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
+//			req.setAttribute("item", vo);
+//			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
+//			// RequestDispatcher rd =
+//			// req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
+//			rd.forward(req, resp);
+//
+//		}
 	
 	}
 
@@ -85,8 +86,21 @@ public class BoardServlet extends BaseServlet {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
 
 			// 메인창에서 title 클릭시 넘어가는 창(내용 보여주기)
-		} else if ("editer".equals(action)) {
+		} else if ("edit".equals(action)) {
+			String password = req.getParameter("password");
+			if(password!=null) {
+				String id = req.getParameter("id");
+				BoardDao dao = new BoardDao(dbuser, dbpass);
+				BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
+				req.setAttribute("item", vo);
+				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
+				// RequestDispatcher rd =
+				// req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
+				rd.forward(req, resp);
+				
+			}
 
+		} else if ("editer".equals(action)) {
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 
 			String id = req.getParameter("id");

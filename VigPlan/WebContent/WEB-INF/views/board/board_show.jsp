@@ -18,7 +18,6 @@
 <script language="javascript">
 	function checkForm(frm) {
 		var password = frm.password.value;
-
 		if (password.length == 0) {
 			alert('비밀번호를 입력하세요.');
 			frm.password.focus();
@@ -87,6 +86,9 @@
 
 
 
+
+
+
 		<div class="modal" id="myModal1">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -96,9 +98,28 @@
 						<!--  <h4 class="modal-title">Modal Heading</h4> -->
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
+					<form action="<%=request.getContextPath()%>/board" method="POST">
+					<input type="hidden" name="a" value="edit">
+					<input type="hidden" name="id" value="<%=item.getId()%>">
+						<div class="modal-body">
+							게시글을 수정하시겠습니까?<br> <br> 비밀번호를 입력해주세요.<br> 
+							<label for="password">비밀번호:</label> 
+							<input type="password" name="password">
+						</div>
+
+						<!-- Modal footer -->
+						<div class="modal-footer">
+
+
+							<input type="button" class="btn btn-primary" value="YES" onclick="checkForm(this.form)">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+						
+						</div>
+					</form>
 
 					<!-- Modal body -->
-					<div class="modal-body">게시글을 수정하시겠습니까?</div>
+	<%-- 				<div class="modal-body">게시글을 수정하시겠습니까?</div><br><br>
+					<input type=password>
 					<!-- 패스워드 입력 폼 -->
 					<!-- Modal footer -->
 					<div class="modal-footer">
@@ -106,7 +127,7 @@
 							href="<%=request.getContextPath()%>/board?a=edit&id=<%=item.getId()%>"
 							button type="button" class="btn btn-primary">YES</a>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
-					</div>
+					</div> --%>
 
 				</div>
 			</div>
@@ -116,11 +137,12 @@
 
 
 
+
+
 		<div class="modal" id="myModal">
 
 			<div class="modal-dialog">
 				<div class="modal-content">
-
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<!--  <h4 class="modal-title">Modal Heading</h4> -->
