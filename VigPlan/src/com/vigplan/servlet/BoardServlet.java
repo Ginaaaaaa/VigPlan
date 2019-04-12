@@ -49,20 +49,12 @@ public class BoardServlet extends BaseServlet {
 			BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
 			req.setAttribute("item", vo);
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
-//			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
+			// RequestDispatcher rd =
+			// req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
 			rd.forward(req, resp);
-			
 
-		} 
-		//	TODO: delete 처리는 POST에서 해 주세요
-		else if ("delete".equals(action)) {
-			
-			String id = req.getParameter("id");
-			BoardDao dao = new BoardDao(dbuser, dbpass);
-			dao.deleteBoardItem(Long.valueOf(id));
-			
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
 		}
+	
 	}
 
 	@Override
@@ -84,61 +76,67 @@ public class BoardServlet extends BaseServlet {
 			vo.setTitle(title);
 			vo.setWriter(writer);
 			vo.setContent(content);
-			
 
 			BoardDao dao = new BoardDao(dbuser, dbpass);
-			/*int insertedCount = */dao.insertBoard(vo);
+			/* int insertedCount = */dao.insertBoard(vo);
 
-//			System.out.println("SUCCESS?:" + (insertedCount == 1));
+			// System.out.println("SUCCESS?:" + (insertedCount == 1));
 
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
 
 			// 메인창에서 title 클릭시 넘어가는 창(내용 보여주기)
 		} else if ("editer".equals(action)) {
-			
-			BoardDao dao = new BoardDao(dbuser,dbpass);
-		
+
+			BoardDao dao = new BoardDao(dbuser, dbpass);
+
 			String id = req.getParameter("id");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
-				
+
 			BoardVo vo = dao.getBoardItem(Long.valueOf(id));
-			
+
 			if (title == null || title.length() == 0) {
 				title = vo.getTitle();
 			}
 			if (content == null || content.length() == 0) {
 				content = vo.getContent();
-			} 
-			//	TODO: 아래 부분 재검토
-			else if ("password".equals(action)) {
-				
 			}
-			
-		
-//			
-//			System.out.println(vo.toString());
-//		
+
 			vo.setId(Long.valueOf(id));
 			vo.setTitle(title);
 			vo.setContent(content);
-			
-			
-			
-			System.out.println(vo.toString());		
-//			vo.setWriter(writer);
-//			vo.setReg_date(reg_date);
-//			vo.setview_cnt(view_cnt);
-	
+
+			System.out.println(vo.toString());
+			// vo.setWriter(writer);
+			// vo.setReg_date(reg_date);
+			// vo.setview_cnt(view_cnt);
+
 			int result = dao.updateBoard(vo);
 			System.out.println("SUCCESS?:" + (result == 1));
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
-//			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_main.jsp");
-//			rd.forward(req, resp);
 
-			// TODO: board 리스트로 다시 리다이렉트
+		}  else if ("delete".equals(action)) {
+			
+			String id = req.getParameter("id");
+			String password = req.getParameter("password");
+
+			BoardVo vo = new  BoardVo();	
+			vo.setPassword(password);
+			vo.setId(Long.valueOf(id));
+				
+			if(password != null) {
+				BoardDao dao = new BoardDao(dbuser, dbpass);
+			    int result = dao.deleteBoardItem(Long.valueOf(id));
+			    
+			    System.out.println("SUCCESS?:" + (result == 0));
+			    resp.sendRedirect(req.getServletContext().getContextPath() + "/board");
+				
+			}
+			
+
+
 		}
-		//
+		
 	}
 
 }
