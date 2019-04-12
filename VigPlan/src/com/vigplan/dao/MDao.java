@@ -110,6 +110,9 @@ public class MDao extends BaseDao {
 		try {
 		conn = getConnection();
 		String sql = " INSERT INTO mboard VALUES(?, ?, ?, ?) ";
+		//	시퀀스 만들고 : 예) 시퀀스 seq_mboard_pk
+		//	INSERT INTO mboard VALUES(seq_mboard_pk.nextval, ?, ?, ?, ?)
+		//	TODO: sql 디렉터리에 데이터베이스 create 문 넣어 주세요
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getmTitle());
 		pstmt.setString(2, vo.getmDate());
