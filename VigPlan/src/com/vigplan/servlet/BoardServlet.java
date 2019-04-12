@@ -53,7 +53,9 @@ public class BoardServlet extends BaseServlet {
 			rd.forward(req, resp);
 			
 
-		} else if ("delete".equals(action)) {
+		} 
+		//	TODO: delete 처리는 POST에서 해 주세요
+		else if ("delete".equals(action)) {
 			
 			String id = req.getParameter("id");
 			BoardDao dao = new BoardDao(dbuser, dbpass);
@@ -107,7 +109,9 @@ public class BoardServlet extends BaseServlet {
 			}
 			if (content == null || content.length() == 0) {
 				content = vo.getContent();
-			} else if ("password".equals(action)) {
+			} 
+			//	TODO: 아래 부분 재검토
+			else if ("password".equals(action)) {
 				
 			}
 			

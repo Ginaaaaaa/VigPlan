@@ -81,7 +81,7 @@
 
 					<!-- Modal body -->
 					<div class="modal-body">게시글을 수정하시겠습니까?</div>
-
+					<!-- 패스워드 입력 폼 -->
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<a

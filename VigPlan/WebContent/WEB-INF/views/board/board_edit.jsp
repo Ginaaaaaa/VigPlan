@@ -28,7 +28,8 @@
 			<input type="hidden" name="a" value="editer">
 			<div class="form-group">
 				<label for="title" class="mb-2 mr-sm-2">제목</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="title">
+					type="text" class="form-control mb-2 mr-sm-2" name="title"
+					value="<%= item.getTitle()%>">
 			</div>
 
 			<div class="form-group">
