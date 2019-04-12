@@ -229,6 +229,52 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		return 0;
 	}
+
+	public BoardVo checkPw(Long id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardVo password = null;
+
+		try {
+			conn = getConnection();
+			String sql = "SELECT pw FROM vigteam_board WHERE id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, id);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			if (rs != null) {
+
+				password = new BoardVo();
+				password.setId(id);
+				password.setPassword(rs.getString(1));
+
+			}
+
+			
+
+		} catch (Exception e) {
+
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+
+			}
+
+		}
+
+		return password;
+		
+	}
 	
 	
 }
