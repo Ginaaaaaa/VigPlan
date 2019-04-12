@@ -7,19 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	로그인 폼<br>
-<%
-String errorMessage = (String)request.getAttribute("error_message");
-if(errorMessage!=null){
-%>
-<font color="red" size="2"><%=errorMessage %></font>
 
-<%
-}
-%>
-<form action="/member_servlet/login" method="post">
-	<table>
-		<tr>
+	<form action="<%= request.getContextPath() %>/member/login" method="post">
+		<table border="2">
+			<tr align="center">
 		<td>ID</td>
 		<td><input type="text" name="id" value="1111" size="20"></td>
 		</tr>
@@ -29,15 +20,10 @@ if(errorMessage!=null){
 		</tr>
 		<tr>
 		<td colspan="2" align="center"><input type="submit" value="전송">
-		<input type="reset value="다시작성"></td>
+		<input type="reset" value="다시작성"></td>
 		</tr>
 	</table>
 </form>
 </body>
 </html>
-
-
-
-
-
 

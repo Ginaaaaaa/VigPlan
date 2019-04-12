@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/VigPlan/register_member" method="post">
+	<form action="<%= request.getContextPath() %>/member" method="post">
 		<table border="2">
 			<tr align="center">
 			</tr>
@@ -16,8 +16,8 @@
 			<td><input type="text" name="id" value="1111" size="20"></td>
 			</tr>
 			<tr>
-			<td>Password></td>
-			<td><input type="password" name="pw" value="1111" size="21"></td>
+			<td>Password</td>
+			<td><input type="password" name="pw" value="1111" size="20"></td>
 			</tr>
 			<tr>
 			<td>Nickname</td>

@@ -18,8 +18,9 @@ ID :<%=vo.getId() %><br>
 Password : <%=vo.getPw() %><br>
 닉네임 : <%vo.getNickname(); %>
 이메일 : <%=vo.getEmail() %>
-<input type="button" value="로그인" onclick="location.href=/VigPlan/WEB-INF/views/memeber/login_form.jsp'"><p>
-<input type="button" value="메인페이지" onclick="location.href=/VigPlan/WEB-INF/views/memeber/index_html'"><p>
+<a href="<%= request.getContextPath() %>/member/login">Login</a>
+<!-- input type="button" value="로그인" onclick="location.href=/VigPlan/WEB-INF/views/memeber/login_form.jsp'" -->
+<input type="button" value="메인페이지" onclick="location.href=/VigPlan/WEB-INF/views/memeber/index_html'">
 
 
 </body>
