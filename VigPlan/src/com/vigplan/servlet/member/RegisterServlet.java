@@ -60,8 +60,9 @@ public class RegisterServlet extends BaseServlet {
 			
 			System.out.println("SUCCESS?:" + (insertedCount == 1));
 			
-			resp.sendRedirect(
-					req.getServletContext().getContextPath() + "/member/login");
+			resp.sendRedirect(req.getContextPath() + "/member?a=success");
+	//		resp.sendRedirect(
+		//			req.getServletContext().getContextPath() + "/member/login");
 		} 
 		
 	}

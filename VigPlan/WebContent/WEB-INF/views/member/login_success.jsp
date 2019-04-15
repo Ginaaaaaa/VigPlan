@@ -26,7 +26,7 @@
 	</table>
 
 <input type="button" value="로그아웃" onclick="location.href='/VigPlan/member/logout'">
-<input type="button" value="회원정보 조회" onclick="location.href=''">
+<input type="button" value="회원정보 " onclick="location.href='/VigPlan/member/info'">
 </form>
 </body>
 </html>

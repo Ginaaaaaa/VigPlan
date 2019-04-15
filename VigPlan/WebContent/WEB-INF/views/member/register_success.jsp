@@ -11,16 +11,18 @@
 <body>
 <%
 	MemberVo vo = (MemberVo)request.getAttribute("vo");
+System.out.println(vo);
 %>
 <h2>가입 환영합니다.</h2>
 <h3>가입 시 입력하신 정보입니다.</h3>
+회원번호 : <%=vo.getNo() %><br>
 ID :<%=vo.getId() %><br>
-Password : <%=vo.getPw() %><br>
-닉네임 : <%vo.getNickname(); %>
-이메일 : <%=vo.getEmail() %>
+Password :<%=vo.getPw() %><br>
+닉네임 : <%=vo.getNickname() %><br>
+이메일 : <%=vo.getEmail() %><br>
+가입날짜 : <%=vo.getRegdate() %>
 <a href="<%= request.getContextPath() %>/member/login">Login</a>
-<!-- input type="button" value="로그인" onclick="location.href=/VigPlan/WEB-INF/views/memeber/login_form.jsp'" -->
-<input type="button" value="메인페이지" onclick="location.href=/VigPlan/WEB-INF/views/memeber/index_html'">
+<a href="<%= request.getContextPath() %>/member">메인페이지</a>
 
 
 </body>
