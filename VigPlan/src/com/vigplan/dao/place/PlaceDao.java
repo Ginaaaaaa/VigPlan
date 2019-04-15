@@ -17,6 +17,7 @@ public class PlaceDao extends BaseDao {
 	}
 
 	public List<PlaceVo> getAllLogs() {
+		
 		List<PlaceVo> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -24,6 +25,7 @@ public class PlaceDao extends BaseDao {
 
 		try {
 			conn = getConnection();
+			stmt = conn.createStatement();
 			String sql = "SELECT title, link, description, telephone, address, roadAddress, mapx, mapy FROM place ORDER BY pk DESC";
 			rs = stmt.executeQuery(sql);
 
