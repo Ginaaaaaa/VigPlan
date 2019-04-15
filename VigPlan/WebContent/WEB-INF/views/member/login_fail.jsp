@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script>
 alert('로그인 실패');
+document.location.href="<%=request.getContextPath()%>/member/login";
 </script>
 </head>
 <body>
