@@ -1,7 +1,7 @@
 package com.vigplan.servlet.moim;
 
 import com.vigplan.dao.BoardDao;
-import com.vigplan.dao.MDao;
+import com.vigplan.dao.moim.MDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.BoardVo;
 import com.vigplan.vo.MVo;
@@ -23,7 +23,7 @@ public class MUpdateServlet extends BaseServlet {
 		System.out.println("doGet");
 		String mNo = request.getParameter("mNo");
 		MDao dao = new MDao(dbuser, dbpass);
-		MVo vo = dao.selectOne(Integer.valueOf(mNo));
+		MVo vo = dao.selectOne(Long.valueOf(mNo));
 		System.out.println(vo);
 		request.setAttribute("moim", vo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/moim/mUpdateForm.jsp");
@@ -46,7 +46,7 @@ public class MUpdateServlet extends BaseServlet {
 		String mContent = req.getParameter("mContent");
 		
 		MVo vo = new MVo();
-		vo.setmNo(Integer.valueOf(mNo));
+		vo.setmNo(Long.valueOf(mNo));
 		vo.setmTitle(req.getParameter("mTitle"));
 		vo.setmDate(req.getParameter("mDate"));
 		vo.setmPlace(req.getParameter("mPlace"));
@@ -54,7 +54,7 @@ public class MUpdateServlet extends BaseServlet {
 		System.out.println("do Post 2");
 		
 		MDao dao = new MDao(dbuser, dbpass);
-		int i = dao.updatemBoard(Integer.valueOf(mNo), mTitle, mDate, mPlace, mContent);
+		int i = dao.updatemBoard(Long.valueOf(mNo), mTitle, mDate, mPlace, mContent);
 		
 		resp.sendRedirect(req.getContextPath() + "/moim");
 

@@ -1,6 +1,6 @@
 package com.vigplan.servlet.moim;
 
-import com.vigplan.dao.MDao;
+import com.vigplan.dao.moim.MDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.MVo;
 
@@ -21,7 +21,7 @@ public class MDeleteServlet extends BaseServlet {
 		System.out.println("do Get");
 		String mNo = request.getParameter("mNo");
 		MDao dao = new MDao(dbuser, dbpass);
-		dao.deletemBoard(Integer.valueOf(mNo));
+		dao.deletemBoard(Long.valueOf(mNo));
 		System.out.println("ok?");
 		response.sendRedirect(request.getContextPath() + "/moim");
 	

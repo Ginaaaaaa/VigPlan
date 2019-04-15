@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.vigplan.dao.MDao;
+import com.vigplan.dao.moim.MDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.MVo;
 

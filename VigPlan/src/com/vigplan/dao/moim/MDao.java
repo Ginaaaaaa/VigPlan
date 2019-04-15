@@ -1,4 +1,4 @@
-package com.vigplan.dao;
+package com.vigplan.dao.moim;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import com.vigplan.dao.BaseDao;
 import com.vigplan.vo.MVo;
 
 
@@ -34,7 +35,7 @@ public class MDao extends BaseDao {
 			// ResultSet -> List
 			while(rs.next()) {
 				MVo vo = new MVo();
-				vo.setmNo(rs.getInt(1));
+				vo.setmNo(rs.getLong(1));
 				vo.setmTitle(rs.getString(2));
 				vo.setmDate(rs.getString(3));
 				vo.setmPlace(rs.getString(4));
@@ -60,7 +61,7 @@ public class MDao extends BaseDao {
 	
 	
 	// select mboard
-	public MVo selectOne(Integer mNo) {
+	public MVo selectOne(Long mNo) {
 		MVo moim = null;
 		//	TODO: mNo로 모임 한 개 가져오기
 		Connection conn = null;
@@ -70,12 +71,12 @@ public class MDao extends BaseDao {
 	      conn = getConnection();
 	      String sql = "SELECT * FROM mboard WHERE mNo =?";
 	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setInt(1, mNo);
+	      pstmt.setLong(1, mNo);
 	      ResultSet rs = pstmt.executeQuery();
 	     
 	      if (rs.next()) {
 	    	  moim = new MVo();
-	    	  moim.setmNo(rs.getInt("mNo"));
+	    	  moim.setmNo(rs.getLong("mNo"));
 	    	  moim.setmTitle(rs.getString("mTitle"));
 	    	  moim.setmDate(rs.getString("mDate"));
 	    	  moim.setmPlace(rs.getString("mPlace"));
@@ -123,7 +124,7 @@ public class MDao extends BaseDao {
 	
 	
 	// updatemBoard 
-	public int updatemBoard(Integer mNo, String mTitle, String mDate, String mPlace, String mContent) {
+	public int updatemBoard(Long mNo, String mTitle, String mDate, String mPlace, String mContent) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -136,7 +137,7 @@ public class MDao extends BaseDao {
 	      pstmt.setString(2, mDate);
 	      pstmt.setString(3, mPlace);
 	      pstmt.setString(4, mContent);
-	      pstmt.setInt(5, mNo);
+	      pstmt.setLong(5, mNo);
 	      System.out.println("updatemboard");
 	      re = pstmt.executeUpdate();
 	    } catch (Exception e) {
@@ -151,7 +152,7 @@ public class MDao extends BaseDao {
 
 
 	 // deletemBoard 
-	public int deletemBoard(Integer mNo) {
+	public int deletemBoard(Long mNo) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -159,7 +160,7 @@ public class MDao extends BaseDao {
 	    try {
 	      conn = getConnection();
 	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setInt(1, mNo);
+	      pstmt.setLong(1, mNo);
 	      re = pstmt.executeUpdate();
 	    } catch (Exception e) {
 	      e.printStackTrace();
