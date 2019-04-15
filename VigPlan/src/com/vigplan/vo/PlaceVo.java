@@ -9,8 +9,8 @@ public class PlaceVo {
 	private String telephone;
 	private String address;
 	private String roadAddress; 
-	private int mapx;
-	private int mapy;
+	private Integer mapx;
+	private Integer mapy;
 
 	public PlaceVo() {
 
@@ -72,20 +72,27 @@ public class PlaceVo {
 		this.roadAddress = roadAddress;
 	}
 
-	public int getMapx() {
+	public Integer getMapx() {
 		return mapx;
 	}
 
-	public void setMapx(int mapx) {
+	public void setMapx(Integer mapx) {
 		this.mapx = mapx;
 	}
 
-	public int getMapy() {
+	public Integer getMapy() {
 		return mapy;
 	}
 
-	public void setMapy(int mapy) {
+	public void setMapy(Integer mapy) {
 		this.mapy = mapy;
+	}
+
+	@Override
+	public String toString() {
+		return "PlaceVo [pk=" + pk + ", title=" + title + ", link=" + link + ", description=" + description
+				+ ", telephone=" + telephone + ", address=" + address + ", roadAddress=" + roadAddress + ", mapx="
+				+ mapx + ", mapy=" + mapy + "]";
 	}
 	
 
