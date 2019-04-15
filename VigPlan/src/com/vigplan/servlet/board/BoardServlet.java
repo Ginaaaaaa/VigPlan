@@ -1,4 +1,4 @@
-package com.vigplan.servlet;
+package com.vigplan.servlet.board;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,7 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.vigplan.dao.BoardDao;
+import com.vigplan.dao.board.BoardDao;
+import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.BoardVo;
 
 @WebServlet("/board")
@@ -33,7 +34,29 @@ public class BoardServlet extends BaseServlet {
 		} else if ("form".equals(action)) {
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/boardform.jsp");
 			rd.forward(req, resp);
-
+		} else if ("checkpw".equals(action)) {
+			
+			String id = req.getParameter("id");
+			String password = req.getParameter("password");
+			
+			BoardVo vo = new BoardVo();
+			vo.setId(Long.valueOf(id));
+			vo.setPassword(password);
+			System.out.println(vo);
+			
+			BoardDao dao = new BoardDao(dbuser, dbpass);
+			
+			
+			vo = dao.getBoardItem(Long.valueOf(id), password);
+			System.out.println(vo);
+			
+			
+			if(vo != null) {
+				resp.getWriter().print("success");
+			} else {
+				resp.getWriter().print("fail");
+			}
+			
 		} else if ("show".equals(action)) {
 			String id = req.getParameter("id");
 			BoardDao dao = new BoardDao(dbuser, dbpass);
@@ -76,22 +99,40 @@ public class BoardServlet extends BaseServlet {
 
 			// 메인창에서 title 클릭시 넘어가는 창(내용 보여주기)
 		} else if ("edit".equals(action)) {
-			String password = req.getParameter("password");
-			if(password!=null) {
+			
+				String password = req.getParameter("password");
+				System.out.println(password);
 				String id = req.getParameter("id");
-				BoardDao dao = new BoardDao(dbuser, dbpass);
-				BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
-				req.setAttribute("item", vo);
-				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
-				// RequestDispatcher rd =
-				// req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
-				rd.forward(req, resp);
 				
-			}
+				BoardDao dao = new BoardDao(dbuser, dbpass);
+				BoardVo vo = dao.getBoardItem(Long.valueOf(id));
+				
+				String password1 = dao.checkPw(Long.valueOf(id));
+				System.out.println(password1);
+				
+				if(password.equals(password1)) {
+					// id의 값을 string으로 받아오니까	
+					req.setAttribute("item", vo);
+					RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
+					// RequestDispatcher rd =
+					// req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
+					rd.forward(req, resp);
+					
+				} else {
+					vo.setPassword(password);
+					req.setAttribute("item", vo);
+					RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_pwcheck.jsp");
+					rd.forward(req, resp);
+			
+				}
+				
+				
+			
 
 		} else if ("editer".equals(action)) {
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 
+			
 			String id = req.getParameter("id");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");

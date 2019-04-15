@@ -16,15 +16,46 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script language="javascript">
+
+
+
 	function checkForm(frm) {
 		var password = frm.password.value;
+		var id = frm.id.value;
+		
 		if (password.length == 0) {
 			alert('비밀번호를 입력하세요.');
 			frm.password.focus();
 		} else {
-			frm.submit();
+			checkPasswordAsync(frm, id, password);
+			//frm.submit();
 		}
 	}
+	
+	function checkPasswordAsync(frm, id, password) {
+		//alert(password);
+		$.ajax({
+			url: "<%= request.getContextPath() %>/board",
+			data: {
+				'a': 'checkpw',
+				'id': id,
+				'password': password
+			},
+			success: function(data) {
+				if (data == "success") {
+					frm.submit();
+				} else {
+					alert("비밀번호 맞지 않음");
+					frm.password.focus();
+				}
+			},
+			error: function(request,response,error) {
+				alert("Error:" + error)
+			}
+		});
+		
+	}
+	
 </script>
 
 <title>Insert title here</title>

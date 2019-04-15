@@ -1,4 +1,4 @@
-package com.vigplan.dao;
+package com.vigplan.dao.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vigplan.dao.BaseDao;
 import com.vigplan.vo.BoardVo;
 
 public class BoardDao extends BaseDao implements IBoardDao {
@@ -230,11 +231,11 @@ public class BoardDao extends BaseDao implements IBoardDao {
 		return 0;
 	}
 
-	public BoardVo checkPw(Long id) {
+	public String checkPw(Long id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		BoardVo password = null;
+		BoardVo password1 = null;
 
 		try {
 			conn = getConnection();
@@ -246,13 +247,11 @@ public class BoardDao extends BaseDao implements IBoardDao {
 			rs.next();
 			if (rs != null) {
 
-				password = new BoardVo();
-				password.setId(id);
-				password.setPassword(rs.getString(1));
+				password1 = new BoardVo();
+				password1.setId(id);
+				password1.setPassword(rs.getString(1));
 
 			}
-
-			
 
 		} catch (Exception e) {
 
@@ -272,9 +271,60 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		}
 
-		return password;
+		return password1.getPassword();
 		
+	}
+
+	@Override
+	public BoardVo getBoardItem(Long id, String password) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardVo line = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT title, writer, reg_date, content FROM vigteam_board where id = ? and pw = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, id);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+
+				line = new BoardVo();
+				line.setId(id);
+				line.setPassword(password);
+				line.setTitle(rs.getString(1));
+				line.setWriter(rs.getString(2));
+				line.setReg_date(rs.getString(3));
+				line.setContent(rs.getString(4));
+			}
+			
+		} catch(Exception e) {
+			
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+
+			}
+			
+		}
+		
+		// TODO Auto-generated method stub
+		//	getBoardItem(Long id)와 거의 동일
+		//	Query문에서 id와 password 체크 게시물이 있으면 리턴
+		return line;
 	}
 	
 	
 }
+
