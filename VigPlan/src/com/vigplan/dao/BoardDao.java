@@ -230,11 +230,11 @@ public class BoardDao extends BaseDao implements IBoardDao {
 		return 0;
 	}
 
-	public BoardVo checkPw(Long id) {
+	public String checkPw(Long id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		BoardVo password = null;
+		BoardVo password1 = null;
 
 		try {
 			conn = getConnection();
@@ -246,13 +246,11 @@ public class BoardDao extends BaseDao implements IBoardDao {
 			rs.next();
 			if (rs != null) {
 
-				password = new BoardVo();
-				password.setId(id);
-				password.setPassword(rs.getString(1));
+				password1 = new BoardVo();
+				password1.setId(id);
+				password1.setPassword(rs.getString(1));
 
 			}
-
-			
 
 		} catch (Exception e) {
 
@@ -272,7 +270,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		}
 
-		return password;
+		return password1.getPassword();
 		
 	}
 	
