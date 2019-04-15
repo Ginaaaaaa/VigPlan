@@ -52,7 +52,10 @@ public class LoginServlet extends BaseServlet {
 		if (vo != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("authUser", vo);
+			
+			//	TODO: 로그인 성공 페이지로 리다이렉트
 		}
+		//	TODO: 실패 -> login 페이지로 리다이렉트
 //		session.setAttribute("id", "pw");
 
 		/*
