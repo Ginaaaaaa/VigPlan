@@ -42,7 +42,6 @@ public class MWriteServlet extends BaseServlet {
 		vo.setmPlace(mPlace);
 		vo.setmContent(mContent);
 
-		
 		MDao dao = new MDao(dbuser, dbpass);
 		int i = dao.insertmBoard(vo);
 		

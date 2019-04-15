@@ -34,10 +34,11 @@ List<MVo> list = (List<MVo>)request.getAttribute("list");
 	</tr>
 	<td> <%=vo.getmNo() %></td>
 	<td><a href="#"><%=vo.getmTitle() %></a></td>
-	<!-- <td><a href="view.jsp?mNo=<%= vo.getmNo() %>"><%= vo.getmTitle() %></a></td> -->
 	<td> <%=vo.getmDate() %></td>
 	<td> <%=vo.getmPlace() %></td>
 	<td> <%=vo.getmContent() %></td>
+	<td> <a href="./moim/update?mNo=<%=vo.getmNo()%>">수정</a>
+	<td> <a href="./moim/delete?mNo=<%=vo.getmNo()%>">삭제</a>
 	<tr>
 	<%
 }
