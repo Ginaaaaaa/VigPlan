@@ -5,6 +5,7 @@ import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.MVo;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,12 +20,12 @@ public class MDeleteServlet extends BaseServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("do Get");
+				
 		String mNo = request.getParameter("mNo");
 		MDao dao = new MDao(dbuser, dbpass);
 		dao.deletemBoard(Long.valueOf(mNo));
 		System.out.println("ok?");
 		response.sendRedirect(request.getContextPath() + "/moim");
-	
 	}
 
 

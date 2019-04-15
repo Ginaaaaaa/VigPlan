@@ -6,11 +6,22 @@
     
 <!DOCTYPE html>
 
-
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type = "text/javascript">     
+function cancel() {
+    var msg = confirm("모임을 삭제하시겠습니까?");
+    if( msg == true ) {
+       document.write ("모임이 삭제되었습니다.");
+       return true;
+    } else {
+       window.alert('취소하였습니다.');
+       return false;
+    }
+ }
+      </script>
 </head>
 <body>
 
@@ -38,14 +49,12 @@ List<MVo> list = (List<MVo>)request.getAttribute("list");
 	<td> <%=vo.getmPlace() %></td>
 	<td> <%=vo.getmContent() %></td>
 	<td> <a href="./moim/update?mNo=<%=vo.getmNo()%>">수정</a>
-	<td> <a href="./moim/delete?mNo=<%=vo.getmNo()%>">삭제</a>
+	<td> <a href="./moim/delete?mNo=<%=vo.getmNo()%>" onclick="return cancel()">삭제</a>
 	<tr>
 	<%
 }
 %>
 </tr>
 </table>
-
-
 </body>
 </html>
