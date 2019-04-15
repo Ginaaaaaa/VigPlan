@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.vigplan.dao.MDao;
+import com.vigplan.dao.moim.MDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.MVo;
 
@@ -42,7 +42,6 @@ public class MWriteServlet extends BaseServlet {
 		vo.setmPlace(mPlace);
 		vo.setmContent(mContent);
 
-		
 		MDao dao = new MDao(dbuser, dbpass);
 		int i = dao.insertmBoard(vo);
 		

@@ -2,16 +2,16 @@ package com.vigplan.vo;
 
 public class MVo {
 	
-	private int mNo;
+	private Long mNo;
 	private String mTitle;
 	private String mDate;
 	private String mPlace;
 	private String mContent;
 	
-	public int getmNo() {
+	public Long getmNo() {
 		return mNo;
 	}
-	public void setmNo(int mNo) {
+	public void setmNo(Long mNo) {
 		this.mNo = mNo;
 	}
 	public String getmTitle() {
