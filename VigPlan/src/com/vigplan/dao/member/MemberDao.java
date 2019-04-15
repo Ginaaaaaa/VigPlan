@@ -1,4 +1,4 @@
-package com.vigplan.dao;
+package com.vigplan.dao.member;
 
 import java.sql.Connection;
 
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import com.vigplan.dao.BaseDao;
 import com.vigplan.vo.MemberVo;
 
 public class MemberDao extends BaseDao implements IMemberDao {

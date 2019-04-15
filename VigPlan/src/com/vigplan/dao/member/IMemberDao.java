@@ -1,4 +1,4 @@
-package com.vigplan.dao;
+package com.vigplan.dao.member;
 
 import com.vigplan.vo.MemberVo;
 
