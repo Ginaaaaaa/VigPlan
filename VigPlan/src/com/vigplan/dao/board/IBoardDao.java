@@ -1,4 +1,4 @@
-package com.vigplan.dao;
+package com.vigplan.dao.board;
 
 import java.util.List;
 

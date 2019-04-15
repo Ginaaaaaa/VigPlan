@@ -1,4 +1,4 @@
-package com.vigplan.dao;
+package com.vigplan.dao.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vigplan.dao.BaseDao;
 import com.vigplan.vo.BoardVo;
 
 public class BoardDao extends BaseDao implements IBoardDao {
