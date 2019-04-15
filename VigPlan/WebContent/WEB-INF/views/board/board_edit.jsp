@@ -13,18 +13,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	
-<script language="javascript">
-	function checkForm(frm) {
-		var password = frm.password
-		if(password == null) {
-			alert('비밀번호를 입력하세요.');
-			frm.password.focus();
-		} else {
-			frm.submit();
-		}
-	}
-</script>
+
 </head>
 <body>
 	<%

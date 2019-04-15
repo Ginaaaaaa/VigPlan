@@ -273,6 +273,57 @@ public class BoardDao extends BaseDao implements IBoardDao {
 		return password1.getPassword();
 		
 	}
+
+	@Override
+	public BoardVo getBoardItem(Long id, String password) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardVo line = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT title, writer, reg_date, content FROM vigteam_board where id = ? and pw = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, id);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+
+				line = new BoardVo();
+				line.setId(id);
+				line.setPassword(password);
+				line.setTitle(rs.getString(1));
+				line.setWriter(rs.getString(2));
+				line.setReg_date(rs.getString(3));
+				line.setContent(rs.getString(4));
+			}
+			
+		} catch(Exception e) {
+			
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+
+			}
+			
+		}
+		
+		// TODO Auto-generated method stub
+		//	getBoardItem(Long id)와 거의 동일
+		//	Query문에서 id와 password 체크 게시물이 있으면 리턴
+		return line;
+	}
 	
 	
 }
+

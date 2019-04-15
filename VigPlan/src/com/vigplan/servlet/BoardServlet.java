@@ -33,7 +33,29 @@ public class BoardServlet extends BaseServlet {
 		} else if ("form".equals(action)) {
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/boardform.jsp");
 			rd.forward(req, resp);
-
+		} else if ("checkpw".equals(action)) {
+			
+			String id = req.getParameter("id");
+			String password = req.getParameter("password");
+			
+			BoardVo vo = new BoardVo();
+			vo.setId(Long.valueOf(id));
+			vo.setPassword(password);
+			System.out.println(vo);
+			
+			BoardDao dao = new BoardDao(dbuser, dbpass);
+			
+			
+			vo = dao.getBoardItem(Long.valueOf(id), password);
+			System.out.println(vo);
+			
+			
+			if(vo != null) {
+				resp.getWriter().print("success");
+			} else {
+				resp.getWriter().print("fail");
+			}
+			
 		} else if ("show".equals(action)) {
 			String id = req.getParameter("id");
 			BoardDao dao = new BoardDao(dbuser, dbpass);
@@ -80,6 +102,7 @@ public class BoardServlet extends BaseServlet {
 				String password = req.getParameter("password");
 				System.out.println(password);
 				String id = req.getParameter("id");
+				
 				BoardDao dao = new BoardDao(dbuser, dbpass);
 				BoardVo vo = dao.getBoardItem(Long.valueOf(id));
 				
@@ -95,7 +118,11 @@ public class BoardServlet extends BaseServlet {
 					rd.forward(req, resp);
 					
 				} else {
-					System.out.println("비밀번호가 틀렸습니다.");
+					vo.setPassword(password);
+					req.setAttribute("item", vo);
+					RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_pwcheck.jsp");
+					rd.forward(req, resp);
+			
 				}
 				
 				
