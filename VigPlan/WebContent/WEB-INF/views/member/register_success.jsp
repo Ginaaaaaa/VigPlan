@@ -10,7 +10,7 @@
 </head>
 <body>
 <%
-	MemberVo vo = (MemberVo)request.getAttribute("mvo");
+	MemberVo vo = (MemberVo)request.getAttribute("vo");
 %>
 <h2>가입 환영합니다.</h2>
 <h3>가입 시 입력하신 정보입니다.</h3>

@@ -1,7 +1,6 @@
-package com.vigplan.servlet;
+package com.vigplan.servlet.member;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,23 +9,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.vigplan.dao.MemberDao;
+import com.vigplan.dao.member.MemberDao;
+import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.MemberVo;
 
 
 //	TODO: 서블릿 요청을 만들고(extends BaseServlet 구조)
 //	TODO: 데이터 접속부는 모두 DAO로 추출
+@SuppressWarnings("serial")
 @WebServlet("/member/login")
 public class LoginServlet extends BaseServlet {
-
-	
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			
+			String action = request.getParameter("a");
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/login_form.jsp");
+		if (action == null) {
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/login_form.jsp");
 			rd.forward(request, response);
+			} else if ("success".equals(action)){	//	/member/login?a=success
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/login_success.jsp");
+				rd.forward(request, response);
+			} else if ("fail".equals(action)) {
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/login_fail.jsp");
+				rd.forward(request, response);
+			}
 
 	}
 
@@ -52,7 +59,14 @@ public class LoginServlet extends BaseServlet {
 		if (vo != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("authUser", vo);
+			
+			//	TODO: 로그인 성공 페이지로 리다이렉트
+			response.sendRedirect(request.getContextPath() + "/member/login?a=success");
+		} else {
+//			TODO: 실패 -> login 페이지로 리다이렉트
+			response.sendRedirect(request.getContextPath() + "/member/login?a=fail");
 		}
+		
 //		session.setAttribute("id", "pw");
 
 		/*

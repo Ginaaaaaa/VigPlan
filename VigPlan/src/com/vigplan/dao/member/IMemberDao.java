@@ -1,4 +1,4 @@
-package com.vigplan.dao;
+package com.vigplan.dao.member;
 
 import com.vigplan.vo.MemberVo;
 
@@ -6,5 +6,5 @@ public interface IMemberDao {
 	public int insertMember(MemberVo vo);
 	public MemberVo getMember(String id, String password);
 	int updateMember(MemberVo vo);
-	int deleteMember(String id);
+	int deleteMember(Long no);
 }

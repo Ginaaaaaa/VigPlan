@@ -1,4 +1,4 @@
-package com.vigplan.servlet;
+package com.vigplan.servlet.member;
 
 import java.io.IOException;
 
@@ -8,7 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.vigplan.dao.MemberDao;
+import com.vigplan.dao.member.MemberDao;
+import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.MemberVo;
 
 @WebServlet("/member")
@@ -25,12 +26,16 @@ public class RegisterServlet extends BaseServlet {
 			rd.forward(request, response);
 		} else if ("success".equals(action)) {
 			//	가입 성공 VIEW JSP로 포워드
-			request.getRequestDispatcher("/WEB-INF/views/member/register_success.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/register_success.jsp");
+			rd.forward(request, response);
+			
 		}
 	}
 
 		@Override
-		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+				throws ServletException, IOException {
+			
 			req.setCharacterEncoding("UTF-8");
 			
 			String id = req.getParameter("id");
