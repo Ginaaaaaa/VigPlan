@@ -117,16 +117,7 @@ public class BoardServlet extends BaseServlet {
 					// req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
 					rd.forward(req, resp);
 					
-				} else {
-					vo.setPassword(password);
-					req.setAttribute("item", vo);
-					RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_pwcheck.jsp");
-					rd.forward(req, resp);
-			
 				}
-				
-				
-			
 
 		} else if ("editer".equals(action)) {
 			BoardDao dao = new BoardDao(dbuser, dbpass);
