@@ -1,9 +1,7 @@
 package com.vigplan.servlet.moim;
 
-import com.vigplan.dao.BoardDao;
 import com.vigplan.dao.moim.MDao;
 import com.vigplan.servlet.BaseServlet;
-import com.vigplan.vo.BoardVo;
 import com.vigplan.vo.MVo;
 
 import java.io.IOException;
