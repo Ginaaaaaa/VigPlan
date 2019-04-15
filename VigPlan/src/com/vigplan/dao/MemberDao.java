@@ -21,7 +21,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 	}
 
 	// 맨 첫 화면
-	
+
 	public List<MemberVo> getAllLogs() {
 
 		List<MemberVo> list = new ArrayList<>();
@@ -121,7 +121,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 			String sql = "INSERT INTO member (no, id, pw, nickname, email) VALUES(seq_member_pk.nextval, ? , ? , ? ,? )";
 
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, vo.getId());
 
 			pstmt.setString(2, vo.getPw());
@@ -129,7 +129,6 @@ public class MemberDao extends BaseDao implements IMemberDao {
 			pstmt.setString(3, vo.getNickname());
 
 			pstmt.setString(4, vo.getEmail());
-			
 
 			insertedCount = pstmt.executeUpdate();
 
@@ -180,38 +179,32 @@ public class MemberDao extends BaseDao implements IMemberDao {
 		ResultSet rs = null;
 
 		MemberVo line = null;
+		
+		System.out.println("ID:" + id);
+		System.out.println("PASSWORD:" + pw);
 
 		try {
 
 			conn = getConnection();
 
-			String sql = "SELECT id, pw FROM member where id = ? and pw = ?";
+			String sql = "SELECT no, id, pw, nickname, regdate, email FROM member where id = ? and pw = ?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
-			
+
 			rs = pstmt.executeQuery();
-
-			rs.next();
-
-			if (rs != null) {
-
+//				System.out.println("RS:" + rs);
+			if (rs.next()) {
 				line = new MemberVo();
-
+				line.setNo(rs.getLong(1));
 				line.setId(id);
-
-				line.setPw(rs.getString(1));
-
-				line.setNickname(rs.getString(2));
-
-				line.setRegdate(rs.getString(3));
-
-				line.setEmail(rs.getString(4));
-
+				line.setPw(rs.getString(3));
+				line.setNickname(rs.getString(4));
+				line.setRegdate(rs.getString(5));
+				line.setEmail(rs.getString(6));
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -260,7 +253,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 			conn = getConnection();
 
-			String sql = "UPDATE vigteam_member SET id = ?, pw = ?, nickname = ? WHERE id = ? ";
+			String sql = "UPDATE vigteam_member SET id = ?, pw = ?, nickname = ?, email=? WHERE no = ? ";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -268,7 +261,9 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 			pstmt.setString(2, vo.getPw());
 
-			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(3, vo.getNickname());
+			pstmt.setString(4, vo.getEmail());
+			pstmt.setLong(5, vo.getNo());
 
 			result = pstmt.executeUpdate();
 
@@ -308,7 +303,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 	@Override
 
-	public int deleteMember(String id) {
+	public int deleteMember(Long no) {
 
 		Connection conn = null;
 
@@ -320,11 +315,11 @@ public class MemberDao extends BaseDao implements IMemberDao {
 
 			conn = getConnection();
 
-			String sql = "DELETE FROM vigteam_member WHERE id = ?";
+			String sql = "DELETE FROM vigteam_member WHERE no = ?";
 
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, id);
+			pstmt.setLong(1, no);
 
 			rs = pstmt.executeQuery();
 

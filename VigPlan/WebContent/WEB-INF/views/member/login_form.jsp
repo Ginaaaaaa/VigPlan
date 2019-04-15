@@ -16,7 +16,7 @@
 		</tr>
 		<tr>
 		<td>Password</td>
-		<td><input type="password" name="password" value="1111" size="21"></td>
+		<td><input type="password" name="pw" value="1111" size="21"></td>
 		</tr>
 		<tr>
 		<td colspan="2" align="center"><input type="submit" value="전송">
