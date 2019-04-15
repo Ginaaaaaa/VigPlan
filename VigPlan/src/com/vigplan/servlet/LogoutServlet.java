@@ -4,26 +4,41 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.vigplan.dao.MemberDao;
 import com.vigplan.vo.MemberVo;
 
-public class LogoutServlet extends HttpServlet {
+
+@SuppressWarnings("serial")
+@WebServlet("/member/logout")
+public class LogoutServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		String action = request.getParameter("a");
 		
-		MemberVo vo = (MemberVo)session.getAttribute("login_info");
-		
-		if(vo==null) {
-			request.setAttribute("error_message", "로그인 후 로그아웃 할 수 있습니다.");
-		} else {
-			session.invalidate(); // 세션 없애기
+		if (action == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/login_form.jsp");
+		rd.forward(request, response);
+
 		}
-		RequestDispatcher rdp = request.getRequestDispatcher("/login_form.jsp");
-		rdp.forward(request, response);
 	}
+		
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String id = request.getParameter("id");
+		String password = request.getParameter("pw");
+		
+		MemberDao dao = new MemberDao(dbuser, dbpass);
+			HttpSession session = request.getSession();
+			session.invalidate();
+			MemberVo vo = dao.getMember(id, password);
+			System.out.println("LOGout: VO = " + vo);
+	}
+
 }

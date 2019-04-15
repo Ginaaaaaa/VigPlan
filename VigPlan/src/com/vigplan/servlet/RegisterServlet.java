@@ -25,12 +25,16 @@ public class RegisterServlet extends BaseServlet {
 			rd.forward(request, response);
 		} else if ("success".equals(action)) {
 			//	가입 성공 VIEW JSP로 포워드
-			request.getRequestDispatcher("/WEB-INF/views/member/register_success.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/register_success.jsp");
+			rd.forward(request, response);
+			
 		}
 	}
 
 		@Override
-		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+				throws ServletException, IOException {
+			
 			req.setCharacterEncoding("UTF-8");
 			
 			String id = req.getParameter("id");

@@ -20,7 +20,6 @@
 		</tr>
 		<tr>
 		<td colspan="2" align="center"><input type="submit" value="전송">
-		<input type="reset" value="다시작성"></td>
 		</tr>
 	</table>
 </form>

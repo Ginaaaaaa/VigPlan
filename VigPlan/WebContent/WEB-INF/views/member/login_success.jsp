@@ -10,10 +10,23 @@
 </head>
 <body>
 <%
-MemberVo vo = (MemberVo)session.getAttribute("login_info");
+	String id=(String)request.getAttribute("id");
+	String pw=(String)request.getAttribute("pw");
 %>
-<h2><%= vo.getNickname() %>님 로그인 되었습니다.</h2><br>
-<input type="button" value="로그아웃" onclick="location.href=/member_servlet/logout'"><p>
-<input type="button" value="회원정보 조회" onclick="location.href=/member_servlet/getMemberInfo'"><p>
+
+	<form action="<%= request.getContextPath() %>/member/login" method="post">
+		<table border="2">
+			<tr align="center">
+		<td>Id</td>
+		<td><input type="text" value="1111" size="20"></td>
+		</tr>
+		<tr>
+		<td>Password</td>
+		<td><input type="password" name="pw" value="1111" size="21"></td>
+	</table>
+
+<input type="button" value="로그아웃" onclick="location.href='/VigPlan/member/logout'">
+<input type="button" value="회원정보 조회" onclick="location.href=''">
+</form>
 </body>
 </html>
