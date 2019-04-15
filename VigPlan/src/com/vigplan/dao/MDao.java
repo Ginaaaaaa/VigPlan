@@ -151,13 +151,13 @@ public class MDao extends BaseDao {
 
 
 	 // deletemBoard 
-	public int deletemBoard(int mNo) {
+	public int deletemBoard(Integer mNo) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
-	    String sql = "DELETE * FROM mboard WHERE mNo=?";
+	    String sql = "DELETE FROM mboard WHERE mNo=?";
 	    try {
-	      getConnection();
+	      conn = getConnection();
 	      pstmt = conn.prepareStatement(sql);
 	      pstmt.setInt(1, mNo);
 	      re = pstmt.executeUpdate();
