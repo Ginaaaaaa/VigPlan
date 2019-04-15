@@ -1,6 +1,6 @@
 package com.vigplan.vo;
 
-public class GVo {
+public class GroupVo {
 private Long gNo;
 private String gName;
 private String gRegdate;
