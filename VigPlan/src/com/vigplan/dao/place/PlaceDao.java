@@ -26,20 +26,22 @@ public class PlaceDao extends BaseDao {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = "SELECT title, link, description, telephone, address, roadAddress, mapx, mapy FROM place ORDER BY pk DESC";
+			String sql = "SELECT pk, title, link, description, telephone, address, roadAddress, mapx, mapy FROM place ORDER BY pk DESC";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
 
 				PlaceVo vo = new PlaceVo();
-				vo.setTitle(rs.getString(1));
-				vo.setLink(rs.getString(2));
-				vo.setDescription(rs.getString(3));
-				vo.setTelephone(rs.getString(4));
-				vo.setAddress(rs.getString(5));
-				vo.setRoadAddress(rs.getString(6));
-				vo.setMapx(rs.getInt(7));
-				vo.setMapy(rs.getInt(8));
+				
+				vo.setPk(rs.getLong(1));
+				vo.setTitle(rs.getString(2));
+				vo.setLink(rs.getString(3));
+				vo.setDescription(rs.getString(4));
+				vo.setTelephone(rs.getString(5));
+				vo.setAddress(rs.getString(6));
+				vo.setRoadAddress(rs.getString(7));
+				vo.setMapx(rs.getInt(8));
+				vo.setMapy(rs.getInt(9));
 				list.add(vo);
 
 			}
@@ -79,7 +81,8 @@ public class PlaceDao extends BaseDao {
 			conn = getConnection();
 			String sql = "INSERT INTO place (pk, title, link, description, telephone, address, roadAddress, mapx, mapy) VALUES(seq_place.nextval, ?, ?, ?, ? ,? ,? ,? ,? )";
 			pstmt = conn.prepareStatement(sql);
-
+			
+			
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getLink());
 			pstmt.setString(3, vo.getDescription());
@@ -120,7 +123,7 @@ public class PlaceDao extends BaseDao {
 
 		try {
 			conn = getConnection();
-			String sql = "SELECT title, link, description, telephone, address, roadAddress FROM place where pk = ?";
+			String sql = "SELECT title, link, description, telephone, address, roadAddress, mapx, mapy FROM place where pk = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, pk);
 			rs = pstmt.executeQuery();
@@ -135,6 +138,9 @@ public class PlaceDao extends BaseDao {
 				line.setTelephone(rs.getString(4));
 				line.setAddress(rs.getString(5));
 				line.setRoadAddress(rs.getString(6));
+				line.setMapx(rs.getInt(7));
+				line.setMapy(rs.getInt(8));
+				
 
 			}
 
