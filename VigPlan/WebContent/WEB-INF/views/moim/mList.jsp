@@ -25,10 +25,10 @@ function cancel() {
 </head>
 <body>
 
-<div class="col-md-12"><a class="button" href="./moim/write" >모임 만들기</a></div>
+<a class="button" href="./moim/write" >모임 만들기</a>
 
 
-<table>
+<table border="1" style="text-align : center">
       <tr>
             <td>번호</td>
             <td>모임명</td>
