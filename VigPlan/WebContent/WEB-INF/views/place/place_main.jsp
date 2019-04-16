@@ -45,8 +45,8 @@
 					for (PlaceVo vo : list) {
 				%>
 				<tr>
-					<td><a
-						href="<%=request.getContextPath()%>/board?a=show&id=<%=vo.getPk()%>"><%=vo.getTitle()%></a></td>
+					<td><%-- <a
+						href="<%=request.getContextPath()%>/board?a=show&id=<%=vo.getPk()%>">--%><%=vo.getTitle()%><%--</a> --%></td>
 					
 					<td><%=vo.getLink()%></td>
 					<td><%=vo.getDescription()%></td>
