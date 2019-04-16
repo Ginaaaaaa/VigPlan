@@ -8,6 +8,10 @@ import java.net.URLEncoder;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.annotations.JsonAdapter;
+
 
 public class APIExamTranslateNMT {
 
@@ -40,6 +44,13 @@ public class APIExamTranslateNMT {
             }
             br.close();
             System.out.println(response.toString());
+            
+            Gson gson = new Gson();
+            JsonObject json = gson.fromJson(response.toString(), JsonObject.class);
+            System.out.println(json);
+            System.out.println(json.get("items"));
+            
+            
         } catch (Exception e) {
             System.out.println(e);
         }
