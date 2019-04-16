@@ -19,7 +19,7 @@ public class APIExamTranslateNMT {
         String clientId = "BUxggQkvPjaUaNp736T4";
         String clientSecret = "QWUDEGsa78";
         try {
-            String text = URLEncoder.encode("고기", "UTF-8");
+            String text = URLEncoder.encode("강남역 고기", "UTF-8");
             String apiURL = "https://openapi.naver.com/v1/search/local.json?query=" + text;
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
