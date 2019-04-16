@@ -14,6 +14,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
 <title>Insert title here</title>
 </head>
 <body>
@@ -61,7 +62,8 @@
 				%>
 			</tbody>
 		</table>
-
+	<a href="<%= request.getContextPath()%>/place?a=form"
+		class="btn btn-secondary btn-sm">장소 등록</a>
 	</div>
 </body>
 </body>
