@@ -18,7 +18,6 @@ public class GroupDao extends BaseDao {
 	
 	
 	// gboard list
-	
 	public List<GroupVo> getAllgboard(){
 		List<GroupVo> list = new ArrayList<>();
 		Connection conn = null;
@@ -58,6 +57,37 @@ public class GroupDao extends BaseDao {
 	}
 	
 	
+	//gboard select
+	public GroupVo selectOne(Long gNo) {
+		GroupVo group = null;
+		//	TODO: mNo로 모임 한 개 가져오기
+		Connection conn = null;
+	    PreparedStatement pstmt = null;
+
+	    try {
+	      conn = getConnection();
+	      String sql = "SELECT * FROM gboard WHERE gNo =?";
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      ResultSet rs = pstmt.executeQuery();
+	     
+	      if (rs.next()) {
+	    	  group = new GroupVo();
+	    	  group.setgNo(rs.getLong("gNo"));
+	    	  group.setgName(rs.getString("gName"));
+	    	  group.setgRegdate(rs.getString("gRegdate"));
+	    	  group.setgPw(rs.getString("gPw"));
+	              }
+	    }catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+				try {if(conn != null) conn.close();} catch(Exception e) {}
+			}
+		return group;
+	}
+	
+	
 	
 	
 	//gboard write
@@ -86,4 +116,57 @@ public class GroupDao extends BaseDao {
 	
 	
 	
+	
+	//gboard update
+	
+	public int updategBoard(GroupVo vo) {
+	    int re = 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+
+	    try {
+	      conn = getConnection();
+	      String sql = " UPDATE gboard SET gName=? WHERE gNo=? ";
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, vo.getgName());
+	      pstmt.setLong(2, vo.getgNo());
+	      System.out.println("updategboard");
+	      re = pstmt.executeUpdate();
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+	
+	
+	// gboard delete
+	public int deletegBoard(Long gNo, String pw) {
+	    int re = 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    String sql = " DELETE FROM gboard WHERE gNo=? AND gPw=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      pstmt.setString(2, pw);
+	      re = pstmt.executeUpdate();
+	      if(re == 1) { 	// 1이면 성공
+	    	  
+	      } else {			// 0이면 실패
+	    	  
+	      }
+	      
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+
+	  }
 }

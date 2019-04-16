@@ -20,7 +20,7 @@
 List<GroupVo> list = (List<GroupVo>)request.getAttribute("list");
 for(GroupVo vo: list){					
 %>
-	<tr><td><a href="#"><%=vo.getgName()%></a></td>
+	<tr><td><a href="group/select?gNo=<%=vo.getgNo()%>"><%=vo.getgName()%></a></td>
 		<td><%=vo.getgRegdate()%></td>
 	</tr>
 	
