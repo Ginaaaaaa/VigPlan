@@ -101,6 +101,7 @@ public class PlaceServlet extends BaseServlet {
 		} else if("editer".equals(action)) {
 		  PlaceDao editdao = new PlaceDao(dbuser,dbpass);
 		  
+		  
 		  String pk = req.getParameter("pk");
 		  String title = req.getParameter("title");
 		  String link = req.getParameter("link");
@@ -111,17 +112,37 @@ public class PlaceServlet extends BaseServlet {
 		  String mapx = req.getParameter("mapx");
 		  String mapy = req.getParameter("mapy");
 		  
-		  PlaceVo editvo = new PlaceVo();
-		  editvo.setPk(Long.valueOf(pk));
-		  editvo.setTitle(title);
-		  editvo.setLink(link);
-		  editvo.setDescription(description);
-		  editvo.setTelephone(telephone);
-		  editvo.setAddress(address);
-		  editvo.setRoadAddress(roadAddress);
-		  editvo.setMapx(Integer.valueOf(mapx));
-		  editvo.setMapy(Integer.valueOf(mapy));
-		  System.out.println(editvo);
+		  PlaceVo editvo = editdao.getPlaceItem(Long.valueOf(pk));
+		  
+		  
+		  if (title == null || title.length() == 0) {
+				title = editvo.getTitle();
+			}
+			if (link == null || link.length() == 0) {
+				link = editvo.getTitle();
+			}
+			if (description == null || description.length() == 0) {
+				description = editvo.getDescription();
+			}
+			if (telephone == null || telephone.length() == 0) {
+				telephone = editvo.getTelephone();
+			}
+			if (address == null || address.length() == 0) {
+				address = editvo.getAddress();
+			}
+			if (roadAddress == null || roadAddress.length() == 0) {
+				roadAddress = editvo.getRoadAddress();
+			}
+			if (mapx == null || mapx.length() == 0) {
+				mapx = String.valueOf(editvo.getMapx());
+				editvo.setMapx(Integer.valueOf(mapx));
+				
+			}
+			if (mapy == null || mapy.length() == 0) {
+				mapy = String.valueOf(editvo.getMapy());
+				editvo.setMapy(Integer.valueOf(mapy));
+			}
+			
 		  
 		  int result = editdao.updatePlace(editvo);
 		  System.out.println(result);
