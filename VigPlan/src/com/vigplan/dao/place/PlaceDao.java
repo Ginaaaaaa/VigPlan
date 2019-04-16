@@ -211,7 +211,7 @@ public class PlaceDao extends BaseDao {
 
 		try {
 			conn = getConnection();
-			String sql = "DELETE FROM place WHERE id = ?";
+			String sql = "DELETE FROM place WHERE pk = ?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setLong(1, pk);

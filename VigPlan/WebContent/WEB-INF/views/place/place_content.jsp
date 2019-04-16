@@ -103,6 +103,36 @@
 		</div>
 	</div>
 	
+	
+	<div class="modal" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<!--  <h4 class="modal-title">Modal Heading</h4> -->
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<form action="<%=request.getContextPath()%>/place" method="POST">
+						<input type="hidden" name="a" value="delete"> 
+						<input type="hidden" name="pk" value="<%=item.getPk()%>">
+						<div class="modal-body">
+							<br> <br> 게시글을 삭제하시겠습니까? <br> <br> <br>
+							<div class="modal-footer">
+
+
+								<input type="submit" value="YES" class="btn btn-primary">
+
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">NO</button>
+
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
 
 </body>
 </html>

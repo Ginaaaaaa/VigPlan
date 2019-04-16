@@ -127,10 +127,19 @@ public class PlaceServlet extends BaseServlet {
 		  System.out.println(result);
 		  resp.sendRedirect(req.getServletContext().getContextPath() + "/place");
 		  
-
-		  
-		  
-		  
+			
+		} else if("delete".equals(action)) {
+			String pk = req.getParameter("pk");
+			PlaceVo deletevo = new PlaceVo();
+			
+			deletevo.setPk(Long.valueOf(pk));
+			
+			PlaceDao deletedao = new PlaceDao(dbuser,dbpass);
+			int result = deletedao.deletePlace(deletevo.getPk());
+			System.out.println("삭제결과 : " + result);
+			
+			System.out.println("SUCCESS?:" + (result == 0));
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/place");
 			
 		}
 
