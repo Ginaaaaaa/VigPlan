@@ -11,11 +11,19 @@ public class BoardVo {
 	private String reg_date;
 	private Long memberNo;
 	
-	//	TODO: memberNo의 getter, setter 만들기
-	//	TODO: toString 다시 Override
+
+
 	
 	public Long getId() {
 		return id;
+	}
+
+	public Long getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(Long memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	public void setId(Long id) {
@@ -72,8 +80,10 @@ public class BoardVo {
 
 	@Override
 	public String toString() {
-		return "BoardVo [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", view_cnt="
-				+ view_cnt + ", reg_date=" + reg_date + ", password=" + password +"]";
+		return "BoardVo [id=" + id + ", password=" + password + ", writer=" + writer + ", title=" + title + ", content="
+				+ content + ", view_cnt=" + view_cnt + ", reg_date=" + reg_date + ", memberNo=" + memberNo + "]";
 	}
-
+	
+	
 }
+

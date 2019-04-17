@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.vigplan.dao.board.BoardDao;
+import com.vigplan.dao.member.MemberDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.BoardVo;
 import com.vigplan.vo.MemberVo;
@@ -66,8 +67,10 @@ public class BoardServlet extends BaseServlet {
 			
 		} else if ("show".equals(action)) {
 			String id = req.getParameter("id");
+			
 			BoardDao dao = new BoardDao(dbuser, dbpass);
-			BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
+			BoardVo vo = dao.getBoardItem(Long.valueOf(id));// id의 값을 string으로 받아오니까
+		
 			req.setAttribute("item", vo);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_show.jsp");
