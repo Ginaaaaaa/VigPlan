@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 
 import com.vigplan.dao.BaseDao;
 import com.vigplan.vo.GroupVo;
+import com.vigplan.vo.MemberVo;
 
 public class GroupDao extends BaseDao {
 
@@ -115,6 +116,29 @@ public class GroupDao extends BaseDao {
 	}
 	
 	
+	// member gboard bridge
+	public void insertbridge(MemberVo mvo, GroupVo vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			String sql = " INSERT INTO member_group_bridge VALUES(?, (SELECT MAX(gno) FROM gboard)) ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, mvo.getNo());
+			rs = pstmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {if(rs != null) rs.close();} catch(Exception e) {}
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+		}
+	}
+	
+	
+	
 	
 	
 	//gboard update
@@ -167,6 +191,9 @@ public class GroupDao extends BaseDao {
 			try {if(conn != null) conn.close();} catch(Exception e) {}
 	    }
 	    return re;
-
 	  }
+	
+	
+	// bridge delete
+	
 }

@@ -3,6 +3,7 @@ package com.vigplan.servlet.group;
 import com.vigplan.dao.group.GroupDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.GroupVo;
+import com.vigplan.vo.MemberVo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,12 +13,17 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/group/delete")
 public class GroupDeleteServlet extends BaseServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//	로그인 해야 함
+		
+		
+		
 		String gNo = request.getParameter("gNo");
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		GroupVo vo = dao.selectOne(Long.valueOf(gNo));
@@ -29,20 +35,21 @@ public class GroupDeleteServlet extends BaseServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		String gNo = request.getParameter("gNo");
 		String pw = request.getParameter("pw");
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		PrintWriter out = response.getWriter();
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
 		int i = dao.deletegBoard(Long.valueOf(gNo), pw);
 		if(i == 0) {
-		out.println("<script type=\"text/javascript\">");
-		out.println("alert('비밀번호가 틀립니다.');");
-		out.println("history.back();");
-		out.println("</script>");
-			
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('비밀번호가 틀립니다.');");
+			out.println("history.back();");
+			out.println("</script>");
 		} else {
+			//	TODO: member_group_bridge에서 해당 그룹의 gNo 레코드는 모두 삭제
+			
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('삭제하였습니다');");
 			out.println("document.location.href='" + request.getContextPath() + "/group'");
