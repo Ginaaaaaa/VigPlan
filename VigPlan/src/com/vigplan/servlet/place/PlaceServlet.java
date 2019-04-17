@@ -143,6 +143,20 @@ public class PlaceServlet extends BaseServlet {
 				editvo.setMapy(Integer.valueOf(mapy));
 			}
 			
+			
+			editvo.setPk(Long.valueOf(pk));
+			editvo.setTitle(title);
+			editvo.setLink(link);
+			editvo.setDescription(description);
+			editvo.setTelephone(telephone);
+			editvo.setAddress(address);
+			editvo.setRoadAddress(roadAddress);
+			editvo.setMapx(Integer.valueOf(mapx));
+			editvo.setMapy(Integer.valueOf(mapy));
+			
+			
+			
+			
 		  
 		  int result = editdao.updatePlace(editvo);
 		  System.out.println(result);
