@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GroupDeleteServlet extends BaseServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//	세션 블록
 		String gNo = request.getParameter("gNo");
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		GroupVo vo = dao.selectOne(Long.valueOf(gNo));
@@ -42,6 +43,7 @@ public class GroupDeleteServlet extends BaseServlet {
 			out.println("history.back();");
 			out.println("</script>");
 		} else {
+			//	TODO: member_group_bridge에서 해당 그룹의 gNo 레코드는 모두 삭제
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('삭제하였습니다');");
 			out.println("document.location.href='" + request.getContextPath() + "/group'");
