@@ -33,6 +33,7 @@
 	     }
 	  }
 	 }
+
  
       </script>
 </head>
@@ -40,6 +41,7 @@
 <form name="gwriteform" action="<%= request.getContextPath() %>/group/write" method="post" onsubmit="return <%= request.getContextPath() %>/group">
 	<div>그룹명&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="gName"></div>
 	<div>비밀번호 : <input type="password" name="gPw"></div>
+
 	<input type="submit" value="그룹 생성" onclick="return checkf()">
 	<input type="button" value="목록보기" onclick="location.href='<%= request.getContextPath() %>/group'">
 </form>
