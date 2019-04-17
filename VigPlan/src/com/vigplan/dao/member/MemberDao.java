@@ -353,5 +353,35 @@ public class MemberDao extends BaseDao implements IMemberDao {
 		return 0;
 
 	}
+	
+	
+	// group invite
+	public List<MemberVo> getAllinvite(String searchid){
+		List<MemberVo> list = new ArrayList<MemberVo>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			String sql = " SELECT * FROM member WHERE id LIKE ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchid + "%");
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next() == true) {
+				MemberVo vo = new MemberVo();
+				vo.setNo(rs.getLong("no"));
+				vo.setId(rs.getString("id"));
+				vo.setNickname(rs.getString("nickname"));
+				list.add(vo);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+		}
+		return list;
+	}
 
 }

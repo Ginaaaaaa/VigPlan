@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
 <%
@@ -19,9 +18,9 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 <input type="hidden" name="gNo" value="<%=group.getgNo() %>">
 	<tr><td> 모임명 </td><td><%=group.getgName() %> </td></tr>
 	<tr><td> 생성일 </td><td><%=group.getgRegdate() %></td></tr>
-	<tr><td> <button type="submit">그룹명 수정</button>
-	<a href="<%= request.getContextPath() %>/group/delete?gNo=<%=group.getgNo()%>"">그룹 삭제</a>
-	</td></tr>
+	<tr><td> <button type="submit">그룹명 수정</button></td>
+	<td><a href="<%= request.getContextPath() %>/group/delete?gNo=<%=group.getgNo()%>"">그룹 삭제</a>
+	<a href="<%= request.getContextPath() %>/group/search?gNo=<%=group.getgNo()%>"">맴버 초대하기</a></td></tr>
 </form> 
 </table>
 </body>

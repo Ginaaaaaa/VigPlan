@@ -44,7 +44,7 @@ List<MVo> list = (List<MVo>)request.getAttribute("list");
 	%>
 	</tr>
 	<td> <%=vo.getmNo() %></td>
-	<td><a href="#"><%=vo.getmTitle() %></a></td>
+	<td><a href="./moim/select?mNo=<%=vo.getmNo() %>"><%=vo.getmTitle() %></a></td>
 	<td> <%=vo.getmDate() %></td>
 	<td> <%=vo.getmPlace() %></td>
 	<td> <%=vo.getmContent() %></td>
