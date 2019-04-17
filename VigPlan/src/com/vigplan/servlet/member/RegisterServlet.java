@@ -26,7 +26,7 @@ public class RegisterServlet extends BaseServlet {
 			rd.forward(request, response);
 		} else if ("success".equals(action)) {
 			//	가입 성공 VIEW JSP로 포워드
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/register_success.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/login_success.jsp");
 			rd.forward(request, response);
 			
 		}
