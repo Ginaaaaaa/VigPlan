@@ -17,6 +17,7 @@ public class GroupWriteServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//	TODO: Session Redirect -> 로그인 안한 요청이면 로그인 창으로
 		System.out.println("groupwriteservlet");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/groupwriteform.jsp");
 		rd.forward(request, response);
@@ -37,6 +38,10 @@ public class GroupWriteServlet extends BaseServlet {
 
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		int i = dao.insertgboard(vo);
+		
+		//  TODO: 인서트 후 session의 authUser에서 getNo 해서
+		//		gboard의 gNo와 authUser의 no를 member_group_bridge 테이블에 넣어주기
+		//	TIP: seq_gboard_pk.currval -> 시퀀스의 현재값을 받을 수 있음
 		
 		resp.sendRedirect(req.getContextPath() + "/group");
 	}
