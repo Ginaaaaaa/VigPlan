@@ -99,16 +99,24 @@ public class BoardServlet extends BaseServlet {
 			String title = req.getParameter("title");
 			String writer = req.getParameter("writer");
 			String content = req.getParameter("content");
+			String memberNo = req.getParameter("memberNo");
 			//	TODO: Session에서 authUser 받아와서 (null 체크) memberNo를 vo에 추가
-			BoardVo vo = new BoardVo();
+			
+			if(authUser != null) {
+				BoardVo vo = new BoardVo();
 
-			vo.setPassword(password);
-			vo.setTitle(title);
-			vo.setWriter(writer);
-			vo.setContent(content);
-
-			BoardDao dao = new BoardDao(dbuser, dbpass);
-			/* int insertedCount = */dao.insertBoard(vo);
+				vo.setPassword(password);
+				vo.setTitle(title);
+				vo.setWriter(writer);
+				vo.setContent(content);
+				vo.setMemberNo(Long.valueOf(memberNo));
+				System.out.println(vo);
+				BoardDao dao = new BoardDao(dbuser, dbpass);
+				/* int insertedCount = */dao.insertBoard(vo);
+				
+			}
+			
+			
 
 			// System.out.println("SUCCESS?:" + (insertedCount == 1));
 
