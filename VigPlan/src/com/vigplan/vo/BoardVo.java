@@ -18,14 +18,6 @@ public class BoardVo {
 		return id;
 	}
 
-	public Long getMemberNo() {
-		return memberNo;
-	}
-
-	public void setMemberNo(Long memberNo) {
-		this.memberNo = memberNo;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -76,6 +68,14 @@ public class BoardVo {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public Long getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(Long memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	@Override
