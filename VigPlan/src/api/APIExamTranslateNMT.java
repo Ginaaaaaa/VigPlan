@@ -8,6 +8,12 @@ import java.net.URLEncoder;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.annotations.JsonAdapter;
+
 
 public class APIExamTranslateNMT {
 
@@ -40,6 +46,24 @@ public class APIExamTranslateNMT {
             }
             br.close();
             System.out.println(response.toString());
+            
+            //	TODO: 아래 코드를 참조
+            //		json 내부의 items 노드를 뜯어서
+            //		PlaceVo의 List로 변환
+            
+            Gson gson = new Gson();	//	Gson 객체 인스턴스화
+            JsonObject json = gson.fromJson(response.toString(), JsonObject.class);	//	JsonString을 객체로 변환
+//            System.out.println(json);
+//            System.out.println(json.get("items"));
+            //	TODO: 1차 목표는 List<PlaceVo>로 만드는 것~
+            JsonArray arr = json.get("items").getAsJsonArray();
+//            System.out.println(arr);
+            
+            for (JsonElement item: arr) {
+//            	System.out.println(item);
+            	JsonObject j = item.getAsJsonObject();
+//            	System.out.println(j.get("title"));
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
