@@ -29,19 +29,18 @@ public class GroupDeleteServlet extends BaseServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		String gNo = request.getParameter("gNo");
 		String pw = request.getParameter("pw");
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		PrintWriter out = response.getWriter();
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
 		int i = dao.deletegBoard(Long.valueOf(gNo), pw);
 		if(i == 0) {
-		out.println("<script type=\"text/javascript\">");
-		out.println("alert('비밀번호가 틀립니다.');");
-		out.println("history.back();");
-		out.println("</script>");
-			
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('비밀번호가 틀립니다.');");
+			out.println("history.back();");
+			out.println("</script>");
 		} else {
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('삭제하였습니다');");

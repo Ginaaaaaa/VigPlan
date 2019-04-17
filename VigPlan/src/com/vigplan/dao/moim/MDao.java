@@ -28,7 +28,7 @@ public class MDao extends BaseDao {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = " SELECT * FROM mboard ";
+			String sql = " SELECT * FROM mboard ORDER BY mDate";
 			rs = stmt.executeQuery(sql);
 			
 			// ResultSet -> List

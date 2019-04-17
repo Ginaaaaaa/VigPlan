@@ -22,14 +22,13 @@ public class GroupListServlet extends BaseServlet {
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		List<GroupVo> list = dao.getAllgboard();
 		
-		System.out.println("list?");
+		System.out.println("group list");
 		request.setAttribute("list", list);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/grouplist.jsp");
 		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		doGet(request, response);
 	}
 
