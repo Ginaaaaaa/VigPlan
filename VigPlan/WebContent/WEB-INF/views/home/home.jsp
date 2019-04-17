@@ -10,23 +10,37 @@
  <script type="text/javascript">
  $(document).ready(function() {
 	 $("#regist_btn").click(function() {
-		 	alert('회원가입 페이지로 이동합니다.');
 			location.assign('/VigPlan/member'); 
+	 });
+	 $("#login_btn").click(function() {
+			location.assign('/VigPlan/member/login'); 
+	 });
+	 $("#board_btn").click(function() {
+			location.assign('/VigPlan/board'); 
+	 });
+	 $("#group_btn").click(function() {
+			location.assign('/VigPlan/group'); 
+	 });
+	 $("#moim_btn").click(function() {
+			location.assign('/VigPlan/moim'); 
 	 });
  });
  
  </script>
-  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 
 <div class="container">
 	<h1>메인페이지</h1>
 	<hr>
-	<button id="regist_btn" class="btn">회원가입하기</button>
-
+	<button id="regist_btn" class="btn">회원가입 하기</button>
+	<button id="login_btn" class="btn">로그인 하기</button>
+	<button id="board_btn" class="btn">게시판</button>
+	<button id="group_btn" class="btn">그룹</button>
+	<button id="moim_btn" class="btn">모임</button>
 </div>
 
 </body>

@@ -7,7 +7,7 @@ CREATE TABLE place (
     address VARCHAR2(200)   NOT NULL,
     roadAddress VARCHAR2(128) NOT NULL,
     mapx NUMBER(10) NOT NULL,
-    mpay NUMBER(10) NOT NULL
+    mapy NUMBER(10) NOT NULL
 
 	);
   

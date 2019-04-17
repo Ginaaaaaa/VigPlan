@@ -11,3 +11,7 @@ CREATE TABLE vigteam_board (
 CREATE SEQUENCE seq_brd_pk
 START WITH 1
 INCREMENT BY 1;
+
+-- 테이블 수정
+ALTER TABLE vigteam_board 
+  ADD (member_no NUMBER);

@@ -9,7 +9,11 @@ public class BoardVo {
 	private String content;
 	private Long view_cnt;
 	private String reg_date;
+	private Long memberNo;
+	
 
+
+	
 	public Long getId() {
 		return id;
 	}
@@ -65,11 +69,21 @@ public class BoardVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public Long getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(Long memberNo) {
+		this.memberNo = memberNo;
+	}
 
 	@Override
 	public String toString() {
-		return "BoardVo [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", view_cnt="
-				+ view_cnt + ", reg_date=" + reg_date + ", password=" + password +"]";
+		return "BoardVo [id=" + id + ", password=" + password + ", writer=" + writer + ", title=" + title + ", content="
+				+ content + ", view_cnt=" + view_cnt + ", reg_date=" + reg_date + ", memberNo=" + memberNo + "]";
 	}
-
+	
+	
 }
+
