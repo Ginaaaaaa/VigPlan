@@ -1,26 +1,25 @@
-package com.vigplan.dao.moim;
+package com.vigplan.dao.group;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.PreparedStatement;
 
 import com.vigplan.dao.BaseDao;
-import com.vigplan.vo.MVo;
+import com.vigplan.vo.GroupVo;
 
+public class GroupDao extends BaseDao {
 
-public class MDao extends BaseDao {
-
-	public MDao(String dbuser, String dbpass) {
+	public GroupDao(String dbuser, String dbpass) {
 		super(dbuser, dbpass);
 	}
-
 	
-	public List<MVo> getAllmboard(){
-		List<MVo> list = new ArrayList<>();
-		// DB 로직
+	
+	// gboard list
+	public List<GroupVo> getAllgboard(){
+		List<GroupVo> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -28,18 +27,17 @@ public class MDao extends BaseDao {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = " SELECT * FROM mboard ";
+			String sql = " SELECT * FROM gboard ";
 			rs = stmt.executeQuery(sql);
 			
 			// ResultSet -> List
 			while(rs.next()) {
-				MVo vo = new MVo();
-				vo.setmNo(rs.getLong(1));
-				vo.setmTitle(rs.getString(2));
-				vo.setmDate(rs.getString(3));
-				vo.setmPlace(rs.getString(4));
-				vo.setmContent(rs.getString(5));
-				
+				GroupVo vo = new GroupVo();
+				vo.setgNo(rs.getLong(1));
+				vo.setgName(rs.getString(2));
+				vo.setgRegdate(rs.getString(3));
+				vo.setgPw(rs.getString(4));
+			
 				list.add(vo);
 			}
 		} catch(Exception e) {
@@ -59,27 +57,26 @@ public class MDao extends BaseDao {
 	}
 	
 	
-	// select mboard
-	public MVo selectOne(Long mNo) {
-		MVo moim = null;
+	//gboard select
+	public GroupVo selectOne(Long gNo) {
+		GroupVo group = null;
 		//	TODO: mNo로 모임 한 개 가져오기
 		Connection conn = null;
 	    PreparedStatement pstmt = null;
 
 	    try {
 	      conn = getConnection();
-	      String sql = "SELECT * FROM mboard WHERE mNo =?";
+	      String sql = "SELECT * FROM gboard WHERE gNo =?";
 	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setLong(1, mNo);
+	      pstmt.setLong(1, gNo);
 	      ResultSet rs = pstmt.executeQuery();
 	     
 	      if (rs.next()) {
-	    	  moim = new MVo();
-	    	  moim.setmNo(rs.getLong("mNo"));
-	    	  moim.setmTitle(rs.getString("mTitle"));
-	    	  moim.setmDate(rs.getString("mDate"));
-	    	  moim.setmPlace(rs.getString("mPlace"));
-	    	  moim.setmContent(rs.getString("mContent"));
+	    	  group = new GroupVo();
+	    	  group.setgNo(rs.getLong("gNo"));
+	    	  group.setgName(rs.getString("gName"));
+	    	  group.setgRegdate(rs.getString("gRegdate"));
+	    	  group.setgPw(rs.getString("gPw"));
 	              }
 	    }catch(Exception e) {
 				e.printStackTrace();
@@ -87,28 +84,26 @@ public class MDao extends BaseDao {
 				try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
 				try {if(conn != null) conn.close();} catch(Exception e) {}
 			}
-
-		
-		return moim;
+		return group;
 	}
-
 	
-	// mWrite
-	public int insertmBoard(MVo vo) {
+	
+	
+	
+	//gboard write
+	public int insertgboard(GroupVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int i = 0;
 		
 		try {
-		conn = getConnection();
-		String sql = " INSERT INTO mboard VALUES(seq_mboard_pk.nextval, ?, ?, ?, ?) ";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, vo.getmTitle());
-		pstmt.setString(2, vo.getmDate());
-		pstmt.setString(3, vo.getmPlace());
-		pstmt.setString(4, vo.getmContent());
-		rs = pstmt.executeQuery();
+			conn = getConnection();
+			String sql = " INSERT INTO gboard VALUES(seq_gboard_pk.nextval, ?, sysdate, ?) ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getgName());
+			pstmt.setString(2, vo.getgPw());
+			rs = pstmt.executeQuery();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -118,26 +113,24 @@ public class MDao extends BaseDao {
 		}
 		return i;
 	}
-
-
 	
 	
-	// updatemBoard 
-	public int updatemBoard(Long mNo, String mTitle, String mDate, String mPlace, String mContent) {
+	
+	
+	//gboard update
+	
+	public int updategBoard(GroupVo vo) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 
 	    try {
 	      conn = getConnection();
-	      String sql = "UPDATE mboard SET mTitle=?, mDate=?, mPlace=?, mContent=? WHERE mNo=?";
+	      String sql = " UPDATE gboard SET gName=? WHERE gNo=? ";
 	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setString(1, mTitle);
-	      pstmt.setString(2, mDate);
-	      pstmt.setString(3, mPlace);
-	      pstmt.setString(4, mContent);
-	      pstmt.setLong(5, mNo);
-	      System.out.println("updatemboard");
+	      pstmt.setString(1, vo.getgName());
+	      pstmt.setLong(2, vo.getgNo());
+	      System.out.println("updategboard");
 	      re = pstmt.executeUpdate();
 	    } catch (Exception e) {
 	      e.printStackTrace();
@@ -147,20 +140,26 @@ public class MDao extends BaseDao {
 	    }
 	    return re;
 	  }
-
-
-
-	 // deletemBoard 
-	public int deletemBoard(Long mNo) {
+	
+	
+	// gboard delete
+	public int deletegBoard(Long gNo, String pw) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
-	    String sql = "DELETE FROM mboard WHERE mNo=?";
+	    String sql = " DELETE FROM gboard WHERE gNo=? AND gPw=? ";
 	    try {
 	      conn = getConnection();
 	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setLong(1, mNo);
+	      pstmt.setLong(1, gNo);
+	      pstmt.setString(2, pw);
 	      re = pstmt.executeUpdate();
+	      if(re == 1) { 	// 1이면 성공
+	    	  
+	      } else {			// 0이면 실패
+	    	  
+	      }
+	      
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	    } finally {
@@ -170,6 +169,4 @@ public class MDao extends BaseDao {
 	    return re;
 
 	  }
-	
 }
-
