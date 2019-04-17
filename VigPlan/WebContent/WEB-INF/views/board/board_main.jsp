@@ -1,4 +1,5 @@
 <%@page import="com.vigplan.vo.BoardVo"%>
+<%@page import="com.vigplan.vo.MemberVo" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -37,6 +38,8 @@ for(BoardVo vo: list) {
 
 
 </head>
+<%
+MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
 <body>
 
 	<div class="container">
@@ -71,10 +74,11 @@ for(BoardVo vo: list) {
 				%>
 			</tbody>
 		</table>
-
+	<% %>
 		<!-- button type="button" class="btn btn-secondary btn-sm" onclick="location.href='board?a=form'">글쓰기</button -->
 		<a href="<%=request.getContextPath()%>/board?a=form"
 			class="btn btn-secondary btn-sm">글쓰기</a>
+	
 		<!-- <input type="button" value="글쓰기" > -->
 	</div>
 </body>
