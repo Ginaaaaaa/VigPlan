@@ -29,6 +29,10 @@ public class BoardServlet extends BaseServlet {
 		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
 		System.out.println("현재 사용자:" + authUser);
 		
+		if (authUser == null) {
+			resp.sendRedirect(req.getContextPath() + "/member/login");
+			return;
+		}
 		String action = req.getParameter("a");
 
 		if (action == null) {
@@ -86,6 +90,9 @@ public class BoardServlet extends BaseServlet {
 
 		String action = req.getParameter("a");
 
+		HttpSession session = req.getSession();
+		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
+		
 		// boardform 수행시 parameter
 		if ("write".equals(action)) {
 			String password = req.getParameter("password");

@@ -1,3 +1,4 @@
+<%@page import="com.vigplan.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -18,11 +19,13 @@
 <head>
 
 </head>
-
+<%
+MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
 <body>
 	<div class="container">
 		<br> <br>
 		<h2>글쓰기</h2>
+		<p>현재 사용자: <%= authUser %></p>
 		<br>
 		<form class="form-inline"
 			action="<%=request.getContextPath()/*ServletStudy*/%>/board"
@@ -36,7 +39,8 @@
 
 			<div class="form-group">
 				<label for="writer" class="mb-2 mr-sm-2">작성자</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="writer">
+					type="text" class="form-control mb-2 mr-sm-2" name="writer"
+					value="<%= authUser.getNickname() %>">
 			</div>
 
 			<div class="form-group">
