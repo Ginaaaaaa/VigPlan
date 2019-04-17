@@ -10,35 +10,18 @@
  <script type="text/javascript">
  $(document).ready(function() {
 	 $("#regist_btn").click(function() {
-		 	alert('회원가입 페이지로 이동합니다.');
 			location.assign('/VigPlan/member'); 
 	 });
- });
- 
- $(document).ready(function() {
 	 $("#login_btn").click(function() {
-		 	alert('로그인 페이지로 이동합니다.');
 			location.assign('/VigPlan/member/login'); 
 	 });
- });
- 
- $(document).ready(function() {
 	 $("#board_btn").click(function() {
-		 	alert('게시판으로 이동합니다.');
 			location.assign('/VigPlan/board'); 
 	 });
- });
- 
- $(document).ready(function() {
 	 $("#group_btn").click(function() {
-		 	alert('그룹으로 이동합니다.');
 			location.assign('/VigPlan/group'); 
 	 });
- });
- 
- $(document).ready(function() {
 	 $("#moim_btn").click(function() {
-		 	alert('모임으로 이동합니다.');
 			location.assign('/VigPlan/moim'); 
 	 });
  });
