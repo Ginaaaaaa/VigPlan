@@ -9,7 +9,11 @@ public class BoardVo {
 	private String content;
 	private Long view_cnt;
 	private String reg_date;
-
+	private Long memberNo;
+	
+	//	TODO: memberNo의 getter, setter 만들기
+	//	TODO: toString 다시 Override
+	
 	public Long getId() {
 		return id;
 	}

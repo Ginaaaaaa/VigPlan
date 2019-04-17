@@ -8,10 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.vigplan.dao.board.BoardDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.BoardVo;
+import com.vigplan.vo.MemberVo;
 
 @WebServlet("/board")
 public class BoardServlet extends BaseServlet {
@@ -21,6 +23,11 @@ public class BoardServlet extends BaseServlet {
 		resp.setContentType("text/html;charset=UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 
+		//	Session 연동 -> 세션에서 사용자 확인
+		HttpSession session = req.getSession();
+		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
+		System.out.println("현재 사용자:" + authUser);
+		
 		String action = req.getParameter("a");
 
 		if (action == null) {
@@ -82,7 +89,7 @@ public class BoardServlet extends BaseServlet {
 			String title = req.getParameter("title");
 			String writer = req.getParameter("writer");
 			String content = req.getParameter("content");
-
+			//	TODO: Session에서 authUser 받아와서 (null 체크) memberNo를 vo에 추가
 			BoardVo vo = new BoardVo();
 
 			vo.setPassword(password);

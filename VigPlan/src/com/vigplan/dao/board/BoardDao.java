@@ -76,10 +76,12 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		try {
 			conn = getConnection();
+			//	TODO: SQL 수정
+			//	TODO: vo에서 memberNo 받아와서 같이 INSERT
 			String sql = "INSERT INTO vigteam_board (id, pw, title, writer, content, view_cnt, reg_date) VALUES(seq_brd_pk.nextval, ? , ? , ? , ?, default, sysdate)";
 
 			pstmt = conn.prepareStatement(sql);
-
+			
 			pstmt.setString(1, vo.getPassword());
 			pstmt.setString(2, vo.getTitle());
 			pstmt.setString(3, vo.getWriter());
