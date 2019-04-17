@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet("/")
 public class HomeServlet extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String action = request.getParameter("a");
-		
-	if (action == null) {
+
+		if (action == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/home/home.jsp");
-		rd.forward(request, response);
-		} else if ("success".equals(action)){	//	/member/login?a=success
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/login_success.jsp");
 			rd.forward(request, response);
 		}
-		
+
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 	}
 
