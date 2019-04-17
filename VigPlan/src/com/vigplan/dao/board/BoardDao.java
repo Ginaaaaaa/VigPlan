@@ -76,14 +76,17 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		try {
 			conn = getConnection();
-			String sql = "INSERT INTO vigteam_board (id, pw, title, writer, content, view_cnt, reg_date) VALUES(seq_brd_pk.nextval, ? , ? , ? , ?, default, sysdate)";
+			//	TODO: SQL 수정
+			//	TODO: vo에서 memberNo 받아와서 같이 INSERT
+			String sql = "INSERT INTO vigteam_board (id, pw, title, writer, content, view_cnt, reg_date, memberNo) VALUES(seq_brd_pk.nextval, ? , ? , ? , ?, default, sysdate,?)";
 
 			pstmt = conn.prepareStatement(sql);
-
+			
 			pstmt.setString(1, vo.getPassword());
 			pstmt.setString(2, vo.getTitle());
 			pstmt.setString(3, vo.getWriter());
 			pstmt.setString(4, vo.getContent());
+			pstmt.setLong(5, vo.getMemberNo());
 
 			insertedCount = pstmt.executeUpdate();
 			System.out.println(insertedCount);
@@ -318,10 +321,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 			}
 			
 		}
-		
-		// TODO Auto-generated method stub
-		//	getBoardItem(Long id)와 거의 동일
-		//	Query문에서 id와 password 체크 게시물이 있으면 리턴
+
 		return line;
 	}
 	

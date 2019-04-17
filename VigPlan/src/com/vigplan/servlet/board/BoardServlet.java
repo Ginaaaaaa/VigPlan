@@ -8,10 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.vigplan.dao.board.BoardDao;
+import com.vigplan.dao.member.MemberDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.BoardVo;
+import com.vigplan.vo.MemberVo;
 
 @WebServlet("/board")
 public class BoardServlet extends BaseServlet {
@@ -21,6 +24,15 @@ public class BoardServlet extends BaseServlet {
 		resp.setContentType("text/html;charset=UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 
+		//	Session 연동 -> 세션에서 사용자 확인
+		HttpSession session = req.getSession();
+		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
+		System.out.println("현재 사용자:" + authUser);
+		
+		if (authUser == null) {
+			resp.sendRedirect(req.getContextPath() + "/member/login");
+			return;
+		}
 		String action = req.getParameter("a");
 
 		if (action == null) {
@@ -59,8 +71,10 @@ public class BoardServlet extends BaseServlet {
 			
 		} else if ("show".equals(action)) {
 			String id = req.getParameter("id");
+			
 			BoardDao dao = new BoardDao(dbuser, dbpass);
-			BoardVo vo = dao.getBoardItem(Long.valueOf(id)); // id의 값을 string으로 받아오니까
+			BoardVo vo = dao.getBoardItem(Long.valueOf(id));// id의 값을 string으로 받아오니까
+		
 			req.setAttribute("item", vo);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_show.jsp");
@@ -76,13 +90,16 @@ public class BoardServlet extends BaseServlet {
 
 		String action = req.getParameter("a");
 
+		HttpSession session = req.getSession();
+		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
+		
 		// boardform 수행시 parameter
 		if ("write".equals(action)) {
 			String password = req.getParameter("password");
 			String title = req.getParameter("title");
 			String writer = req.getParameter("writer");
 			String content = req.getParameter("content");
-
+			//	TODO: Session에서 authUser 받아와서 (null 체크) memberNo를 vo에 추가
 			BoardVo vo = new BoardVo();
 
 			vo.setPassword(password);
