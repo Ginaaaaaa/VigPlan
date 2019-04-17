@@ -14,7 +14,7 @@
 	<div>
 		<table border="1">
 			<tr><td>가입한 그룹 목록</td>
-				<td>가입일</td>
+				<td>가입일</td>				
 			</tr>
 <%			
 List<GroupVo> list = (List<GroupVo>)request.getAttribute("list");
