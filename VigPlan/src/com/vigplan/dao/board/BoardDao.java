@@ -122,7 +122,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 		try {
 			conn = getConnection();
 
-			String sql = "SELECT title, writer, reg_date, content FROM vigteam_board where id = ?";
+			String sql = "SELECT title, writer, reg_date, content, member_no FROM vigteam_board where id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, id);
 			rs = pstmt.executeQuery();
@@ -135,6 +135,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 				line.setWriter(rs.getString(2));
 				line.setReg_date(rs.getString(3));
 				line.setContent(rs.getString(4));
+				line.setMemberNo(rs.getLong(5));
 
 			}
 

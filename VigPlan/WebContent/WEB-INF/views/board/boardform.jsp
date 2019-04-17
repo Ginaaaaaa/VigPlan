@@ -25,19 +25,19 @@ MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
 	<div class="container">
 		<br> <br>
 		<h2>글쓰기</h2>
-		<p>현재 사용자: <%= authUser %></p>
+
 		<br>
 		<form class="form-inline"
 			action="<%=request.getContextPath()/*ServletStudy*/%>/board"
 			method="POST"> 
 			<input type="hidden" name="a" value="write">
-			<input type="hidden" name="memberNo" value="<%= authUser.getNo()%>">
-			<input type="hidden" name="writer" value="<%= authUser.getNickname()%>">
+			<input type="hidden" name="writer" value="<%=authUser.getNickname() %>">
+			<input type="hidden" name="memberNo" value="<%=authUser.getNo() %>">
 			<div class="form-group">
 				<label for="title" class="mb-2 mr-sm-2">제목:</label> <input
 					type="text" class="form-control mb-2 mr-sm-2" name="title">
 			</div>
-			<br> <br>
+			
 
 			<div class="form-group">
 				<label for="content" class="mb-2 mr-sm-2">내용</label> <input
