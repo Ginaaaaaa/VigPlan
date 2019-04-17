@@ -1,18 +1,17 @@
 package api;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import javax.servlet.annotation.WebServlet;
+import java.util.Arrays;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.annotations.JsonAdapter;
+import com.vigplan.vo.PlaceVo;
 
 
 public class APIExamTranslateNMT {
@@ -45,24 +44,18 @@ public class APIExamTranslateNMT {
                 response.append(inputLine);
             }
             br.close();
-            System.out.println(response.toString());
-            
-            //	TODO: 아래 코드를 참조
-            //		json 내부의 items 노드를 뜯어서
-            //		PlaceVo의 List로 변환
             
             Gson gson = new Gson();	//	Gson 객체 인스턴스화
-            JsonObject json = gson.fromJson(response.toString(), JsonObject.class);	//	JsonString을 객체로 변환
-//            System.out.println(json);
-//            System.out.println(json.get("items"));
-            //	TODO: 1차 목표는 List<PlaceVo>로 만드는 것~
+            JsonObject json = gson.fromJson(response.toString(), JsonObject.class);
+
             JsonArray arr = json.get("items").getAsJsonArray();
-//            System.out.println(arr);
+            PlaceVo[] places = gson.fromJson(arr, PlaceVo[].class);
+            List<PlaceVo> list = Arrays.asList(places);
             
-            for (JsonElement item: arr) {
-//            	System.out.println(item);
-            	JsonObject j = item.getAsJsonObject();
-//            	System.out.println(j.get("title"));
+//            System.out.println(list);
+
+            for (PlaceVo place: list) {
+            	System.out.println(place);
             }
         } catch (Exception e) {
             System.out.println(e);
