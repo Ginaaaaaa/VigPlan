@@ -73,9 +73,13 @@ public class BoardServlet extends BaseServlet {
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 			BoardVo vo = dao.getBoardItem(Long.valueOf(id));// id의 값을 string으로 받아오니까
 			
+			
 			Long memberNo = vo.getMemberNo();
 			Long testMemberNo = authUser.getNo();
 			
+			//	TODO: 게시물 작성자와 세션 비교는 board_show.jsp에서 통합으로 해주세요.
+			//		board_show2.jsp는 지워주세요
+			/*
 			if(memberNo.equals(testMemberNo)) {
 				req.setAttribute("item", vo);
 
@@ -89,7 +93,7 @@ public class BoardServlet extends BaseServlet {
 				rd.forward(req, resp);
 				
 			}
-			
+			*/
 			
 			
 			
