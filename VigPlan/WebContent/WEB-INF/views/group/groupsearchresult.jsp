@@ -14,13 +14,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+<script typr="text/javascript">
+//
+</script>
 </head>
 <body>
 <br> <br>
 		<h3><strong>아이디 검색 결과</strong></h3>
 		<br> <br>
 <div class="container">
-<form action="<%= request.getContextPath() %>/group/invite" method="post">
+<form action="<%= request.getContextPath() %>/group/invite" method="post" name="form">
 	<table class="table">
 	<thead>
 	<tr>

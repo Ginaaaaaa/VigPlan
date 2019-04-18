@@ -356,16 +356,17 @@ public class MemberDao extends BaseDao implements IMemberDao {
 	
 	
 	// group invite
-	public List<MemberVo> getAllinvite(String searchid){
+	public List<MemberVo> getAllinvite(MemberVo mvo, String searchid){
 		List<MemberVo> list = new ArrayList<MemberVo>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			conn = getConnection();
-			String sql = " SELECT * FROM member WHERE id LIKE ? ";
+			String sql = " SELECT * FROM member WHERE id LIKE ? AND id NOT LIKE ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + searchid + "%");
+			pstmt.setString(2, mvo.getId());
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next() == true) {
