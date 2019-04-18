@@ -73,29 +73,14 @@ public class BoardServlet extends BaseServlet {
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 			BoardVo vo = dao.getBoardItem(Long.valueOf(id));// id의 값을 string으로 받아오니까
 			
-			Long memberNo = vo.getMemberNo();
-			Long testMemberNo = authUser.getNo();
+//			Long memberNo = vo.getMemberNo();
+//			Long testMemberNo = authUser.getNo();
 			
-			if(memberNo.equals(testMemberNo)) {
-				req.setAttribute("item", vo);
+			req.setAttribute("item", vo);
 
-				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_show.jsp");
-				rd.forward(req, resp);
-				
-			} else {
-				req.setAttribute("item", vo);
-
-				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_show2.jsp");
-				rd.forward(req, resp);
-				
-			}
+			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_show.jsp");
+			rd.forward(req, resp);
 			
-			
-			
-			
-
-	
-
 		}
 
 	}
@@ -116,7 +101,7 @@ public class BoardServlet extends BaseServlet {
 			String writer = req.getParameter("writer");
 			String content = req.getParameter("content");
 			String memberNo = req.getParameter("memberNo");
-			// TODO: Session에서 authUser 받아와서 (null 체크) memberNo를 vo에 추가
+		
 
 			if (authUser == null) {
 				resp.sendRedirect(req.getContextPath() + "/member/login");
