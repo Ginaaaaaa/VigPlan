@@ -72,7 +72,7 @@ public class NaverApi {
         
         try {
             String text = URLEncoder.encode(keyword, "UTF-8");
-            String apiURL = "https://openapi.naver.com/v1/search/local.json?display=20&start=1&sort=sim&query=" + text;
+            String apiURL = "https://openapi.naver.com/v1/search/local.json?display=" + display + "&start=" + start + "&sort=sim&query=" + text;
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");

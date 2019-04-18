@@ -15,37 +15,19 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery.min.js"></script> 
+
 <script>
-$.getScript("paging.js", function() {
-	document.write(str);
-});
-</script>
-
-<script language="javascript" >
-
-function searchPlace() {
-	var pageNo = (no || 1);
-	$.ajax({
-		type:"GET",
-		url: "<%= request.getContextPath() %>/place/search", 
-		dataType: "json", 
-		data : "countPerPage="+10+"&pageNo="+pageNo, 
-		contentType:"application/json; charset=UTF-8", 
-		cache : false, 
-		success : function(){
-
-		}
-	});
+function callPage(pageNo) {
+	var frm = document.frm;
+	var display = parseInt(frm.display.value);
+	var newStart = (pageNo - 1) * display + 1;
+	
+	//alert("new start pos:" + newStart);
+	frm.start.value = newStart;
+	frm.submit();
 }
-$(document).ready(function(){ 
-	//Paging(전체데이타수,페이지당 보여줄 데이타수,페이지 그룹 범위,현재페이지 번호,token명) 
-	var page_viewList = Paging(20, 10, 10 ,1, "PagingView"); 
-	$("#list").empty().html(page_viewList); });
-
 </script>
- 
-
 <title>Insert title here</title>
 </head>
 <%
@@ -57,8 +39,14 @@ $(document).ready(function(){
 		<form name='frm' method='GET'
 			action='<%=request.getContextPath()%>/place/search'>
 			<aside style='float: right;'> <input type='text'
-				name='keyword' value='' placeholder="특수문자는 사용할수 없습니다.">
+				name='keyword' 
+				<% if (request.getParameter("keyword") != null) { %>
+				value='<%= request.getParameter("keyword") %>'
+				<% } %>
+				 placeholder="특수문자는 사용할수 없습니다.">
 			<button type='submit'>검색</button>
+			<input type="hidden" name="start" value="<%= request.getAttribute("nStart") %>">
+			<input type="hidden" name="display" value="<%= request.getAttribute("nDisplay") %>">
 			</aside>
 		</form>
 		<div class='menu_line' style='clear: both;'></div>
@@ -98,7 +86,13 @@ $(document).ready(function(){
 				</tbody>
 			</table>
 			<%
-				
+			if (request.getParameter("keyword") != null) {
+				for (int i = 0; i < 10; i++) {
+					%>
+					<a href="#" onclick="callPage(<%= i+1 %>)"><%= i+1 %></a>
+					<%
+				}
+			}
 			%>
 		</div>
 </body>

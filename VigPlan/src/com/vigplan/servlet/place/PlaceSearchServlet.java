@@ -17,14 +17,22 @@ import api.NaverApi;
 
 @WebServlet("/place/search")
 public class PlaceSearchServlet extends HttpServlet {
-
+	private static int DISPLAY_COUNT = 10;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String action = request.getParameter("a");
 		String keyword = request.getParameter("keyword");
-
+		String start = request.getParameter("start");
+		String display = request.getParameter("display");
+		
+		Integer nStart = start == null ? 1: Integer.valueOf(start);
+		Integer nDisplay = display == null? DISPLAY_COUNT : Integer.valueOf(display);
+		
+		request.setAttribute("nDisplay", nDisplay);
+		request.setAttribute("nStart", nStart);
+		
 		if (keyword != null) {
-			List<PlaceVo> list = NaverApi.searchPlace(keyword, 100, 0 );
+			List<PlaceVo> list = NaverApi.searchPlace(keyword, nDisplay, nStart );
 			request.setAttribute("list", list);
 			System.out.println(list);
 		
