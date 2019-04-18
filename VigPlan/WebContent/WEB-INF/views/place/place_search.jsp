@@ -15,15 +15,38 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<title>Insert title here</title>
+<script src="//code.jquery.com/jquery.min.js"></script>
 <script>
+$.getScript("paging.js", function() {
+	document.write(str);
+});
+</script>
+
+<script language="javascript" >
+
+function searchPlace() {
+	var pageNo = (no || 1);
+	$.ajax({
+		type:"GET",
+		url: "<%= request.getContextPath() %>/place/search", 
+		dataType: "json", 
+		data : "countPerPage="+10+"&pageNo="+pageNo, 
+		contentType:"application/json; charset=UTF-8", 
+		cache : false, 
+		success : function(){
+
+		}
+	});
+}
 $(document).ready(function(){ 
 	//Paging(전체데이타수,페이지당 보여줄 데이타수,페이지 그룹 범위,현재페이지 번호,token명) 
-	var page_viewList = Paging(20, 10, 10 ,1, "PagingView"); $("#place/search").empty().html(page_viewList); });
-
+	var page_viewList = Paging(20, 10, 10 ,1, "PagingView"); 
+	$("#list").empty().html(page_viewList); });
 
 </script>
+ 
+
+<title>Insert title here</title>
 </head>
 <%
 	MemberVo authUser = (MemberVo) session.getAttribute("authUser");
