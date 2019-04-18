@@ -33,6 +33,7 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 	<a href="<%= request.getContextPath() %>/group/search?gNo=<%=group.getgNo()%>"">맴버 초대하기</a></td></tr>
 </form> 
 </table>
+<!-- TODO: 하단에 소속 멤버 표시 -->
 </div>
 </body>
 </html>

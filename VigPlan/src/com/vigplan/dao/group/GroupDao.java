@@ -17,6 +17,10 @@ public class GroupDao extends BaseDao {
 		super(dbuser, dbpass);
 	}
 	
+	//	TODO: 현재 사용자가 소속된 그룹만 보여주기
+	public List<GroupVo> getMyGboard(String memberNo) {
+		return null;
+	}
 	
 	// gboard list
 	public List<GroupVo> getAllgboard(){
