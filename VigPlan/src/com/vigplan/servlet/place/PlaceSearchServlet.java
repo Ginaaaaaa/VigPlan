@@ -24,7 +24,7 @@ public class PlaceSearchServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 
 		if (keyword != null) {
-			List<PlaceVo> list = NaverApi.searchPlace(keyword);
+			List<PlaceVo> list = NaverApi.searchPlace(keyword, 100, 0 );
 			request.setAttribute("list", list);
 			System.out.println(list);
 		

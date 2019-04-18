@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.vigplan.vo.PlaceVo;
 
@@ -68,12 +67,12 @@ public class NaverApi {
     }
     */
 	
-    public static List<PlaceVo> searchPlace(String keyword) {
+    public static List<PlaceVo> searchPlace(String keyword, int display, int start) {
         List<PlaceVo> list = null;
         
         try {
             String text = URLEncoder.encode(keyword, "UTF-8");
-            String apiURL = "https://openapi.naver.com/v1/search/local.json?query=" + text;
+            String apiURL = "https://openapi.naver.com/v1/search/local.json?display=20&start=1&sort=sim&query=" + text;
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
@@ -99,13 +98,14 @@ public class NaverApi {
             
             Gson gson = new Gson();	//	Gson 객체 인스턴스화 
             JsonObject json = gson.fromJson(response.toString(), JsonObject.class);
-
+            System.out.println("JSON:" + json);
             JsonArray arr = json.get("items").getAsJsonArray();
+            
             PlaceVo[] places = gson.fromJson(arr, PlaceVo[].class);
             list = Arrays.asList(places);
             
         } catch (Exception e) {
-            System.out.println(e);
+           e.printStackTrace();
         }
         
         return list;

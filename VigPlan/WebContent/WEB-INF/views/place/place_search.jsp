@@ -1,8 +1,8 @@
 <%@page import="com.vigplan.vo.PlaceVo"%>
-<%@page import="com.vigplan.vo.MemberVo" %>
+<%@page import="com.vigplan.vo.MemberVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,22 +17,32 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <title>Insert title here</title>
+<script>
+$(document).ready(function(){ 
+	//Paging(전체데이타수,페이지당 보여줄 데이타수,페이지 그룹 범위,현재페이지 번호,token명) 
+	var page_viewList = Paging(20, 10, 10 ,1, "PagingView"); $("#place/search").empty().html(page_viewList); });
+
+
+</script>
 </head>
 <%
-MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
+	MemberVo authUser = (MemberVo) session.getAttribute("authUser");
+%>
 <body>
-<div class='aside_menu'>
-  <form name='frm' method='GET' action='<%= request.getContextPath() %>/place/search'>
-    <aside style='float: right;'>
-      <input type='text' name='keyword' value='' placeholder="특수문자는 사용할수 없습니다.">
-      <button type='submit'>검색</button>    
-    </aside> 
-  </form>
-  <div class='menu_line' style='clear: both;'></div>
+
+	<div class='aside_menu'>
+		<form name='frm' method='GET'
+			action='<%=request.getContextPath()%>/place/search'>
+			<aside style='float: right;'> <input type='text'
+				name='keyword' value='' placeholder="특수문자는 사용할수 없습니다.">
+			<button type='submit'>검색</button>
+			</aside>
+		</form>
+		<div class='menu_line' style='clear: both;'></div>
 		<div class="container">
 			<br> <br>
 			<h3>
-				<strong>전체글보기</strong>
+				<strong>검색</strong>
 			</h3>
 			<br> <br>
 			<table class="table">
@@ -59,7 +69,7 @@ MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
 						<td><%=vo.getAddress()%></td>
 					</tr>
 					<%
-							}
+						}
 						}
 					%>
 				</tbody>
@@ -68,6 +78,5 @@ MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
 				
 			%>
 		</div>
-
 </body>
 </html>
