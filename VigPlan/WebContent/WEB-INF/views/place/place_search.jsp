@@ -22,7 +22,6 @@
 	MemberVo authUser = (MemberVo) session.getAttribute("authUser");
 %>
 <body>
-
 	<div class='aside_menu'>
 		<form name='frm' method='GET'
 			action='<%=request.getContextPath()%>/place/search'>
@@ -42,6 +41,7 @@
 			<table class="table">
 				<thead>
 					<tr>
+						<th></th>
 						<th>이름</th>
 						<th>홈페이지</th>
 						<th>전화번호</th>
@@ -68,7 +68,8 @@
 					%>
 				</tbody>
 			</table>
-			<% %>
+			<%
+%>
 		</div>
 </body>
 </html>
