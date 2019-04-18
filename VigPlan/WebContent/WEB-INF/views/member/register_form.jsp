@@ -13,19 +13,19 @@
 			</tr>
 			<tr>
 			<td>ID</td>
-			<td><input type="text" name="id" value="1111" size="20"></td>
+			<td><input type="text" name="id" value="" size="20"></td>
 			</tr>
 			<tr>
 			<td>Password</td>
-			<td><input type="password" name="pw" value="1111" size="20"></td>
+			<td><input type="password" name="pw" value="" size="20"></td>
 			</tr>
 			<tr>
 			<td>Nickname</td>
-			<td><input type="text" name="nickname" value="둘리" size="20"></td>
+			<td><input type="text" name="nickname" value="" size="20"></td>
 			</tr>
 			<tr>
 			<td>Email</td>
-			<td><input type="text" name="email" value="msp@naver.com" size="20"></td>
+			<td><input type="text" name="email" value="" size="20"></td>
 			</tr>
 			<tr align="center">
 			<td colspan="2"><input type="submit" value="확인">
