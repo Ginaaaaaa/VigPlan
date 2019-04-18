@@ -1,4 +1,5 @@
 <%@page import="com.vigplan.vo.BoardVo"%>
+<%@page import="com.vigplan.vo.MemberVo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.vigplan.vo.BoardVo"%>
@@ -61,6 +62,8 @@
 
 <title>Insert title here</title>
 </head>
+
+<% MemberVo authUser = (MemberVo) session.getAttribute("authUser"); %>
 <body>
 
 	<div class="container">
@@ -95,15 +98,12 @@
 
 			</tbody>
 		</table>
-
-
-		<%-- 			<a href="<%=request.getContextPath()%>/board?a=edit&id=<%=item.getId()%>"
-			class="btn btn-secondary btn-sm" >수정</a>
-			
-			<a href="<%=request.getContextPath()%>/board?a=delete&id=<%=item.getId()%>"
-			class="btn btn-secondary btn-sm">삭제</a> --%>
-
-		<button type="button" class="btn btn-secondary btn-sm"
+		<%
+				Long memberNo = item.getMemberNo();
+				Long testMemberNo = authUser.getNo();
+				
+				if(memberNo.equals(testMemberNo)) {%> 
+					<button type="button" class="btn btn-secondary btn-sm"
 			data-toggle="modal" data-target="#myModal1">수정</button>
 		<%-- 			<a href="<%=request.getContextPath()%>/board?a=delete&id=<%=item.getId()%>"
 				class="btn btn-secondary btn-sm" data-toggle="modal"
@@ -167,10 +167,6 @@
 
 
 
-
-
-
-
 		<div class="modal" id="myModal">
 
 			<div class="modal-dialog">
@@ -206,7 +202,26 @@
 			</div>
 
 		</div>
+				
+					
+				<% } else { %>
+				
+				<a href="<%=request.getContextPath()%>/board"
+			class="btn btn-secondary btn-sm">리스트</a>
+					
+				<%} %>
+				
+				
+				
+	
 
+		<%-- 			<a href="<%=request.getContextPath()%>/board?a=edit&id=<%=item.getId()%>"
+			class="btn btn-secondary btn-sm" >수정</a>
+			
+			<a href="<%=request.getContextPath()%>/board?a=delete&id=<%=item.getId()%>"
+			class="btn btn-secondary btn-sm">삭제</a> --%>
+
+	
 	</div>
 </body>
 </html>
