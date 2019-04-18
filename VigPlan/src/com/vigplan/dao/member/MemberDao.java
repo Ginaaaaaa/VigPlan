@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vigplan.dao.BaseDao;
+import com.vigplan.vo.GroupVo;
 import com.vigplan.vo.MemberVo;
 
 public class MemberDao extends BaseDao implements IMemberDao {
@@ -379,6 +380,38 @@ public class MemberDao extends BaseDao implements IMemberDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+		}
+		return list;
+	}
+	
+	
+	// select 후 memberlist 뽑기
+	public List<MemberVo> getMyMember(Long gno){
+		List<MemberVo> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			String sql = " SELECT m.no, m.id, m.nickname FROM member m, gboard g, member_group_bridge b WHERE g.gno=? AND m.no = b.member_no AND b.group_gno = g.gNo ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, gno);
+		    rs = pstmt.executeQuery();
+		    
+		    while(rs.next()) {
+				MemberVo vo = new MemberVo();
+				vo.setNo(rs.getLong(1));
+				vo.setId(rs.getString(2));
+				vo.setNickname(rs.getString(3));
+				list.add(vo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {if(rs != null) rs.close();} catch(Exception e) {}
 			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
 			try {if(conn != null) conn.close();} catch(Exception e) {}
 		}

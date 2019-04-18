@@ -23,7 +23,7 @@
 		<h3><strong>아이디 검색 결과</strong></h3>
 		<br> <br>
 <div class="container">
-<form action="<%= request.getContextPath() %>/group/invite" method="post" name="form">
+
 	<table class="table">
 	<thead>
 	<tr>
@@ -32,25 +32,26 @@
 	<th>초대버튼</th>
 	</tr>
 	</thead>
-
-	
-<%	List<MemberVo> list = (List<MemberVo>)request.getAttribute("list");
-for(MemberVo vo: list){	GroupVo group = (GroupVo) request.getAttribute("group");
+	<%	
+	GroupVo group = (GroupVo) request.getAttribute("group");
+List<MemberVo> list = (List<MemberVo>)request.getAttribute("list");
+for(MemberVo vo: list){	
 %>
 	<tbody>
 	<tr>
+	<form action="<%= request.getContextPath() %>/group/invite" method="post">
+	<input type="hidden" name="gNo" value="<%= group.getgNo() %>">
+	<input type="hidden" name="no" value="<%=vo.getNo() %>">
 	<td><%=vo.getId() %></td>
 	<td><%=vo.getNickname() %></td>
 	<td><button type="sumit">초대</button></td>
-	</tr>
-	</tbody>
-<input type="hidden" name="gNo" value="<%= group.getgNo() %>">
-<input type="hidden" name="no" value="<%=vo.getNo() %>">
+	</form>
 	<%
 }
 %>
+	</tr>
+	</tbody>
 	</table>
-</form>
 </div>
 </body>
 </html>

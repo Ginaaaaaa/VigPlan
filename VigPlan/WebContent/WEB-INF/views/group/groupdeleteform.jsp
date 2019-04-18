@@ -21,7 +21,8 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 		<br> <br>
 		<h3><strong>그룹 삭제</strong></h3>
 		<br> <br>
-	<form action="<%= request.getContextPath() %>/group/delete?gNo=<%=group.getgNo()%>" method="post" onsubmit="return <%= request.getContextPath() %>/group">
+	<form action="<%= request.getContextPath() %>/group/delete" method="post">
+	<input type="hidden" name="gNo" value="<%=group.getgNo()%>">
 	<div>비밀번호 입력 : <input type="password" name="pw"><button type="submit">확인</div>
 	</form>
 </body>

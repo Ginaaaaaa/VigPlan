@@ -17,9 +17,36 @@ public class GroupDao extends BaseDao {
 		super(dbuser, dbpass);
 	}
 	
-	//	TODO: 현재 사용자가 소속된 그룹만 보여주기
-	public List<GroupVo> getMyGboard(String memberNo) {
-		return null;
+	
+	public List<GroupVo> getMyGboard(Long memberNo) {
+		List<GroupVo> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			String sql = " SELECT g.gNo, g.gName, g.gRegdate FROM member m, gboard g, member_group_bridge b WHERE m.no=? AND b.member_no = m.no AND b.group_gno = g.gNo ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, memberNo);
+		    rs = pstmt.executeQuery();
+			
+		    while(rs.next()) {
+				GroupVo vo = new GroupVo();
+				vo.setgNo(rs.getLong(1));
+				vo.setgName(rs.getString(2));
+				vo.setgRegdate(rs.getString(3));
+				list.add(vo);
+			}
+		    
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {if(rs != null) rs.close();} catch(Exception e) {}
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+		}
+		return list;
 	}
 	
 	// gboard list

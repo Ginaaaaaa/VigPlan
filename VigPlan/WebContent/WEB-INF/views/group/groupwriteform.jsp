@@ -45,11 +45,11 @@
 		<br> <br>
 		<h3><strong>그룹 만들기</strong></h3>
 		<br> <br>
-<form name="gwriteform" action="<%= request.getContextPath() %>/group/write" method="post" onsubmit="return <%= request.getContextPath() %>/group">
+<form name="gwriteform" action="<%= request.getContextPath() %>/group/write" method="post" onsubmit="return checkf()">
 	<div>그룹명&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="gName"><br>
 		 비밀번호 : <input type="password" name="gPw"></div>
 
-	<input type="submit" value="그룹 생성" onclick="return checkf()">
+	<input type="submit" value="그룹 생성">
 	<input type="button" value="목록보기" onclick="location.href='<%= request.getContextPath() %>/group'">
 </form>
 </body>

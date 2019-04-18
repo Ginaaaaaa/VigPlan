@@ -20,7 +20,7 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 		<br> <br>
 		<h3><strong>그룹 수정</strong></h3>
 		<br> <br>
-<form action="<%= request.getContextPath() %>/group/update" name="gupdate" method="post" onsubmit="return <%= request.getContextPath() %>/group">
+<form action="<%= request.getContextPath() %>/group/update" name="gupdate" method="post">
 <table class="table">
 <input type="hidden" name="gNo" value="<%= group.getgNo() %>">
 <tr><th>모임명</th><td><input type="text" name="gName" value="<%=group.getgName()%>"></td></tr>
