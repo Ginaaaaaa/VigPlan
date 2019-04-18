@@ -53,8 +53,8 @@
 						//	request에서  list 어트리뷰트를 받아와서
 						//	있으면(not null) 루프
 						List<PlaceVo> list = (List<PlaceVo>) request.getAttribute("list");
-						for (PlaceVo vo : list) {
-							if (list != null) {
+						if (list != null) {
+							for (PlaceVo vo : list) {
 					%>
 					<tr>
 						<td><%=vo.getTitle()%></td>
@@ -63,12 +63,14 @@
 						<td><%=vo.getAddress()%></td>
 					</tr>
 					<%
-					}
+							}
 						}
 					%>
 				</tbody>
 			</table>
-			<% %>
+			<%
+				
+			%>
 		</div>
 </body>
 </html>
