@@ -1,6 +1,7 @@
 package com.vigplan.servlet.group;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vigplan.dao.group.GroupDao;
+import com.vigplan.dao.member.MemberDao;
 import com.vigplan.vo.GroupVo;
+import com.vigplan.vo.MemberVo;
 import com.vigplan.servlet.BaseServlet;
 
 
@@ -21,8 +24,12 @@ public class GroupSelectServlet extends BaseServlet {
 		String gNo = request.getParameter("gNo");
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		GroupVo vo = dao.selectOne(Long.valueOf(gNo));
-		System.out.println(vo);
 		request.setAttribute("group", vo);
+		
+		MemberDao mdao = new MemberDao(dbuser, dbpass);
+		List<MemberVo> list = mdao.getMyMember(Long.valueOf(gNo));
+		request.setAttribute("list", list);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/groupselect.jsp");
 		rd.forward(request, response);
 	}

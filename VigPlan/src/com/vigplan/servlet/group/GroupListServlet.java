@@ -21,9 +21,6 @@ public class GroupListServlet extends BaseServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GroupDao dao = new GroupDao(dbuser, dbpass);
-		List<GroupVo> list = dao.getAllgboard();
-		
 		HttpSession session = request.getSession();
 		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
 		
@@ -34,6 +31,9 @@ public class GroupListServlet extends BaseServlet {
 			//	리다이렉트
 			response.sendRedirect(request.getContextPath() + "/member/login");
 		} else {
+			GroupDao dao = new GroupDao(dbuser, dbpass);
+			List<GroupVo> list = dao.getMyGboard(authUser.getNo());
+			
 			System.out.println("list?");
 			request.setAttribute("list", list);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/grouplist.jsp");

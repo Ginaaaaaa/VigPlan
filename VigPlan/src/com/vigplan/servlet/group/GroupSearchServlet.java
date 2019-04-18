@@ -61,8 +61,9 @@ public class GroupSearchServlet extends BaseServlet {
 		GroupVo vo = gdao.selectOne(Long.valueOf(gNo));
 		request.setAttribute("group", vo);
 		
+		
 		MemberDao mdao = new MemberDao(dbuser, dbpass);
-		List<MemberVo> list = mdao.getAllinvite(searchid);
+		List<MemberVo> list = mdao.getAllinvite(authUser,searchid);
 		System.out.println(list);
 		request.setAttribute("list", list);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/groupsearchresult.jsp");

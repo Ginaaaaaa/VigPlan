@@ -11,7 +11,7 @@
 MVo moim = (MVo) request.getAttribute("moim");
 %>
 <h1>모임 수정하기</h1>
-<form action="<%= request.getContextPath() %>/moim/update" method="post" onsubmit="return <%= request.getContextPath() %>/moim">
+<form action="<%= request.getContextPath() %>/moim/update" method="post">
 <table border="1">
 <input type="hidden" name="mNo" value="<%= moim.getmNo() %>">
 <tr><td>모임명</td><td><input type="text" name="mTitle" value="<%=moim.getmTitle()%>"></td></tr>
