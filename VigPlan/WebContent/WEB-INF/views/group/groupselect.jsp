@@ -27,7 +27,7 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 <form action="<%= request.getContextPath() %>/group/update" method="get">
 <input type="hidden" name="gNo" value="<%=group.getgNo() %>">
 	
-	<tr><th> 모임명 </th><td><%=group.getgName() %> </td></tr>
+	<tr><th> 그룹명 </th><td><%=group.getgName() %> </td></tr>
 	<tr><th> 생성일 </th><td><%=group.getgRegdate() %></td></tr>
 	<tr><th> 멤버 목록</th><td>
 	<%
