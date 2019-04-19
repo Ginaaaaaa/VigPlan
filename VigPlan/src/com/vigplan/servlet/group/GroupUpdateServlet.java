@@ -48,7 +48,7 @@ public class GroupUpdateServlet extends BaseServlet {
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		int i = dao.updategBoard(vo);
 		
-		resp.sendRedirect(req.getContextPath() + "/group");
+		resp.sendRedirect(req.getContextPath() + "/group/select?gNo=" + gNo);
 	}
 
 }

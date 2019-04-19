@@ -39,8 +39,7 @@ public class MDao extends BaseDao {
 				vo.setmNo(rs.getLong(1));
 				vo.setmTitle(rs.getString(2));
 				vo.setmDate(rs.getString(3));
-				vo.setmPlace(rs.getString(4));
-				vo.setmContent(rs.getString(5));
+				vo.setmContent(rs.getString(4));
 				
 				list.add(vo);
 			}
@@ -80,7 +79,6 @@ public class MDao extends BaseDao {
 	    	  moim.setmNo(rs.getLong("mNo"));
 	    	  moim.setmTitle(rs.getString("mTitle"));
 	    	  moim.setmDate(rs.getString("mDate"));
-	    	  moim.setmPlace(rs.getString("mPlace"));
 	    	  moim.setmContent(rs.getString("mContent"));
 	              }
 	    }catch(Exception e) {
@@ -159,12 +157,11 @@ public class MDao extends BaseDao {
 		
 		try {
 		conn = getConnection();
-		String sql = " INSERT INTO mboard VALUES(seq_mboard_pk.nextval, ?, ?, ?, ?) ";
+		String sql = " INSERT INTO mboard VALUES(seq_mboard_pk.nextval, ?, ?, ?) ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getmTitle());
 		pstmt.setString(2, vo.getmDate());
-		pstmt.setString(3, vo.getmPlace());
-		pstmt.setString(4, vo.getmContent());
+		pstmt.setString(3, vo.getmContent());
 		rs = pstmt.executeQuery();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -180,20 +177,19 @@ public class MDao extends BaseDao {
 	
 	
 	// updatemBoard 
-	public int updatemBoard(Long mNo, String mTitle, String mDate, String mPlace, String mContent) {
+	public int updatemBoard(Long mNo, String mTitle, String mDate, String mContent) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 
 	    try {
 	      conn = getConnection();
-	      String sql = "UPDATE mboard SET mTitle=?, mDate=?, mPlace=?, mContent=? WHERE mNo=?";
+	      String sql = "UPDATE mboard SET mTitle=?, mDate=?, mContent=? WHERE mNo=?";
 	      pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, mTitle);
 	      pstmt.setString(2, mDate);
-	      pstmt.setString(3, mPlace);
-	      pstmt.setString(4, mContent);
-	      pstmt.setLong(5, mNo);
+	      pstmt.setString(3, mContent);
+	      pstmt.setLong(4, mNo);
 	      System.out.println("updatemboard");
 	      re = pstmt.executeUpdate();
 	    } catch (Exception e) {

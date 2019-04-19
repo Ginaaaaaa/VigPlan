@@ -25,7 +25,6 @@ function cancel() {
             <td>번호</td>
             <td>모임명</td>
             <td>날짜</td>
-            <td>장소</td>
             <td>소개</td>
       </tr>
       <tr>
@@ -38,7 +37,6 @@ List<MVo> list = (List<MVo>)request.getAttribute("list");
 	<td> <%=vo.getmNo() %></td>
 	<td><a href="./moim/select?mNo=<%=vo.getmNo() %>"><%=vo.getmTitle() %></a></td>
 	<td> <%=vo.getmDate() %></td>
-	<td> <%=vo.getmPlace() %></td>
 	<td> <%=vo.getmContent() %></td>
 	<td> <a href="./moim/update?mNo=<%=vo.getmNo()%>">수정</a>
 	<td> <a href="./moim/delete?mNo=<%=vo.getmNo()%>" onclick="return cancel()">삭제</a>

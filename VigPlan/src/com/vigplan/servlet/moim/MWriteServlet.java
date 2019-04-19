@@ -48,7 +48,6 @@ public class MWriteServlet extends BaseServlet {
 		req.setCharacterEncoding("UTF-8");
 		String mTitle = req.getParameter("mTitle"); 
 		String mDate = req.getParameter("mDate"); 
-		String mPlace = req.getParameter("mPlace");
 		String mContent = req.getParameter("mContent");
 		String gNo = req.getParameter("gNo");
 		
@@ -63,7 +62,6 @@ public class MWriteServlet extends BaseServlet {
 		MVo vo = new MVo(); 
 		vo.setmTitle(mTitle);
 		vo.setmDate(mDate);
-		vo.setmPlace(mPlace);
 		vo.setmContent(mContent);
 
 		MDao dao = new MDao(dbuser, dbpass);

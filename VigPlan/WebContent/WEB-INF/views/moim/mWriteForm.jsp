@@ -14,7 +14,6 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 <input type="hidden" name="gNo" value="<%=group.getgNo()%>">
 <tr><td>모임명</td><td><input type="text" name="mTitle"></td></tr>
 <tr><td>날짜</td><td><input type="datetime-local" name="mDate"></td></tr>
-<tr><td>장소</td><td><input type="text" name="mPlace"></td></tr>
 <tr><td>소개</td><td><input type="text" name="mContent"></td></tr>
 <tr><td><input type="submit" value="모임 생성">
 <input type="reset" value="다시작성">

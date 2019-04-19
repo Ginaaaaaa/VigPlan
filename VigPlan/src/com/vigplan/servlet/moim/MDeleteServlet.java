@@ -25,7 +25,7 @@ public class MDeleteServlet extends BaseServlet {
 		MDao dao = new MDao(dbuser, dbpass);
 		dao.deletemBoard(Long.valueOf(mNo));
 		System.out.println("ok?");
-		response.sendRedirect(request.getContextPath() + "/moim");
+		response.sendRedirect(request.getContextPath() + "/group");
 	}
 
 

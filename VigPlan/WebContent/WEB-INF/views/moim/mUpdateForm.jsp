@@ -13,7 +13,6 @@ MVo moim = (MVo) request.getAttribute("moim");
 <input type="hidden" name="mNo" value="<%= moim.getmNo() %>">
 <tr><td>모임명</td><td><input type="text" name="mTitle" value="<%=moim.getmTitle()%>"></td></tr>
 <tr><td>날짜</td><td><input type="datetime-local" name="mDate" value="<%=moim.getmDate()%>"></td></tr>
-<tr><td>장소</td><td><input type="text" name="mPlace" value="<%=moim.getmPlace()%>"></td></tr>
 <tr><td>소개</td><td><input type="text" name="mContent" value="<%=moim.getmContent()%>"></td></tr>
 <tr><td><input type="submit" value="모임 수정">
 </table>

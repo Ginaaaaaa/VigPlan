@@ -40,21 +40,19 @@ public class MUpdateServlet extends BaseServlet {
 		String mNo = req.getParameter("mNo");
 		String mTitle = req.getParameter("mTitle"); 
 		String mDate = req.getParameter("mDate"); 
-		String mPlace = req.getParameter("mPlace");
 		String mContent = req.getParameter("mContent");
 		
 		MVo vo = new MVo();
 		vo.setmNo(Long.valueOf(mNo));
 		vo.setmTitle(req.getParameter("mTitle"));
 		vo.setmDate(req.getParameter("mDate"));
-		vo.setmPlace(req.getParameter("mPlace"));
 		vo.setmContent(req.getParameter("mConent"));
 		System.out.println("do Post 2");
 		
 		MDao dao = new MDao(dbuser, dbpass);
-		int i = dao.updatemBoard(Long.valueOf(mNo), mTitle, mDate, mPlace, mContent);
+		int i = dao.updatemBoard(Long.valueOf(mNo), mTitle, mDate, mContent);
 		
-		resp.sendRedirect(req.getContextPath() + "/moim");
+		resp.sendRedirect(req.getContextPath() + "/moim/select?mNo=" + mNo);
 
 	    }
 

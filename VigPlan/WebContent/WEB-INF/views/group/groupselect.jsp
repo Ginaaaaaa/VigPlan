@@ -53,7 +53,7 @@ for(MemberVo vo: list){
 		<tr>
 			<td><%=mvo.getmNo()%></td>
 			<td>
-				<a href="<%=request.getContextPath()%>/moim/select?mNo=<%=mvo.getmNo()%>"><%=mvo.getmTitle()%></a></td>
+			<a href="<%=request.getContextPath()%>/moim/select?mNo=<%=mvo.getmNo()%>"><%=mvo.getmTitle()%></a></td>
 			<td><%=mvo.getmDate()%></td>
 		</tr>
 		<%
