@@ -15,3 +15,7 @@ CREATE SEQUENCE seq_mboard_pk
   moim_mno number,
   primary key (group_gno, moim_mno) -- Optional
 );
+
+-- 추가 DDL: 2019-04-19
+
+ALTER TABLE mboard DROP COLUMN mplace;
