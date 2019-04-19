@@ -1,18 +1,15 @@
 <%@page import="com.vigplan.vo.MVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Insert title here</title>
-</head>
-<body>
+<%@include file="../includes/header.jsp" %>
 <%
 MVo moim = (MVo) request.getAttribute("moim");
 %>
-<h1>모임 수정하기</h1>
+<br> <br>
+		<h3><strong>모임 수정하기</strong></h3>
+		<br> <br>
 <form action="<%= request.getContextPath() %>/moim/update" method="post">
-<table border="1">
+<table class="table">
 <input type="hidden" name="mNo" value="<%= moim.getmNo() %>">
 <tr><td>모임명</td><td><input type="text" name="mTitle" value="<%=moim.getmTitle()%>"></td></tr>
 <tr><td>날짜</td><td><input type="datetime-local" name="mDate" value="<%=moim.getmDate()%>"></td></tr>
@@ -21,7 +18,4 @@ MVo moim = (MVo) request.getAttribute("moim");
 <tr><td><input type="submit" value="모임 수정">
 </table>
 </form>
-
-
-</body>
-</html>
+<%@include file="../includes/footer.jsp" %>

@@ -5,24 +5,10 @@
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
-<script typr="text/javascript">
-//
-</script>
-</head>
-<body>
+<%@include file="../includes/header.jsp" %>
 <br> <br>
 		<h3><strong>아이디 검색 결과</strong></h3>
 		<br> <br>
-<div class="container">
 
 	<table class="table">
 	<thead>
@@ -52,6 +38,4 @@ for(MemberVo vo: list){
 	</tr>
 	</tbody>
 	</table>
-</div>
-</body>
-</html>
+<%@include file="../includes/footer.jsp" %>
