@@ -16,13 +16,10 @@ function callPage(pageNo) {
 	frm.submit();
 }
 </script>
-<title>Insert title here</title>
-</head>
+
 <%
 	MemberVo authUser = (MemberVo) session.getAttribute("authUser");
 %>
-<body>
-
 	<div class='aside_menu'>
 		<form name='frm' method='GET'
 			action='<%=request.getContextPath()%>/place/search'>

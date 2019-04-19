@@ -2,13 +2,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Join Page</title>
-</head>
-<body>
+<%@include file="../includes/header.jsp" %>
+
 <%
 	MemberVo vo = (MemberVo)request.getAttribute("vo");
 System.out.println(vo);
@@ -24,6 +19,4 @@ Password :<%=vo.getPw() %><br>
 <a href="<%= request.getContextPath() %>/member/login">Login</a>
 <a href="<%= request.getContextPath() %>/member">메인페이지</a>
 
-
-</body>
-</html>
+<%@include file="../includes/footer.jsp" %>
