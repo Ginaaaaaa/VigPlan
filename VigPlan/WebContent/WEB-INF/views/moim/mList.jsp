@@ -3,13 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html>
-
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@include file="../includes/header.jsp" %>
 <script type = "text/javascript">     
 function cancel() {
     var msg = confirm("모임을 삭제하시겠습니까?");
@@ -22,13 +16,11 @@ function cancel() {
     }
  }
       </script>
-</head>
-<body>
 
 <a class="button" href="./moim/write" >모임 만들기</a>
 
 
-<table border="1" style="text-align : center">
+<table class="table">
       <tr>
             <td>번호</td>
             <td>모임명</td>
@@ -56,5 +48,4 @@ List<MVo> list = (List<MVo>)request.getAttribute("list");
 %>
 </tr>
 </table>
-</body>
-</html>
+<%@include file="../includes/footer.jsp" %>

@@ -364,10 +364,17 @@ public class MemberDao extends BaseDao implements IMemberDao {
 		
 		try {
 			conn = getConnection();
+			
 			String sql = " SELECT * FROM member WHERE id LIKE ? AND id NOT LIKE ? ";
+			if(searchid == "") {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, null);
+			}else {
+			pstmt = conn.prepareStatement(sql);	
 			pstmt.setString(1, "%" + searchid + "%");
+			}
 			pstmt.setString(2, mvo.getId());
+
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next() == true) {
@@ -376,6 +383,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 				vo.setId(rs.getString("id"));
 				vo.setNickname(rs.getString("nickname"));
 				list.add(vo);
+			
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
