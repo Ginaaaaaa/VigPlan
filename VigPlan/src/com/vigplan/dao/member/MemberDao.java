@@ -366,11 +366,11 @@ public class MemberDao extends BaseDao implements IMemberDao {
 			conn = getConnection();
 			
 			String sql = " SELECT * FROM member WHERE id LIKE ? AND id NOT LIKE ? ";
-			pstmt = conn.prepareStatement(sql);
-			
 			if(searchid == "") {
-				pstmt.setString(1, null);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, null);
 			}else {
+			pstmt = conn.prepareStatement(sql);	
 			pstmt.setString(1, "%" + searchid + "%");
 			}
 			pstmt.setString(2, mvo.getId());

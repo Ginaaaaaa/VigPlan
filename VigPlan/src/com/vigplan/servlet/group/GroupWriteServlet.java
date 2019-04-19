@@ -56,11 +56,8 @@ public class GroupWriteServlet extends BaseServlet {
 		HttpSession session = req.getSession();
 		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
 		dao.insertbridge(authUser, vo);
-		//  TODO: 인서트 후 session의 authUser에서 getNo 해서
-		//		gboard의 gNo와 authUser의 no를 member_group_bridge 테이블에 넣어주기
-		//	TIP: seq_gboard_pk.currval -> 시퀀스의 현재값을 받을 수 있음
-		
-		resp.sendRedirect(req.getContextPath() + "/group");
+
+		resp.sendRedirect(req.getContextPath() + "/group/select?gNo=" + vo.getgNo());
 	}
 
 }
