@@ -1,4 +1,5 @@
 <%@ page import="com.vigplan.vo.GroupVo" %>
+<%@ page import="com.vigplan.vo.MVo" %>
 <%@ page import="com.vigplan.dao.group.GroupDao" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

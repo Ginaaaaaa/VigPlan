@@ -1,7 +1,9 @@
 <%@ page import="com.vigplan.vo.GroupVo" %>
 <%@ page import="com.vigplan.vo.MemberVo" %>
+<%@ page import="com.vigplan.vo.MVo" %>
 <%@ page import="com.vigplan.dao.group.GroupDao" %>
 <%@ page import="java.util.List" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
@@ -33,4 +35,34 @@ for(MemberVo vo: list){
 	<a href="<%= request.getContextPath() %>/group/search?gNo=<%=group.getgNo()%>"">맴버 초대하기</a></td></tr>
 </form> 
 </table>
-<%@include file="../includes/footer.jsp" %>
+
+<table class="table">
+	<h3>모임 리스트</h3>
+	<thead>
+		<tr>
+			<th>모임 번호</th>
+			<th>모임명</th>
+			<th>모임날짜</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%
+			List<MVo> mlist = (List<MVo>) request.getAttribute("mlist");
+			for (MVo mvo : mlist) {
+		%>
+		<tr>
+			<td><%=mvo.getmNo()%></td>
+			<td>
+				<a href="<%=request.getContextPath()%>/moim/select?mNo=<%=mvo.getmNo()%>"><%=mvo.getmTitle()%></a></td>
+			<td><%=mvo.getmDate()%></td>
+		</tr>
+		<%
+			}
+		%>
+	</tbody>
+	<form action="<%=request.getContextPath()%>/moim/write">
+		<input type="hidden" name="gNo" value=<%=group.getgNo()%>>
+		<button type="submit" class="btn btn-primary">모임 만들기</button>
+	</form>
+</table>
+<%@include file="../includes/footer.jsp"%>

@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vigplan.dao.BaseDao;
+import com.vigplan.vo.GroupVo;
 import com.vigplan.vo.MVo;
+import com.vigplan.vo.MemberVo;
 
 
 public class MDao extends BaseDao {
@@ -92,6 +94,61 @@ public class MDao extends BaseDao {
 		return moim;
 	}
 
+	
+	// group moim bridge
+	public void insertbridge2(GroupVo gvo, MVo mvo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			String sql = " INSERT INTO group_moim_bridge VALUES(?, (SELECT MAX(mno) FROM mboard)) ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, gvo.getgNo());
+			rs = pstmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {if(rs != null) rs.close();} catch(Exception e) {}
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+		}
+	}
+	
+	
+	// group 내 moim 불러오기
+	public List<MVo> getMyMoim(Long gno){
+		List<MVo> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			String sql = " SELECT m.mno, m.mtitle, m.mdate FROM gboard g, mboard m, group_moim_bridge b WHERE g.gno=? AND b.group_gno = g.gNo AND m.mno = b.moim_mno ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, gno);
+		    rs = pstmt.executeQuery();
+		    
+		    while(rs.next()) {
+				MVo vo = new MVo();
+				vo.setmNo(rs.getLong(1));
+				vo.setmTitle(rs.getString(2));
+				vo.setmDate(rs.getString(3));
+				list.add(vo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {if(rs != null) rs.close();} catch(Exception e) {}
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+		}
+		return list;
+	}
+	
+	
 	
 	// mWrite
 	public int insertmBoard(MVo vo) {

@@ -1,6 +1,9 @@
 package com.vigplan.servlet.group;
 
-import com.vigplan.dao.group.GroupDao;import com.vigplan.vo.GroupVo;
+import com.vigplan.dao.group.GroupDao;
+import com.vigplan.dao.moim.MDao;
+import com.vigplan.vo.GroupVo;
+import com.vigplan.vo.MVo;
 import com.vigplan.vo.MemberVo;
 
 import java.util.List;
@@ -31,10 +34,11 @@ public class GroupListServlet extends BaseServlet {
 			//	리다이렉트
 			response.sendRedirect(request.getContextPath() + "/member/login");
 		} else {
+			String gNo = request.getParameter("gNo");
 			GroupDao dao = new GroupDao(dbuser, dbpass);
 			List<GroupVo> list = dao.getMyGboard(authUser.getNo());
 			
-			System.out.println("list?");
+			System.out.println("list");
 			request.setAttribute("list", list);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/grouplist.jsp");
 			rd.forward(request, response);
