@@ -8,7 +8,6 @@ import com.vigplan.dao.group.GroupDao;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,7 @@ public class GroupWriteServlet extends BaseServlet {
 		// 로그인 했으면 write 창으로
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/groupwriteform.jsp");
 		rd.forward(request, response);
-		System.out.println("write : do Get");
+		System.out.println("group writeform으로 보내기");
 		}
 	}
 
@@ -45,7 +44,7 @@ public class GroupWriteServlet extends BaseServlet {
 		
 		resp.setContentType("text/html);charset=UTF-8"); 
 		resp.setCharacterEncoding("UTF-8");
-		System.out.println("write : do Post");
+		System.out.println("do Post");
 		
 		GroupVo vo = new GroupVo(); 
 		vo.setgName(gName);
@@ -54,16 +53,14 @@ public class GroupWriteServlet extends BaseServlet {
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		int i = dao.insertgboard(vo);
 		
-		Long maxno = dao.getgNo(vo);
-		
-		
 		HttpSession session = req.getSession();
 		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
 		dao.insertbridge(authUser, vo);
-
-		// sendRedirect
-		resp.sendRedirect(req.getContextPath() + "/group/select?gNo=" + maxno);
+		//  TODO: 인서트 후 session의 authUser에서 getNo 해서
+		//		gboard의 gNo와 authUser의 no를 member_group_bridge 테이블에 넣어주기
+		//	TIP: seq_gboard_pk.currval -> 시퀀스의 현재값을 받을 수 있음
 		
+		resp.sendRedirect(req.getContextPath() + "/group");
 	}
 
 }

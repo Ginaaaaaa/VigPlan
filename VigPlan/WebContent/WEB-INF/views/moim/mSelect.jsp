@@ -3,7 +3,11 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <script type = "text/javascript">     
 function cancel() {
     var msg = confirm("모임을 삭제하시겠습니까?");
@@ -16,14 +20,13 @@ function cancel() {
     }
  }
       </script>
-
+</head>
+<body>
 <%
 MVo moim = (MVo)request.getAttribute("moim");
 	%>
-	<br> <br>
-		<h3><strong>모임 상세정보</strong></h3>
-		<br> <br>
-	<table class="table">
+	<h1>모임 상세정보</h1>
+	<table>
 	<tr>
 		<td>번호</td>
 		<td>모임명</td>
@@ -41,4 +44,6 @@ MVo moim = (MVo)request.getAttribute("moim");
 	<td> <a href="<%= request.getContextPath() %>/moim/delete?mNo=<%=moim.getmNo()%>" onclick="return cancel()">삭제</a>
 	</tr>
 	</table>
-<%@include file="../includes/footer.jsp" %>
+
+</body>
+</html>

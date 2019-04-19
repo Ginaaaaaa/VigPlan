@@ -21,7 +21,8 @@
 	 });
 	 $("#moim_btn").click(function() {
 			location.assign('<%= request.getContextPath() %>/moim'); 
-	 });
+			 });
+
  });
  
  </script>
@@ -42,4 +43,6 @@ MemberVo authUser = (MemberVo)session.getAttribute("authUser");
 	<button id="board_btn" class="btn">게시판</button>
 	<button id="group_btn" class="btn">그룹</button>
 	<button id="moim_btn" class="btn">모임</button>
+
 <%@include file="../includes/footer.jsp" %>
+

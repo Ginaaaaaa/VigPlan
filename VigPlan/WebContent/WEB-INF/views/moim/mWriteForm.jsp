@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header.jsp" %>
-<br> <br>
-		<h3><strong>모임 만들기</strong></h3>
-		<br> <br>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>모임 만들기</h1>
 <form action="<%= request.getContextPath() %>/moim/write" method="post">
 <table border="1">
 <tr><td>모임명</td><td><input type="text" name="mTitle"></td></tr>
@@ -15,4 +19,6 @@
 <input type="button" value="목록보기" onclick="location.href='<%= request.getContextPath() %>/moim'"></td></tr>
 </table>
 </form>
-<%@include file="../includes/footer.jsp" %>
+
+</body>
+</html>

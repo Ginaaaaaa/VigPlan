@@ -136,7 +136,6 @@ public class GroupDao extends BaseDao {
 			pstmt.setString(1, vo.getgName());
 			pstmt.setString(2, vo.getgPw());
 			rs = pstmt.executeQuery();
-
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -146,31 +145,6 @@ public class GroupDao extends BaseDao {
 		}
 		return i;
 	}
-	
-	
-	// gno 뽑아오는 메서드
-	public Long getgNo(GroupVo vo) {
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		Long maxno = null;
-		try {
-			conn = getConnection();
-			stmt = conn.createStatement();
-			String sql = " SELECT MAX(gno) FROM gboard ";
-			rs = stmt.executeQuery(sql);
-			rs.next();
-			maxno = rs.getLong(1);
-		}catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {if(rs != null) rs.close();} catch(Exception e) {}
-			try {if(stmt != null) stmt.close();} catch(Exception e) {}
-			try {if(conn != null) conn.close();} catch(Exception e) {}
-		}
-		return maxno;
-	}
-	
 	
 	
 	// member gboard bridge
