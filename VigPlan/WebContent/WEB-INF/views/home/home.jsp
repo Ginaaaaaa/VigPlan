@@ -27,6 +27,9 @@
 	 });
 	 $("#moim_btn").click(function() {
 			location.assign('<%= request.getContextPath() %>/moim'); 
+			 });
+	 $("#search_btn").click(function() {
+					location.assign('<%= request.getContextPath() %>/place/search'); 
 	 });
  });
  
@@ -55,6 +58,7 @@ MemberVo authUser = (MemberVo)session.getAttribute("authUser");
 	<button id="board_btn" class="btn">게시판</button>
 	<button id="group_btn" class="btn">그룹</button>
 	<button id="moim_btn" class="btn">모임</button>
+	<button id="search_btn" class="btn">검색</button>
 </div>
 
 </body>
