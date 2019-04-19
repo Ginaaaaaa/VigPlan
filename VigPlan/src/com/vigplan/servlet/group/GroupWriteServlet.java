@@ -8,6 +8,7 @@ import com.vigplan.dao.group.GroupDao;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class GroupWriteServlet extends BaseServlet {
 		// 로그인 했으면 write 창으로
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/groupwriteform.jsp");
 		rd.forward(request, response);
-		System.out.println("group writeform으로 보내기");
+		System.out.println("write : do Get");
 		}
 	}
 
@@ -44,7 +45,7 @@ public class GroupWriteServlet extends BaseServlet {
 		
 		resp.setContentType("text/html);charset=UTF-8"); 
 		resp.setCharacterEncoding("UTF-8");
-		System.out.println("do Post");
+		System.out.println("write : do Post");
 		
 		GroupVo vo = new GroupVo(); 
 		vo.setgName(gName);
@@ -53,11 +54,16 @@ public class GroupWriteServlet extends BaseServlet {
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		int i = dao.insertgboard(vo);
 		
+		Long maxno = dao.getgNo(vo);
+		
+		
 		HttpSession session = req.getSession();
 		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
 		dao.insertbridge(authUser, vo);
 
-		resp.sendRedirect(req.getContextPath() + "/group/select?gNo=" + vo.getgNo());
+		// sendRedirect
+		resp.sendRedirect(req.getContextPath() + "/group/select?gNo=" + maxno);
+		
 	}
 
 }
