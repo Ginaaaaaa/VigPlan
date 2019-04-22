@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vigplan.dao.BaseDao;
+import com.vigplan.vo.GroupVo;
+import com.vigplan.vo.MVo;
 import com.vigplan.vo.PlaceVo;
 
 public class PlaceDao extends BaseDao {
@@ -236,5 +238,63 @@ public class PlaceDao extends BaseDao {
 
 		return 0;
 	}
-
+	
+	public List<PlaceVo> getMyPlace(Long mno){
+		List<PlaceVo> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+//title, link, description, telephone, address, roadAddress, mapx, mapy
+		try {
+			conn = getConnection();
+			String sql = " SELECT p.title, p.link, p.description, p.telephone, p.address, p.roadAddress, p.mapx, p.mapy FROM place p, mboard m, mboard_place_bridge b WHERE m.mno=? AND b.pk = p.pk AND b.mno = m.mno ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, mno);
+		    rs = pstmt.executeQuery();
+		    
+		    while(rs.next()) {
+				PlaceVo vo = new PlaceVo();
+				vo.setTitle(rs.getString(1));
+				vo.setLink(rs.getString(2));
+				vo.setDescription(rs.getString(3));
+				vo.setTelephone(rs.getString(4));
+				vo.setAddress(rs.getString(5));
+				vo.setRoadAddress(rs.getString(6));
+				vo.setMapx(rs.getInt(7));
+				vo.setMapy(rs.getInt(8));
+	
+				list.add(vo);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {if(rs != null) rs.close();} catch(Exception e) {}
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+		}
+		return list;
+	
+	}
+	
+	
+	public void insertbridge(MVo mvo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			String sql = " INSERT INTO mboard_place_bridge VALUES(?,(SELECT MAX(pk) FROM place)) ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, mvo.getmNo());
+			rs = pstmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {if(rs != null) rs.close();} catch(Exception e) {}
+			try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+		}
+	}
+	
 }

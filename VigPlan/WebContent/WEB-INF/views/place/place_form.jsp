@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.vigplan.vo.MVo"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,6 +18,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+MVo moim = (MVo)request.getAttribute("moim");
+	%>		
 	<div class="container">
 		<br> <br>
 		<h2>장소 등록</h2>
@@ -24,6 +29,7 @@
 			action="<%=request.getContextPath()%>/place"
 			method="POST">
 			<input type="hidden" name="a" value="insert">
+			<input type="hidden" name="mNo" value="<%=moim.getmNo()%>">
 			<div class="form-group">
 				<label for="title" class="mb-2 mr-sm-2">제목</label> <input
 					type="text" class="form-control mb-2 mr-sm-2" name="title">

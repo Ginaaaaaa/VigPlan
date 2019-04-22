@@ -10,30 +10,46 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.vigplan.dao.moim.MDao;
 import com.vigplan.dao.place.PlaceDao;
 import com.vigplan.servlet.BaseServlet;
+import com.vigplan.vo.MVo;
 import com.vigplan.vo.PlaceVo;
 
 @WebServlet("/place")
 public class PlaceServlet extends BaseServlet {
 
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
+		
 
 		String action = req.getParameter("a");
+//		String mNo = req.getParameter("mNo");
+		MVo moim = (MVo)req.getAttribute("moim");
 
 		if (action == null) {
+			String mNo = req.getParameter("mNo");
+//			Long mno = Long.valueOf(mNo);
 			PlaceDao listdao = new PlaceDao(dbuser, dbpass);
-
-			List<PlaceVo> list = listdao.getAllLogs();
-
+			MDao dao = new MDao(dbuser, dbpass);
+			List<PlaceVo> list = listdao.getMyPlace(Long.valueOf(mNo));
+			//	moim 넘기기? -> mNo로 moim 받아와서 -> setAttribute 해야
+			moim = dao.selectOne(Long.valueOf(mNo));	
 			req.setAttribute("list", list);
+			req.setAttribute("moim", moim);
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_main.jsp");
 			rd.forward(req, resp);
 
 		} else if ("form".equals(action)) {
+			String mNo = req.getParameter("mNo");
+			
+			MDao dao = new MDao(dbuser, dbpass);
+			moim = dao.selectOne(Long.valueOf(mNo));
+			req.setAttribute("moim", moim);
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_form.jsp");
 			rd.forward(req, resp);
 		} else if("content".equals(action)) {
@@ -47,10 +63,7 @@ public class PlaceServlet extends BaseServlet {
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_content.jsp");
 				rd.forward(req, resp);		
 				
-			}
-
-		
-		
+			} 
 		}
 
 	
@@ -60,9 +73,10 @@ public class PlaceServlet extends BaseServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("a");
+		String mNo = req.getParameter("mNo");
 
 		if ("insert".equals(action)) {
-
+			String moimNo = mNo;
 			String title = req.getParameter("title");
 			String link = req.getParameter("link");
 			String description = req.getParameter("description");
@@ -73,7 +87,9 @@ public class PlaceServlet extends BaseServlet {
 			String mapy = req.getParameter("mapy");
 
 			PlaceVo insertvo = new PlaceVo();
-
+			MVo insertMvo = new MVo();
+			insertMvo.setmNo(Long.valueOf(moimNo));
+			
 			insertvo.setTitle(title);
 			insertvo.setLink(link);
 			insertvo.setDescription(description);
@@ -83,13 +99,14 @@ public class PlaceServlet extends BaseServlet {
 			insertvo.setMapx(Integer.valueOf(mapx));
 			insertvo.setMapy(Integer.valueOf(mapy));
 
-			System.out.println(insertvo);
+			
 
 			PlaceDao insertdao = new PlaceDao(dbuser, dbpass);
-			int insertedCount = insertdao.insertPlace(insertvo);
-			System.out.println(insertedCount);
-
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/place");
+			insertdao.insertPlace(insertvo);
+			insertdao.insertbridge(insertMvo);
+//			req.setAttribute("mNo", moimNo);
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + moimNo);
+			
 
 		}  else if("edit".equals(action)) {
 			String pk = req.getParameter("pk");
