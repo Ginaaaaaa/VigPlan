@@ -247,7 +247,7 @@ public class PlaceDao extends BaseDao {
 //title, link, description, telephone, address, roadAddress, mapx, mapy
 		try {
 			conn = getConnection();
-			String sql = " SELECT p.title, p.link, p.description, p.telephone, p.address, p.roadAddress, p.mapx, p.mapy FROM place p, mboard m, mboard_place_bridge b WHERE m.mno=? AND b.pk = p.pk AND b.mno = m.mno ";
+			String sql = " SELECT p.title, p.link, p.description, p.telephone, p.address, p.roadAddress, p.mapx, p.mapy, p.pk FROM place p, mboard m, mboard_place_bridge b WHERE m.mno=? AND b.pk = p.pk AND b.mno = m.mno ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, mno);
 		    rs = pstmt.executeQuery();
@@ -262,6 +262,7 @@ public class PlaceDao extends BaseDao {
 				vo.setRoadAddress(rs.getString(6));
 				vo.setMapx(rs.getInt(7));
 				vo.setMapy(rs.getInt(8));
+				vo.setPk(rs.getLong(9));
 	
 				list.add(vo);
 			}
