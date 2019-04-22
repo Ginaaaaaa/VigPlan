@@ -76,7 +76,7 @@ public class PlaceServlet extends BaseServlet {
 		String mNo = req.getParameter("mNo");
 
 		if ("insert".equals(action)) {
-			String moimNo = mNo;
+			
 			String title = req.getParameter("title");
 			String link = req.getParameter("link");
 			String description = req.getParameter("description");
@@ -88,7 +88,7 @@ public class PlaceServlet extends BaseServlet {
 
 			PlaceVo insertvo = new PlaceVo();
 			MVo insertMvo = new MVo();
-			insertMvo.setmNo(Long.valueOf(moimNo));
+			insertMvo.setmNo(Long.valueOf(mNo));
 			
 			insertvo.setTitle(title);
 			insertvo.setLink(link);
@@ -105,7 +105,7 @@ public class PlaceServlet extends BaseServlet {
 			insertdao.insertPlace(insertvo);
 			insertdao.insertbridge(insertMvo);
 //			req.setAttribute("mNo", moimNo);
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + moimNo);
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + mNo);
 			
 
 		}  else if("edit".equals(action)) {
@@ -175,12 +175,10 @@ public class PlaceServlet extends BaseServlet {
 			editvo.setMapy(Integer.valueOf(mapy));
 			
 			
-			
-			
 		  
 		  int result = editdao.updatePlace(editvo);
 		  System.out.println(result);
-		  resp.sendRedirect(req.getServletContext().getContextPath() + "/place");
+		  resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + mNo);
 		  
 			
 		} else if("delete".equals(action)) {

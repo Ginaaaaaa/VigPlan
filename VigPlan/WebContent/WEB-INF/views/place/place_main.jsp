@@ -50,7 +50,7 @@ MVo moim = (MVo)request.getAttribute("moim");	//	NULL
 				%>
 				<tr>
 					<td><a
-						href="<%=request.getContextPath()%>/place?a=content&pk=<%=vo.getPk()%>"><%=vo.getTitle()%><%--</a> --%></td>
+						href="<%=request.getContextPath()%>/place?a=content&pk=<%=vo.getPk()%>&mNo=<%=moim.getmNo() %>"><%=vo.getTitle()%><%--</a> --%></td>
 					
 					<td><%=vo.getLink()%></td>
 					<td><%=vo.getDescription()%></td>
