@@ -30,9 +30,6 @@ function callPage(pageNo) {
 </script>
 <title>Insert title here</title>
 </head>
-<%
-	KakaoApiVo authUser = (KakaoApiVo) session.getAttribute("authUser");
-%>
 <body>
 
 	<div class='aside_menu'>
