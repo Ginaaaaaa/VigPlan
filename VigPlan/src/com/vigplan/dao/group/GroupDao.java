@@ -20,7 +20,7 @@ public class GroupDao extends BaseDao {
 	}
 	
 	
-	public List<GroupVo> getMyGboard(Long memberNo) {
+	public List<GroupVo> getMyGroup(Long memberNo) {
 		List<GroupVo> list = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -51,8 +51,8 @@ public class GroupDao extends BaseDao {
 		return list;
 	}
 	
-	// gboard list
-	public List<GroupVo> getAllgboard(){
+	// gboard list ---멤버 무시하고 전체 그룹 출력하는 메서드라서 안씀
+	public List<GroupVo> getAllGboard(){
 		List<GroupVo> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -125,7 +125,7 @@ public class GroupDao extends BaseDao {
 	
 	
 	//gboard write
-	public int insertgboard(GroupVo vo) {
+	public int insertGroup(GroupVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -151,7 +151,7 @@ public class GroupDao extends BaseDao {
 	
 	
 	// gno 뽑아오는 메서드
-	public Long getgNo(GroupVo vo) {
+	public Long getGno(GroupVo vo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -175,8 +175,8 @@ public class GroupDao extends BaseDao {
 	
 	
 	
-	// member gboard bridge
-	public void insertbridge(MemberVo mvo, GroupVo vo) {
+	// member group bridge
+	public void insertMemberGroupBridge(MemberVo mvo, GroupVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -202,7 +202,7 @@ public class GroupDao extends BaseDao {
 	
 	//gboard update
 	
-	public int updategBoard(GroupVo vo) {
+	public int updateGroup(GroupVo vo) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -225,7 +225,7 @@ public class GroupDao extends BaseDao {
 	  }
 	
 	// pw delete check
-	public int deletecheck(Long gNo) {
+	public int getGpw(Long gNo) {
 	    int pw = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -250,7 +250,7 @@ public class GroupDao extends BaseDao {
 	  }
 	
 	// delete gboard
-	public int deletegBoard(Long gNo) {
+	public int deleteGroup(Long gNo) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -296,7 +296,7 @@ public class GroupDao extends BaseDao {
 	*/
 	
 	// member_group bridge delete
-	public int deletemgbridge(Long gNo) {
+	public int deleteMemberGroupBridge(Long gNo) {
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    int re = 0;
@@ -315,69 +315,9 @@ public class GroupDao extends BaseDao {
 	    }
 	    return re;
 	  }
+		
 	
-	
-	// get mNo from bridge
-	// Array로 받아야함---------------------
-	public List<Long> getmno(Long gNo) {
-		List<Long> list = new ArrayList<>();
-		Connection conn = null;
-	    PreparedStatement pstmt = null;
-
-	    try {
-	      conn = getConnection();
-	      String sql = "SELECT m.mno FROM gboard g, mboard m, group_moim_bridge b WHERE g.gno=? AND g.gno = b.group_gno AND b.moim_mno=m.mno ";
-	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setLong(1, gNo);
-	      ResultSet rs = pstmt.executeQuery();
-	      
-	      System.out.println("getmno:" + rs);
-	     
-      while (rs.next()) {
-    	  System.out.println("mno:" + rs.getLong(1));
-	    	  list.add(rs.getLong(1));
-	              }
-	    }catch(Exception e) {
-				e.printStackTrace();
-			} finally {
-				try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
-				try {if(conn != null) conn.close();} catch(Exception e) {}
-			}
-		return list;
-	}
-	
-	
-	//
-	
-	public void deleteg2roupmoim(List<Long> list) {
-	    Connection conn = null;
-	    PreparedStatement pstmt = null;
-	    int re = 0;	    
-	    String sql = " DELETE FROM mboard WHERE mno=? ";
-	    try {
-	      conn = getConnection();
-	      Object[] arr = list.toArray();
-	      //Long[] longarr = list.toArray(new Long[0]);
-	      Array array = conn.createArrayOf("Long", arr);
-	      pstmt = conn.prepareStatement(sql);
-	      pstmt.setArray(1, array);
-	      ResultSet rs = pstmt.executeQuery();
-	     
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	    } finally {
-	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
-			try {if(conn != null) conn.close();} catch(Exception e) {}
-	    }
-	  }
-	
-	
-	
-	
-	
-	// delete mNo (안됨)
-	
-	public int deletegroupmoim(Long gNo) {
+	public int deleteMoimInGroup(Long gNo) {
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    int re = 0;
@@ -402,7 +342,7 @@ public class GroupDao extends BaseDao {
 	
 	
 	// group_moim bridge delete
-	public int deletegmbridge(Long gNo) {
+	public int deleteGroupMoimBridge(Long gNo) {
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    int re = 0;	    
