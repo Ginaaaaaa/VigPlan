@@ -8,7 +8,7 @@
 GroupVo group = (GroupVo) request.getAttribute("group");
 %>
 		<br> <br>
-		<h3><strong>아이디로 그룹 초대</strong></h3>
+		<h3><strong>멤버 그룹 초대하기</strong></h3>
 		<br> <br>
 <form name="invite" method="post" action="<%= request.getContextPath() %>/group/search">
 	<input type="hidden" name="gNo" value="<%=group.getgNo() %>">

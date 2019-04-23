@@ -50,7 +50,7 @@ public class MUpdateServlet extends BaseServlet {
 		System.out.println("do Post 2");
 		
 		MDao dao = new MDao(dbuser, dbpass);
-		int i = dao.updatemBoard(Long.valueOf(mNo), mTitle, mDate, mContent);
+		int i = dao.updateMoim(Long.valueOf(mNo), mTitle, mDate, mContent);
 		
 		resp.sendRedirect(req.getContextPath() + "/moim/select?mNo=" + mNo);
 

@@ -20,7 +20,7 @@ public class MDao extends BaseDao {
 	}
 
 	
-	public List<MVo> getAllmboard(){
+	public List<MVo> getAllMoim(){
 		List<MVo> list = new ArrayList<>();
 		// DB 로직
 		Connection conn = null;
@@ -94,7 +94,7 @@ public class MDao extends BaseDao {
 
 	
 	// group moim bridge
-	public void insertbridge2(GroupVo gvo, MVo mvo) {
+	public void insertGroupMoimBridge(GroupVo gvo, MVo mvo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -149,7 +149,7 @@ public class MDao extends BaseDao {
 	
 	
 	// mWrite
-	public int insertmBoard(MVo vo) {
+	public int insertMoim(MVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -177,7 +177,7 @@ public class MDao extends BaseDao {
 	
 	
 	// updatemBoard 
-	public int updatemBoard(Long mNo, String mTitle, String mDate, String mContent) {
+	public int updateMoim(Long mNo, String mTitle, String mDate, String mContent) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -204,7 +204,7 @@ public class MDao extends BaseDao {
 
 
 	 // deletemBoard 
-	public int deletemBoard(Long mNo) {
+	public int deleteMoim(Long mNo) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;

@@ -15,7 +15,8 @@ CREATE TABLE group_moim_bridge (
   group_gno number(30),
   moim_mno number,
   primary key (group_gno, moim_mno) -- Optional
-
+);
+  
 ALTER TABLE mboard DROP COLUMN mplace;
 
 CREATE TABLE mboard_place_bridge (

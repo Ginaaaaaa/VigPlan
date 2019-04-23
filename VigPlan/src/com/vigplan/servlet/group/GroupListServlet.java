@@ -36,7 +36,7 @@ public class GroupListServlet extends BaseServlet {
 		} else {
 			String gNo = request.getParameter("gNo");
 			GroupDao dao = new GroupDao(dbuser, dbpass);
-			List<GroupVo> list = dao.getMyGboard(authUser.getNo());
+			List<GroupVo> list = dao.getMyGroup(authUser.getNo());
 			
 			System.out.println("list");
 			request.setAttribute("list", list);

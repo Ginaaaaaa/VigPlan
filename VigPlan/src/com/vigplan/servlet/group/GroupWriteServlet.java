@@ -52,14 +52,14 @@ public class GroupWriteServlet extends BaseServlet {
 		vo.setgPw(gPw);
 
 		GroupDao dao = new GroupDao(dbuser, dbpass);
-		int i = dao.insertgboard(vo);
+		int i = dao.insertGroup(vo);
 		
-		Long maxno = dao.getgNo(vo);
+		Long maxno = dao.getGno(vo);
 		
 		
 		HttpSession session = req.getSession();
 		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
-		dao.insertbridge(authUser, vo);
+		dao.insertMemberGroupBridge(authUser, vo);
 
 		// sendRedirect
 		resp.sendRedirect(req.getContextPath() + "/group/select?gNo=" + maxno);

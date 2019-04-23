@@ -38,7 +38,7 @@ public class GroupInviteServlet extends BaseServlet {
 		
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		
-		dao.insertbridge(mvo, gvo);
+		dao.insertMemberGroupBridge(mvo, gvo);
 
 		System.out.println("invite : do Post");
 		response.sendRedirect(request.getContextPath() + "/group/select?gNo=" + gNo);

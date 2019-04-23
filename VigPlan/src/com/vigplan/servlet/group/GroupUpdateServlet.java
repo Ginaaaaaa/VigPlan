@@ -46,7 +46,7 @@ public class GroupUpdateServlet extends BaseServlet {
 		vo.setgPw(req.getParameter("gPw"));
 		
 		GroupDao dao = new GroupDao(dbuser, dbpass);
-		int i = dao.updategBoard(vo);
+		int i = dao.updateGroup(vo);
 		
 		resp.sendRedirect(req.getContextPath() + "/group/select?gNo=" + gNo);
 	}

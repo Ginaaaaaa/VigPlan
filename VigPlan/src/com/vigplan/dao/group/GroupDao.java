@@ -1,5 +1,6 @@
 package com.vigplan.dao.group;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ import java.sql.PreparedStatement;
 
 import com.vigplan.dao.BaseDao;
 import com.vigplan.vo.GroupVo;
+import com.vigplan.vo.MVo;
 import com.vigplan.vo.MemberVo;
 
 public class GroupDao extends BaseDao {
@@ -18,7 +20,7 @@ public class GroupDao extends BaseDao {
 	}
 	
 	
-	public List<GroupVo> getMyGboard(Long memberNo) {
+	public List<GroupVo> getMyGroup(Long memberNo) {
 		List<GroupVo> list = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -49,8 +51,8 @@ public class GroupDao extends BaseDao {
 		return list;
 	}
 	
-	// gboard list
-	public List<GroupVo> getAllgboard(){
+	// gboard list ---멤버 무시하고 전체 그룹 출력하는 메서드라서 안씀
+	public List<GroupVo> getAllGboard(){
 		List<GroupVo> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -123,7 +125,7 @@ public class GroupDao extends BaseDao {
 	
 	
 	//gboard write
-	public int insertgboard(GroupVo vo) {
+	public int insertGroup(GroupVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -149,7 +151,7 @@ public class GroupDao extends BaseDao {
 	
 	
 	// gno 뽑아오는 메서드
-	public Long getgNo(GroupVo vo) {
+	public Long getGno(GroupVo vo) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -173,8 +175,8 @@ public class GroupDao extends BaseDao {
 	
 	
 	
-	// member gboard bridge
-	public void insertbridge(MemberVo mvo, GroupVo vo) {
+	// member group bridge
+	public void insertMemberGroupBridge(MemberVo mvo, GroupVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -200,7 +202,7 @@ public class GroupDao extends BaseDao {
 	
 	//gboard update
 	
-	public int updategBoard(GroupVo vo) {
+	public int updateGroup(GroupVo vo) {
 	    int re = 0;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -222,7 +224,54 @@ public class GroupDao extends BaseDao {
 	    return re;
 	  }
 	
+	// pw delete check
+	public int getGpw(Long gNo) {
+	    int pw = 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = " SELECT gPw FROM gboard WHERE gNo=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);	      
+	      rs = pstmt.executeQuery();
+	      rs.next();
+	      pw = rs.getInt(1);
+	      
+	      
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return pw;
+	  }
 	
+	// delete gboard
+	public int deleteGroup(Long gNo) {
+	    int re = 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    String sql = " DELETE FROM gboard WHERE gNo=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      re = pstmt.executeUpdate();
+
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+	
+	
+	/*
 	// gboard delete
 	public int deletegBoard(Long gNo, String pw) {
 	    int re = 0;
@@ -235,11 +284,49 @@ public class GroupDao extends BaseDao {
 	      pstmt.setLong(1, gNo);
 	      pstmt.setString(2, pw);
 	      re = pstmt.executeUpdate();
-	      if(re == 1) { 	// 1이면 성공
-	    	  
-	      } else {			// 0이면 실패
-	    	  
-	      }
+
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+	*/
+	
+	// member_group bridge delete
+	public int deleteMemberGroupBridge(Long gNo) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int re = 0;
+	    String sql = " DELETE FROM member_group_bridge WHERE group_gNo=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      re = pstmt.executeUpdate();
+	      
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+		
+	
+	public int deleteMoimInGroup(Long gNo) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int re = 0;
+	    String sql = " DELETE FROM mboard WHERE mno IN (SELECT m.mno FROM gboard g, mboard m, group_moim_bridge b WHERE g.gno=? AND b.group_gno=g.gno AND b.moim_mno=m.mno) ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      ResultSet rs = pstmt.executeQuery();
 	      
 	    } catch (Exception e) {
 	      e.printStackTrace();
@@ -251,6 +338,29 @@ public class GroupDao extends BaseDao {
 	  }
 	
 	
-	// bridge delete
+	
+	
+	
+	// group_moim bridge delete
+	public int deleteGroupMoimBridge(Long gNo) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int re = 0;	    
+	    String sql = " DELETE FROM group_moim_bridge WHERE group_gNo=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      re = pstmt.executeUpdate();
+	      
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+	
 	
 }
