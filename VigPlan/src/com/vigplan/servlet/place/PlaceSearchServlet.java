@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.vigplan.vo.PlaceVo;
+import com.vigplan.vo.KakaoApiVo;
 
-import api.NaverApi;
+import api.KakaoApi;
 
 
 @WebServlet("/place/search")
@@ -21,18 +21,20 @@ public class PlaceSearchServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String action = request.getParameter("a");
+		request.setCharacterEncoding("UTF-8");
 		String keyword = request.getParameter("keyword");
-		String start = request.getParameter("start");
-		String display = request.getParameter("display");
+		System.out.println("[" + keyword + "]");
+		String page = request.getParameter("page");
+		String size = request.getParameter("size");
 		
-		Integer nStart = start == null ? 1: Integer.valueOf(start);
-		Integer nDisplay = display == null? DISPLAY_COUNT : Integer.valueOf(display);
+		Integer npage = page == null ? 1: Integer.valueOf(page);
+		Integer nsize = size == null? DISPLAY_COUNT : Integer.valueOf(size);
 		
-		request.setAttribute("nDisplay", nDisplay);
-		request.setAttribute("nStart", nStart);
+		request.setAttribute("nSize", nsize);
+		request.setAttribute("nPage", npage);
 		
 		if (keyword != null) {
-			List<PlaceVo> list = NaverApi.searchPlace(keyword, nDisplay, nStart );
+			List<KakaoApiVo> list = KakaoApi.searchPlace(keyword, nsize, npage );
 			request.setAttribute("list", list);
 			System.out.println(list);
 		

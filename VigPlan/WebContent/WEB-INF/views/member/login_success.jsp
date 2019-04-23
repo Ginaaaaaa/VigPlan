@@ -18,11 +18,11 @@
 		<table border="2">
 			<tr align="center">
 		<td>Id</td>
-		<td><input type="text" value="1111" size="20"></td>
+		<td><input type="text" value="" size="20"></td>
 		</tr>
 		<tr>
 		<td>Password</td>
-		<td><input type="password" name="pw" value="1111" size="21"></td>
+		<td><input type="password" name="pw" value="" size="21"></td>
 	</table>
 
 <input type="button" value="로그아웃" onclick="location.href='/VigPlan/member/logout'">
