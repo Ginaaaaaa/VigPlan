@@ -66,7 +66,7 @@ public class MWriteServlet extends BaseServlet {
 
 		MDao dao = new MDao(dbuser, dbpass);
 		int i = dao.insertMoim(vo);
-		dao.insertGroupMoimbridge(gvo, vo);
+		dao.insertGroupMoimBridge(gvo, vo);
 
 		
 		resp.sendRedirect(req.getContextPath() + "/group/select?gNo=" + gNo);

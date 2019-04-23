@@ -94,7 +94,7 @@ public class MDao extends BaseDao {
 
 	
 	// group moim bridge
-	public void insertGroupMoimbridge(GroupVo gvo, MVo mvo) {
+	public void insertGroupMoimBridge(GroupVo gvo, MVo mvo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

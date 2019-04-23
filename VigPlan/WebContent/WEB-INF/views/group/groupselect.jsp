@@ -18,7 +18,7 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 <input type="hidden" name="gNo" value="<%=group.getgNo() %>">
 	
 	<tr><th> 그룹명 </th><td><%=group.getgName() %> </td></tr>
-	<tr><th> 생성일 </th><td><%=group.getgRegdate() %></td></tr>
+	<tr><th> 생성일 </th><td><%=group.getgRegdate().substring(0,10) %></td></tr>
 	<tr><th> 멤버 목록</th><td>
 	<%
 List<MemberVo> list = (List<MemberVo>)request.getAttribute("list");
