@@ -10,47 +10,67 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.vigplan.dao.moim.MDao;
 import com.vigplan.dao.place.PlaceDao;
 import com.vigplan.servlet.BaseServlet;
+import com.vigplan.vo.MVo;
 import com.vigplan.vo.PlaceVo;
 
 @WebServlet("/place")
 public class PlaceServlet extends BaseServlet {
 
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
+		
 
 		String action = req.getParameter("a");
 
+
 		if (action == null) {
+			String mNo = req.getParameter("mNo");
 			PlaceDao listdao = new PlaceDao(dbuser, dbpass);
-
-			List<PlaceVo> list = listdao.getAllLogs();
-
+			MDao dao = new MDao(dbuser, dbpass);
+			List<PlaceVo> list = listdao.getMyPlace(Long.valueOf(mNo));
+			//	moim 넘기기? -> mNo로 moim 받아와서 -> setAttribute 해야
+			MVo moim = new MVo();
+			moim = dao.selectOne(Long.valueOf(mNo));	
 			req.setAttribute("list", list);
+			req.setAttribute("moim", moim);
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_main.jsp");
 			rd.forward(req, resp);
 
 		} else if ("form".equals(action)) {
+			String mNo = req.getParameter("mNo");
+			
+			MDao dao = new MDao(dbuser, dbpass);
+			
+			MVo moim = new MVo();
+			moim = dao.selectOne(Long.valueOf(mNo));
+			req.setAttribute("moim", moim);
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_form.jsp");
 			rd.forward(req, resp);
 		} else if("content".equals(action)) {
 				String pk = req.getParameter("pk");
+				String mNo = req.getParameter("mNo");
 				
 				PlaceDao placedao = new PlaceDao(dbuser, dbpass);
+				MDao dao = new MDao(dbuser, dbpass);
+				
 				PlaceVo contentvo = placedao.getPlaceItem(Long.valueOf(pk));
 				req.setAttribute("item", contentvo);
 				
+				MVo moim = new MVo();
+				moim = dao.selectOne(Long.valueOf(mNo));	
+				req.setAttribute("moim", moim);
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_content.jsp");
 				rd.forward(req, resp);		
 				
-			}
-
-		
-		
+			} 
 		}
 
 	
@@ -60,9 +80,11 @@ public class PlaceServlet extends BaseServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("a");
+		
 
 		if ("insert".equals(action)) {
-
+			
+			String mNo = req.getParameter("mNo");
 			String title = req.getParameter("title");
 			String link = req.getParameter("link");
 			String description = req.getParameter("description");
@@ -73,7 +95,9 @@ public class PlaceServlet extends BaseServlet {
 			String mapy = req.getParameter("mapy");
 
 			PlaceVo insertvo = new PlaceVo();
-
+			MVo insertMvo = new MVo();
+			insertMvo.setmNo(Long.valueOf(mNo));
+			
 			insertvo.setTitle(title);
 			insertvo.setLink(link);
 			insertvo.setDescription(description);
@@ -83,13 +107,14 @@ public class PlaceServlet extends BaseServlet {
 			insertvo.setMapx(Integer.valueOf(mapx));
 			insertvo.setMapy(Integer.valueOf(mapy));
 
-			System.out.println(insertvo);
+			
 
 			PlaceDao insertdao = new PlaceDao(dbuser, dbpass);
-			int insertedCount = insertdao.insertPlace(insertvo);
-			System.out.println(insertedCount);
-
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/place");
+			insertdao.insertPlace(insertvo);
+			insertdao.insertbridge(insertMvo);
+//			req.setAttribute("mNo", moimNo);
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + mNo);
+			
 
 		}  else if("edit".equals(action)) {
 			String pk = req.getParameter("pk");
@@ -159,25 +184,29 @@ public class PlaceServlet extends BaseServlet {
 			
 			
 			
-			
-		  
 		  int result = editdao.updatePlace(editvo);
-		  System.out.println(result);
-		  resp.sendRedirect(req.getServletContext().getContextPath() + "/place");
+		  
+		  MVo vo = new MVo();
+		  vo = editdao.selectbridge(Long.valueOf(pk));
+
+		  resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + vo.getmNo());
 		  
 			
 		} else if("delete".equals(action)) {
 			String pk = req.getParameter("pk");
 			PlaceVo deletevo = new PlaceVo();
 			
+			
 			deletevo.setPk(Long.valueOf(pk));
 			
 			PlaceDao deletedao = new PlaceDao(dbuser,dbpass);
-			int result = deletedao.deletePlace(deletevo.getPk());
-			System.out.println("삭제결과 : " + result);
+			MVo vo = new MVo();
+			vo = deletedao.selectbridge(Long.valueOf(pk));
 			
-			System.out.println("SUCCESS?:" + (result == 0));
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/place");
+			deletedao.deletePlace(Long.valueOf(pk));
+			int result = deletedao.deletebridge(Long.valueOf(pk));
+
+		   resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + vo.getmNo());
 			
 		}
 

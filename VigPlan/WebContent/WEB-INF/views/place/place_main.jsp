@@ -1,5 +1,6 @@
 <%@page import="com.vigplan.vo.PlaceVo"%>
 <%@page import="java.util.List"%>
+<%@page import="com.vigplan.vo.MVo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +19,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+MVo moim = (MVo)request.getAttribute("moim");	//	NULL
+	%>
 	<div class="container">
 		<br> <br>
 		<h3>
@@ -46,7 +50,7 @@
 				%>
 				<tr>
 					<td><a
-						href="<%=request.getContextPath()%>/place?a=content&pk=<%=vo.getPk()%>"><%=vo.getTitle()%><%--</a> --%></td>
+						href="<%=request.getContextPath()%>/place?a=content&pk=<%=vo.getPk()%>&mNo=<%=moim.getmNo() %>"><%=vo.getTitle()%><%--</a> --%></td>
 					
 					<td><%=vo.getLink()%></td>
 					<td><%=vo.getDescription()%></td>
@@ -62,8 +66,9 @@
 				%>
 			</tbody>
 		</table>
-	<a href="<%= request.getContextPath()%>/place?a=form"
-		class="btn btn-secondary btn-sm">장소 등록</a>
+
+		
+	<a href="<%= request.getContextPath() %>/place?a=form&mNo=<%=moim.getmNo() %>" class="btn btn-primary">장소 등록</a>
 	</div>
 </body>
 </body>

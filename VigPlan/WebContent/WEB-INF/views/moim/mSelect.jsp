@@ -1,5 +1,6 @@
 <%@ page import="com.vigplan.vo.MVo" %>
 <%@ page import="com.vigplan.dao.moim.MDao" %>
+
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -39,5 +40,9 @@ MVo moim = (MVo)request.getAttribute("moim");
 	<td> <a href="<%= request.getContextPath() %>/moim/delete?mNo=<%=moim.getmNo()%>" onclick="return cancel()">삭제</a>
 	</tr>
 	</table>
-	<a href="<%= request.getContextPath() %>/place?mNo=<%=moim.getmNo() %>" class="btn btn-primary">장소 추가</a>
+<a href="<%= request.getContextPath() %>/place?mNo=<%=moim.getmNo() %>" class="btn btn-primary">장소 추가</a>
+
+	
+	
+	
 <%@include file="../includes/footer.jsp" %>
