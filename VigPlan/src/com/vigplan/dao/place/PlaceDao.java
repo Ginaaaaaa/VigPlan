@@ -335,10 +335,40 @@ public class PlaceDao extends BaseDao {
 				
 			}
 		}
+		return line;	
 		
-		return line;
+	}
+	
+	public int deletebridge(Long pk) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
-		
+		try {
+			conn = getConnection();
+			String sql = "delete from MBOARD_PLACE_BRIDGE where PK = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, pk);
+			rs = pstmt.executeQuery();
+			
+		} catch(Exception e) {
+			
+		} finally {
+			try {
+				if(pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+
+			}
+			try {
+				if(conn != null)
+					conn.close();
+			} catch (Exception e) {
+
+			}
+				
+		}
+		return 0;
 	}
 	
 	

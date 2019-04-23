@@ -190,15 +190,17 @@ public class PlaceServlet extends BaseServlet {
 			String pk = req.getParameter("pk");
 			PlaceVo deletevo = new PlaceVo();
 			
+			
 			deletevo.setPk(Long.valueOf(pk));
 			
 			PlaceDao deletedao = new PlaceDao(dbuser,dbpass);
-			int result = deletedao.deletePlace(deletevo.getPk());
-			
 			MVo vo = new MVo();
 			vo = deletedao.selectbridge(Long.valueOf(pk));
 			
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + vo.getmNo());
+			deletedao.deletePlace(Long.valueOf(pk));
+			int result = deletedao.deletebridge(Long.valueOf(pk));
+
+		   resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + vo.getmNo());
 			
 		}
 
