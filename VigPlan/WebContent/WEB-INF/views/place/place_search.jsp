@@ -1,4 +1,4 @@
-<%@page import="com.vigplan.vo.PlaceVo"%>
+<%@page import="com.vigplan.vo.KakaoApiVo"%>
 <%@page import="com.vigplan.vo.MemberVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -20,19 +20,16 @@
 <script>
 function callPage(pageNo) {
 	var frm = document.frm;
-	var display = parseInt(frm.display.value);
-	var newStart = (pageNo - 1) * display + 1;
+	var display = parseInt(frm.size.value);
+	var newPage = (pageNo - 1) * size + 1;
 	
 	//alert("new start pos:" + newStart);
-	frm.start.value = newStart;
+	frm.page.value = newPage;
 	frm.submit();
 }
 </script>
 <title>Insert title here</title>
 </head>
-<%
-	MemberVo authUser = (MemberVo) session.getAttribute("authUser");
-%>
 <body>
 
 	<div class='aside_menu'>
@@ -45,8 +42,8 @@ function callPage(pageNo) {
 				<% } %>
 				 placeholder="특수문자는 사용할수 없습니다.">
 			<button type='submit'>검색</button>
-			<input type="hidden" name="start" value="<%= request.getAttribute("nStart") %>">
-			<input type="hidden" name="display" value="<%= request.getAttribute("nDisplay") %>">
+			<input type="hidden" name="size" value="<%= request.getAttribute("nSize") %>">
+			<input type="hidden" name="page" value="<%= request.getAttribute("nPage") %>">
 			</aside>
 		</form>
 		<div class='menu_line' style='clear: both;'></div>
@@ -69,31 +66,35 @@ function callPage(pageNo) {
 					<%
 						//	request에서  list 어트리뷰트를 받아와서
 						//	있으면(not null) 루프
-						List<PlaceVo> list = (List<PlaceVo>) request.getAttribute("list");
+						List<KakaoApiVo> list = (List<KakaoApiVo>) request.getAttribute("list");
 						if (list != null) {
-							for (PlaceVo vo : list) {
+							for (KakaoApiVo vo : list) {
 					%>
 					<tr>
-						<td><%=vo.getTitle()%></td>
-						<td><%=vo.getLink()%></td>
-						<td><%=vo.getTelephone()%></td>
-						<td><%=vo.getAddress()%></td>
+						<td><%=vo.getPlace_name()%></td>
+						<td><%=vo.getPlace_url()%></td>
+						<td><%=vo.getPhone()%></td>
+						<td><%=vo.getAddress_name()%></td>
 					</tr>
+					<form>
+						<input type="hidden" name="place_name" value="<%= vo.getPlace_name() %>">
+						<input type="hidden" name="place_url" value="<%= vo.getPlace_url() %>">
+						<input type="hidden" name="place_name" value="<%= vo.getPlace_name() %>">
+						<input type="hidden" name="phone" value="<%= vo.getPhone() %>">
+						<input type="hidden" name="address_name" value="<%= vo.getAddress_name() %>">
+						<input type="hidden" name="road_address_name" value="<%= vo.getRoad_address_name() %>">
+						<input type="hidden" name="x" value="<%= vo.getX() %>">
+						<input type="hidden" name="y" value="<%= vo.getY() %>">
+						
+					</form>
 					<%
 						}
 						}
 					%>
 				</tbody>
 			</table>
-			<%
-			if (request.getParameter("keyword") != null) {
-				for (int i = 0; i < 10; i++) {
-					%>
-					<a href="#" onclick="callPage(<%= i+1 %>)"><%= i+1 %></a>
-					<%
-				}
-			}
-			%>
+			
 		</div>
+		
 </body>
 </html>
