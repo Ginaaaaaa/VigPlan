@@ -28,7 +28,7 @@ public class MoimListServlet extends BaseServlet {
 				resp.sendRedirect(req.getContextPath() + "/member/login");
 			} else {
 				MDao dao = new MDao(dbuser, dbpass);
-				List<MVo> list = dao.getAllmboard();
+				List<MVo> list = dao.getAllMoim();
 						
 				req.setAttribute("list", list);
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/moim/mList.jsp");
