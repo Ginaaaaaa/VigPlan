@@ -1,5 +1,6 @@
 package com.vigplan.dao.group;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ import java.sql.PreparedStatement;
 
 import com.vigplan.dao.BaseDao;
 import com.vigplan.vo.GroupVo;
+import com.vigplan.vo.MVo;
 import com.vigplan.vo.MemberVo;
 
 public class GroupDao extends BaseDao {
@@ -222,7 +224,54 @@ public class GroupDao extends BaseDao {
 	    return re;
 	  }
 	
+	// pw delete check
+	public int deletecheck(Long gNo) {
+	    int pw = 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = " SELECT gPw FROM gboard WHERE gNo=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);	      
+	      rs = pstmt.executeQuery();
+	      rs.next();
+	      pw = rs.getInt(1);
+	      
+	      
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return pw;
+	  }
 	
+	// delete gboard
+	public int deletegBoard(Long gNo) {
+	    int re = 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    String sql = " DELETE FROM gboard WHERE gNo=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      re = pstmt.executeUpdate();
+
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+	
+	
+	/*
 	// gboard delete
 	public int deletegBoard(Long gNo, String pw) {
 	    int re = 0;
@@ -235,11 +284,28 @@ public class GroupDao extends BaseDao {
 	      pstmt.setLong(1, gNo);
 	      pstmt.setString(2, pw);
 	      re = pstmt.executeUpdate();
-	      if(re == 1) { 	// 1이면 성공
-	    	  
-	      } else {			// 0이면 실패
-	    	  
-	      }
+
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+	*/
+	
+	// member_group bridge delete
+	public int deletemgbridge(Long gNo) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int re = 0;
+	    String sql = " DELETE FROM member_group_bridge WHERE group_gNo=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      re = pstmt.executeUpdate();
 	      
 	    } catch (Exception e) {
 	      e.printStackTrace();
@@ -251,6 +317,111 @@ public class GroupDao extends BaseDao {
 	  }
 	
 	
-	// bridge delete
+	// get mNo from bridge
+	// Array로 받아야함---------------------
+	public List<Long> getmno(Long gNo) {
+		List<Long> list = new ArrayList<>();
+		Connection conn = null;
+	    PreparedStatement pstmt = null;
+
+	    try {
+	      conn = getConnection();
+	      String sql = "SELECT m.mno FROM gboard g, mboard m, group_moim_bridge b WHERE g.gno=? AND g.gno = b.group_gno AND b.moim_mno=m.mno ";
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      ResultSet rs = pstmt.executeQuery();
+	      
+	      System.out.println("getmno:" + rs);
+	     
+      while (rs.next()) {
+    	  System.out.println("mno:" + rs.getLong(1));
+	    	  list.add(rs.getLong(1));
+	              }
+	    }catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+				try {if(conn != null) conn.close();} catch(Exception e) {}
+			}
+		return list;
+	}
+	
+	
+	//
+	
+	public void deleteg2roupmoim(List<Long> list) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int re = 0;	    
+	    String sql = " DELETE FROM mboard WHERE mno=? ";
+	    try {
+	      conn = getConnection();
+	      Object[] arr = list.toArray();
+	      //Long[] longarr = list.toArray(new Long[0]);
+	      Array array = conn.createArrayOf("Long", arr);
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setArray(1, array);
+	      ResultSet rs = pstmt.executeQuery();
+	     
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	  }
+	
+	
+	
+	
+	
+	// delete mNo (안됨)
+	
+	public int deletegroupmoim(Long gNo) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int re = 0;
+	    String sql = " DELETE FROM mboard WHERE mno IN (SELECT m.mno FROM gboard g, mboard m, group_moim_bridge b WHERE g.gno=? AND b.group_gno=g.gno AND b.moim_mno=m.mno) ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      ResultSet rs = pstmt.executeQuery();
+	      
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+	
+	
+	
+	
+	
+	// group_moim bridge delete
+	public int deletegmbridge(Long gNo) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int re = 0;	    
+	    String sql = " DELETE FROM group_moim_bridge WHERE group_gNo=? ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      re = pstmt.executeUpdate();
+	      
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	    return re;
+	  }
+	
+	
 	
 }

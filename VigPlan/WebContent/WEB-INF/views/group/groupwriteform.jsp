@@ -15,10 +15,17 @@
  
  function checkf(){
 	 gform=document.gwriteform;
-	 if(gform.gName.value == "" || gform.gPw.value == ""){
-		 window.alert("필수 입력란이 비었습니다. 확인해주세요.");
+	 if(gform.gName.value == ""){
+		 window.alert("그룹명을 작성해주세요.");
 		 return false;
-	 } else {
+	 } else if(gform.gPw.value == ""){
+		 window.alert("그룹 비밀번호를 작성해주세요.");
+		 return false;
+	 }	else if(gform.gPw.value != gform.gPw1.value){
+		 window.alert("비밀번호 확인이 일치하지 않습니다.");
+		 return false;
+	 }
+	 else {
 		 var msg = confirm("그룹을 만드시겠습니까?");
 	    if(msg) {
 	        window.alert ("그룹이 생성되었습니다.");
@@ -39,6 +46,7 @@
 <form name="gwriteform" action="<%= request.getContextPath() %>/group/write" method="post" onsubmit="return checkf()">
 	<div>그룹명&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="gName"><br>
 		 비밀번호 : <input type="password" name="gPw"></div>
+		 비밀번호 확인 :<input type="password" name="gPw1"></div>
 
 	<input type="submit" value="그룹 생성">
 	<input type="button" value="목록보기" onclick="location.href='<%= request.getContextPath() %>/group'">

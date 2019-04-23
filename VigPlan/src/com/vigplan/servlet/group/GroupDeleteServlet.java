@@ -4,9 +4,11 @@ import com.vigplan.dao.group.GroupDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.GroupVo;
 import com.vigplan.vo.MemberVo;
+import com.vigplan.vo.MVo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,23 +43,33 @@ public class GroupDeleteServlet extends BaseServlet {
 		String pw = request.getParameter("pw");
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		PrintWriter out = response.getWriter();
-		int i = dao.deletegBoard(Long.valueOf(gNo), pw);
-		if(i == 0) {
+		
+		int gpw = dao.deletecheck(Long.valueOf(gNo));		// 맞는 패스워드 호출
+		System.out.println(gpw);
+		
+		if(gpw != Integer.valueOf(pw)) {					// 입력한 패스워드와 맞는 패스워드 비교
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('비밀번호가 틀립니다.');");
 			out.println("history.back();");
 			out.println("</script>");
+			
 		} else {
-			//	TODO: member_group_bridge에서 해당 그룹의 gNo 레코드는 모두 삭제
+		
+			dao.deletegroupmoim(Long.valueOf(gNo));			// group 내 mboard 데이터 삭제
+			int d = dao.deletegmbridge(Long.valueOf(gNo));	//group_moim bridge의 gNo 레코드 삭제
+			int r = dao.deletemgbridge(Long.valueOf(gNo));	//member_group bridge의 gNo 레코드 삭제
+			int i = dao.deletegBoard(Long.valueOf(gNo));	// group 데이터 삭제
 			
 			out.println("<script type=\"text/javascript\">");
-			out.println("alert('삭제하였습니다');");
+			out.println("alert('삭제하였습니다.');");
 			out.println("document.location.href='" + request.getContextPath() + "/group'");
 			out.println("</script>");
-		}
+			
 		out.close();
 		System.out.println("ok?");
 		response.sendRedirect(request.getContextPath() + "/group");
 	}
-
+	}
 }
+
+
