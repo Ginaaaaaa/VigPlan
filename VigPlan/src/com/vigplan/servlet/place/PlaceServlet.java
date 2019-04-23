@@ -27,16 +27,15 @@ public class PlaceServlet extends BaseServlet {
 		
 
 		String action = req.getParameter("a");
-//		String mNo = req.getParameter("mNo");
-		MVo moim = (MVo)req.getAttribute("moim");
+
 
 		if (action == null) {
 			String mNo = req.getParameter("mNo");
-//			Long mno = Long.valueOf(mNo);
 			PlaceDao listdao = new PlaceDao(dbuser, dbpass);
 			MDao dao = new MDao(dbuser, dbpass);
 			List<PlaceVo> list = listdao.getMyPlace(Long.valueOf(mNo));
 			//	moim 넘기기? -> mNo로 moim 받아와서 -> setAttribute 해야
+			MVo moim = new MVo();
 			moim = dao.selectOne(Long.valueOf(mNo));	
 			req.setAttribute("list", list);
 			req.setAttribute("moim", moim);
@@ -47,6 +46,8 @@ public class PlaceServlet extends BaseServlet {
 			String mNo = req.getParameter("mNo");
 			
 			MDao dao = new MDao(dbuser, dbpass);
+			
+			MVo moim = new MVo();
 			moim = dao.selectOne(Long.valueOf(mNo));
 			req.setAttribute("moim", moim);
 			
@@ -73,10 +74,11 @@ public class PlaceServlet extends BaseServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("a");
-		String mNo = req.getParameter("mNo");
+		
 
 		if ("insert".equals(action)) {
 			
+			String mNo = req.getParameter("mNo");
 			String title = req.getParameter("title");
 			String link = req.getParameter("link");
 			String description = req.getParameter("description");
@@ -175,10 +177,13 @@ public class PlaceServlet extends BaseServlet {
 			editvo.setMapy(Integer.valueOf(mapy));
 			
 			
-		  
+			
 		  int result = editdao.updatePlace(editvo);
-		  System.out.println(result);
-		  resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + mNo);
+		  
+		  MVo vo = new MVo();
+		  vo = editdao.selectbridge(Long.valueOf(pk));
+
+		  resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + vo.getmNo());
 		  
 			
 		} else if("delete".equals(action)) {
@@ -189,10 +194,11 @@ public class PlaceServlet extends BaseServlet {
 			
 			PlaceDao deletedao = new PlaceDao(dbuser,dbpass);
 			int result = deletedao.deletePlace(deletevo.getPk());
-			System.out.println("삭제결과 : " + result);
 			
-			System.out.println("SUCCESS?:" + (result == 0));
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/place");
+			MVo vo = new MVo();
+			vo = deletedao.selectbridge(Long.valueOf(pk));
+			
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + vo.getmNo());
 			
 		}
 

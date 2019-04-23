@@ -298,4 +298,48 @@ public class PlaceDao extends BaseDao {
 		}
 	}
 	
+	public MVo selectbridge(Long pk) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MVo line = null;
+		
+		try {
+			conn = getConnection();
+			String sql = "SELECT mno FROM mboard_place_bridge WHERE pk=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, pk);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				line = new MVo();
+				line.setmNo(Long.valueOf(rs.getString(1)));
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+			}catch(Exception e) {
+				
+			}try {
+				if(pstmt != null) pstmt.close(); 
+			}catch(Exception e) {
+				
+			} try {
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				
+			}
+		}
+		
+		return line;
+		
+		
+	}
+	
+	
 }
