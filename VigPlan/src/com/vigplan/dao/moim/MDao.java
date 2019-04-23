@@ -224,5 +224,36 @@ public class MDao extends BaseDao {
 
 	  }
 	
+	public int deleteBridge(Long mNo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "DELETE FROM mboard_place_bridge WHERE mNo=?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, mNo);
+			rs = pstmt.executeQuery();
+			
+			
+		} catch(Exception e) {
+			
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+			} catch(Exception e) {
+				
+			} try {
+				if(conn != null) conn.close();
+			} catch(Exception e) {
+				
+			}
+		}
+		
+		return 0;
+	}
+	
 }
 
