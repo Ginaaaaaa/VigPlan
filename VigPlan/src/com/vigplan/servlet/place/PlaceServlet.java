@@ -55,11 +55,17 @@ public class PlaceServlet extends BaseServlet {
 			rd.forward(req, resp);
 		} else if("content".equals(action)) {
 				String pk = req.getParameter("pk");
+				String mNo = req.getParameter("mNo");
 				
 				PlaceDao placedao = new PlaceDao(dbuser, dbpass);
+				MDao dao = new MDao(dbuser, dbpass);
+				
 				PlaceVo contentvo = placedao.getPlaceItem(Long.valueOf(pk));
 				req.setAttribute("item", contentvo);
 				
+				MVo moim = new MVo();
+				moim = dao.selectOne(Long.valueOf(mNo));	
+				req.setAttribute("moim", moim);
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_content.jsp");
 				rd.forward(req, resp);		

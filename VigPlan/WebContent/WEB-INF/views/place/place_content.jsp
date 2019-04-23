@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.vigplan.vo.PlaceVo"%>
+<%@page import="com.vigplan.vo.MVo" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,6 +39,7 @@
 
 				<%
 					PlaceVo item = (PlaceVo) request.getAttribute("item");
+					MVo moim = (MVo)request.getAttribute("moim");
 					//object로 받아온 것 바꿔줌
 				%>
 				<tr>
@@ -68,8 +70,8 @@
 
 		<button type="button" class="btn btn-secondary btn-sm"
 			data-toggle="modal" data-target="#myModal">삭제</button>
-
-		<a href="<%=request.getContextPath()%>/place"
+		
+		<a href="<%=request.getContextPath()%>/place?mNo=<%=moim.getmNo() %>"
 			class="btn btn-secondary btn-sm">리스트</a>
 
 
