@@ -22,7 +22,7 @@
 <%
 MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
 <body>
-	<div class="container">
+	<div class="container" align="left">
 		<br> <br>
 		<h2>글쓰기</h2>
 
@@ -33,29 +33,31 @@ MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
 			<input type="hidden" name="a" value="write">
 			<input type="hidden" name="writer" value="<%=authUser.getNickname() %>">
 			<input type="hidden" name="memberNo" value="<%=authUser.getNo() %>">
-			<div class="form-group">
-				<label for="title" class="mb-2 mr-sm-2">제목:</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="title">
-			</div>
 			
-
-			<div class="form-group">
-				<label for="content" class="mb-2 mr-sm-2">내용</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="content">
+			<div align="right">
+			<table class= "table" border="2" width="500">
+       
+        <tr>
+          <td align="center">제목</td>
+          <td><textarea cols="50" rows="1" name="title"></textarea></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <textarea cols="100" rows="20" name="content"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">파일 첨부</td>
+          <td><input type="file" name="fileName"></td>
+        </tr>
+        <tr>
+          <td align="center">비밀번호</td>
+          <td><input type="password" name="password"></td>
+        </tr>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary mb-2">완료</button>
 			</div>
-
-			<div class="form-group">
-				<label for="password" class="mb-2 mr-sm-2">비밀번호</label> <input
-					type="password" class="form-control mb-2 mr-sm-2" name="password">
-			</div>
-
-
-			<!--     <div class="form-group">
-    <label for="content" class="mb-2 mr-sm-2">내용</label>
-    <input type="content" class="form-control mb-2 mr-sm-2" name="content">
-    </div> -->
-
-			<button type="submit" class="btn btn-primary mb-2">완료</button>
 		</form>
 	</div>
 
