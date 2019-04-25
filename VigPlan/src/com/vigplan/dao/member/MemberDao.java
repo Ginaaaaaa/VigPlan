@@ -404,7 +404,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 		
 		try {
 			conn = getConnection();
-			String sql = " SELECT m.no, m.id, m.nickname FROM member m, gboard g, member_group_bridge b WHERE g.gno=? AND m.no = b.member_no AND b.group_gno = g.gNo ";
+			String sql = " SELECT m.no, m.id, m.nickname, m.email FROM member m, gboard g, member_group_bridge b WHERE g.gno=? AND m.no = b.member_no AND b.group_gno = g.gNo ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, gno);
 		    rs = pstmt.executeQuery();
@@ -414,6 +414,7 @@ public class MemberDao extends BaseDao implements IMemberDao {
 				vo.setNo(rs.getLong(1));
 				vo.setId(rs.getString(2));
 				vo.setNickname(rs.getString(3));
+				vo.setEmail(rs.getString(4));
 				list.add(vo);
 			}
 		}catch(Exception e) {
