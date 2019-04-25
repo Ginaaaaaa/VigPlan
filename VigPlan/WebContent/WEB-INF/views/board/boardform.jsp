@@ -15,47 +15,84 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+table th {
+	text-align: center;
+}
 
-<head>
+.table {
+	margin-top: 20px;
+	margin-left: 100px;
+	width: 50% !important;
+	
+}
+
+div.absolute {
+  position: absolute;
+  width: 35%;
+  bottom: 150px;
+  right: 10px;
+
+} 
+
+div.title {
+	position: absolute;
+	left: 10px;
+	margin-left: 585px;
+}
+
+div.button {
+	position: absolute;
+	margin-left: 900px;
+	margin-top: 400px;
+}
+
+</style>
 
 </head>
 <%
-MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
+	MemberVo authUser = (MemberVo) session.getAttribute("authUser");
+%>
 <body>
-	<div class="container">
-		<br> <br>
-		<h2>글쓰기</h2>
-
+	<div class="container" align="left">
+		<br> 
 		<br>
+		<div class="title">
+		<h3>새 글 작성</h3>
+		</div>
+		<br>
+		
 		<form class="form-inline"
 			action="<%=request.getContextPath()/*ServletStudy*/%>/board"
-			method="POST"> 
-			<input type="hidden" name="a" value="write">
-			<input type="hidden" name="writer" value="<%=authUser.getNickname() %>">
-			<input type="hidden" name="memberNo" value="<%=authUser.getNo() %>">
-			<div class="form-group">
-				<label for="title" class="mb-2 mr-sm-2">제목:</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="title">
+			method="POST">
+			<input type="hidden" name="a" value="write"> <input
+				type="hidden" name="writer" value="<%=authUser.getNickname()%>">
+			<input type="hidden" name="memberNo" value="<%=authUser.getNo()%>">
+			<div class="table">
+			<table class="table" border="2" width="500">
+
+				<tr>
+					<td align="center">제목</td>
+					<td><input type="text" size="40" name="title"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea cols="100" rows="20" name="content"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">파일 첨부</td>
+					<td><input type="file" name="fileName"></td>
+				</tr>
+				<tr>
+					<td align="center">비밀번호</td>
+					<td><input type="password" name="password"></td>
+				</tr>
+			</table>
 			</div>
-			
-
-			<div class="form-group">
-				<label for="content" class="mb-2 mr-sm-2">내용</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="content">
+			<br>
+				<div class="button">
+				<button type="submit" class="btn btn-primary btn-md">완료</button>
 			</div>
-
-			<div class="form-group">
-				<label for="password" class="mb-2 mr-sm-2">비밀번호</label> <input
-					type="password" class="form-control mb-2 mr-sm-2" name="password">
-			</div>
-
-
-			<!--     <div class="form-group">
-    <label for="content" class="mb-2 mr-sm-2">내용</label>
-    <input type="content" class="form-control mb-2 mr-sm-2" name="content">
-    </div> -->
-
-			<button type="submit" class="btn btn-primary mb-2">완료</button>
 		</form>
 	</div>
 
