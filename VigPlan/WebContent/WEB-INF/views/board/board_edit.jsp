@@ -112,10 +112,7 @@ div.button {
 					<td align="center">파일 첨부</td>
 					<td><input type="file" name="fileName"></td>
 				</tr>
-				<tr>
-					<td align="center">비밀번호</td>
-					<td><input type="password" name="password"></td>
-				</tr>
+				
 			</table>
 			</div>
 			<br>
