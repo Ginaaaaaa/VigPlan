@@ -21,8 +21,10 @@ table th {
 }
 
 .table {
-	margin: auto;
+	margin-top: 20px;
+	margin-left: 100px;
 	width: 50% !important;
+	
 }
 
 div.absolute {
@@ -36,6 +38,13 @@ div.absolute {
 div.title {
 	position: absolute;
 	left: 10px;
+	margin-left: 585px;
+}
+
+div.button {
+	position: absolute;
+	margin-left: 900px;
+	margin-top: 400px;
 }
 
 </style>
@@ -59,6 +68,7 @@ div.title {
 			<input type="hidden" name="a" value="write"> <input
 				type="hidden" name="writer" value="<%=authUser.getNickname()%>">
 			<input type="hidden" name="memberNo" value="<%=authUser.getNo()%>">
+			<div class="table">
 			<table class="table" border="2" width="500">
 
 				<tr>
@@ -78,12 +88,14 @@ div.title {
 					<td><input type="password" name="password"></td>
 				</tr>
 			</table>
+			</div>
 			<br>
-			<div class="absolute">
-				<button type="submit" class="btn btn-primary mb-2">완료</button>
+				<div class="button">
+				<button type="submit" class="btn btn-primary btn-md">완료</button>
 			</div>
 		</form>
 	</div>
+
 
 </body>
 </html>
