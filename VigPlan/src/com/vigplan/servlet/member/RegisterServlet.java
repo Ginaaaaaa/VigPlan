@@ -46,9 +46,6 @@ public class RegisterServlet extends BaseServlet {
 			resp.setContentType("text/html;charset=UTF-8");
 			resp.setCharacterEncoding("UTF-8");
 			
-//			PrintWriter writer = resp.getWriter();
-//			writer.println("name=" + name + ", log=" + log);
-//			writer.close();
 			MemberVo vo = new MemberVo();
 			vo.setId(id);
 			vo.setPw(password);
@@ -61,8 +58,7 @@ public class RegisterServlet extends BaseServlet {
 			System.out.println("SUCCESS?:" + (insertedCount == 1));
 			
 			resp.sendRedirect(req.getContextPath() + "/member?a=success");
-	//		resp.sendRedirect(
-		//			req.getServletContext().getContextPath() + "/member/login");
+
 		} 
 		
 	}

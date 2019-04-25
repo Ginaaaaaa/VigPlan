@@ -28,7 +28,7 @@
 <td> <%=authUser.getEmail() %></td>
 <td> <%=authUser.getRegdate() %></td>
 <td> <a href="<%= request.getContextPath() %>/member/update?No=<%=authUser.getNo()%>">수정</a>
-<td> <a href="<%= request.getContextPath() %>/member/delete?No=<%=authUser.getNo()%>" onclick="return cancel()">삭제</a>
+<td> <a href="<%= request.getContextPath() %>/MemberDao/deleteMember?No=<%=authUser.getNo()%>" onclick="return cancel()">삭제</a>
 </tr>
 </table>
 
