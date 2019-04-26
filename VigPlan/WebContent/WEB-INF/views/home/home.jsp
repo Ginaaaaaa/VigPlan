@@ -20,6 +20,17 @@
 <%-- <%-- 			location.assign('<%= request.getContextPath() %>/group');  --%> 
 <!-- 	 }); -->
 <!--   }); -->
+
+<script>
+$(document).ready(function() {
+	$("#board_btn").click(function() {
+		location.assign('<%= request.getContextPath() %>/board'); 
+	});
+	$("#group_btn").click(function() {
+		location.assign('<%= request.getContextPath() %>/group'); 
+	});
+});
+</script>
  
 
 
@@ -76,4 +87,7 @@
 <%-- <% } %> --%>
 <!-- 	<button id="board_btn" class="btn">게시판</button> -->
 <!-- 	<button id="group_btn" class="btn">그룹</button> -->
+
+<button id="board_btn" class="btn">게시판</button>
+<button id="group_btn" class="btn">그룹</button>
 <%@include file="../includes/footer.jsp" %>

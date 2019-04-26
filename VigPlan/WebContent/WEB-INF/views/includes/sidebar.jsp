@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
     <script>
      $(document).ready(function() {
-	 $("#regist_btn").click(function() { 
+	 	$("#regist_btn").click(function() { 
 			location.assign('<%= request.getContextPath() %>/member');
-			</script>
+	 	});
+     });
+	</script>
     <div class="sidebar-fixed position-fixed sidebar-dark bg-secondary">
       <div style="text-align:center">
       <a class="logo-wrapper waves-effect" style="padding-bottom: 15px; padding-top: 20px;">
