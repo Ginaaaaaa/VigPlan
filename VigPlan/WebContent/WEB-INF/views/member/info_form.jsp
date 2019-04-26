@@ -1,13 +1,11 @@
-<%@ page import="com.vigplan.dao.member.MemberDao" %>    
+<%@ page import="com.vigplan.dao.member.MemberDao"%>    
 <%@ page import="com.vigplan.vo.MemberVo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
 
 <title>회원정보</title>
-<%
-	MemberVo authUser = (MemberVo)session.getAttribute("authUser");
-%>
+
 	<br> <br>
 	<h3><strong>회원관리 상세 페이지</strong></h3>
 	<br> <br>

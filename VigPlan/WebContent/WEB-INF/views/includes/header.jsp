@@ -1,3 +1,4 @@
+<%@page import="com.vigplan.vo.MemberVo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -59,7 +60,15 @@ position:absolute;
 
     <!-- Sidebar -->
     <%-- 세션 체크  --%>
+    <% 
+    MemberVo authUser = (MemberVo)session.getAttribute("authUser");
+  	 %> 
+ <% if (authUser == null) { %> 
 	<%@include file="sidebar.jsp" %>
+ <% } else {%>
+ 	<%@include file="sidebar2.jsp" %>
+ <% }%>
+
     <!-- Sidebar -->
   </header>
 
