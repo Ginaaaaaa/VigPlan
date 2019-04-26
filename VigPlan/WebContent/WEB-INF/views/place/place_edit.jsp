@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.vigplan.vo.PlaceVo"%>
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,7 +32,7 @@
 			method="POST"> 
 			<input type="hidden" name="a" value="editer">
 			<input type="hidden" name="pk" value="<%= item.getPk()%>">
-	
+
 			<div class="form-group">
 				<label for="title" class="mb-2 mr-sm-2"></label>제목<input
 					type="text" class="form-control mb-2 mr-sm-2" name="title" value="<%= item.getTitle()%>">

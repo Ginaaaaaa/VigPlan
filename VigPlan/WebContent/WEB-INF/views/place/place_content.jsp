@@ -71,7 +71,7 @@
 		<button type="button" class="btn btn-secondary btn-sm"
 			data-toggle="modal" data-target="#myModal">삭제</button>
 		
-		<a href="<%=request.getContextPath()%>/place?mNo=<%=moim.getmNo() %>"
+		<a href="<%=request.getContextPath()%>/moim/select?mNo=<%=moim.getmNo() %>"
 			class="btn btn-secondary btn-sm">리스트</a>
 
 
@@ -86,6 +86,7 @@
 					<form action="<%=request.getContextPath()%>/place" method="POST">
 						<input type="hidden" name="a" value="edit"> 
 						<input type="hidden" name="pk" value="<%=item.getPk()%>">
+						<input type="hidden" name="mNo" value="<%=moim.getmNo() %>">
 						<div class="modal-body">
 							<br> <br> 게시글을 수정하시겠습니까? <br> <br> <br>
 							<div class="modal-footer">
@@ -116,6 +117,7 @@
 					<form action="<%=request.getContextPath()%>/place" method="POST">
 						<input type="hidden" name="a" value="delete"> 
 						<input type="hidden" name="pk" value="<%=item.getPk()%>">
+						<input type="hidden" name="mNo" value="<%=moim.getmNo() %>">
 						<div class="modal-body">
 							<br> <br> 게시글을 삭제하시겠습니까? <br> <br> <br>
 							<div class="modal-footer">

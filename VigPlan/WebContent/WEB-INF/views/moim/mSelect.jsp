@@ -33,7 +33,7 @@ MVo moim = (MVo)request.getAttribute("moim");
 	</tr>
 	<tr>
 	<td> <%=moim.getmNo() %></td>
-	<td><%=moim.getmTitle() %></a></td>
+	<td><%=moim.getmTitle() %></td>
 	<td> <%=moim.getmDate() %></td>
 	<td> <%=moim.getmContent() %></td>
 	<td> <a href="<%= request.getContextPath() %>/moim/update?mNo=<%=moim.getmNo()%>">수정</a>

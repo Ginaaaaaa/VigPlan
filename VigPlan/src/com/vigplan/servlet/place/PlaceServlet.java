@@ -114,7 +114,7 @@ public class PlaceServlet extends BaseServlet {
 			insertdao.insertPlace(insertvo);
 			insertdao.insertbridge(insertMvo);
 //			req.setAttribute("mNo", moimNo);
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + mNo);
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/moim/select?mNo=" + mNo);
 			
 
 		}  else if("edit".equals(action)) {
@@ -124,12 +124,14 @@ public class PlaceServlet extends BaseServlet {
 			System.out.println(vo);
 			req.setAttribute("item", vo);
 			
+			MVo mvo = new MVo();
+			
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_edit.jsp");
 			rd.forward(req, resp);	
 			
 		} else if("editer".equals(action)) {
 		  PlaceDao editdao = new PlaceDao(dbuser,dbpass);
-		  
 		  
 		  String pk = req.getParameter("pk");
 		  String title = req.getParameter("title");
@@ -142,6 +144,8 @@ public class PlaceServlet extends BaseServlet {
 		  String mapy = req.getParameter("mapy");
 		  
 		  PlaceVo editvo = editdao.getPlaceItem(Long.valueOf(pk));
+		  MVo mvo = editdao.selectbridge(Long.valueOf(pk));
+		  Long mNo = mvo.getmNo();
 		  
 		  
 		  if (title == null || title.length() == 0) {
@@ -184,17 +188,17 @@ public class PlaceServlet extends BaseServlet {
 			editvo.setMapy(Integer.valueOf(mapy));
 			
 			
-			
 		  int result = editdao.updatePlace(editvo);
 		  
 		  MVo vo = new MVo();
 		  vo = editdao.selectbridge(Long.valueOf(pk));
 
-		  resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + vo.getmNo());
+		  resp.sendRedirect(req.getServletContext().getContextPath() + "/moim/select?mNo=" + mNo);
 		  
 			
 		} else if("delete".equals(action)) {
 			String pk = req.getParameter("pk");
+			String mNo = req.getParameter("mNo");
 			PlaceVo deletevo = new PlaceVo();
 			
 			
@@ -204,10 +208,9 @@ public class PlaceServlet extends BaseServlet {
 			MVo vo = new MVo();
 			vo = deletedao.selectbridge(Long.valueOf(pk));
 			
-			deletedao.deletePlace(Long.valueOf(pk));
 			int result = deletedao.deletebridge(Long.valueOf(pk));
 
-		   resp.sendRedirect(req.getServletContext().getContextPath() + "/place?mNo=" + vo.getmNo());
+		   resp.sendRedirect(req.getServletContext().getContextPath() + "/moim/select?mNo=" + mNo);
 			
 		}
 
