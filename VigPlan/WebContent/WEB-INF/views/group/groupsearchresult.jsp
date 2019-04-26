@@ -5,8 +5,9 @@
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@include file="../includes/header.jsp" %>
-<br> <br>
+		<br> <br>
 		<h3><strong>아이디 검색 결과</strong></h3>
 		<br> <br>
 

@@ -3,6 +3,7 @@ package com.vigplan.servlet.group;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.dao.group.GroupDao;
 import com.vigplan.vo.GroupVo;
+import com.vigplan.vo.MemberVo;
 
 import java.io.IOException;
 
@@ -11,11 +12,19 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/group/update")
 public class GroupUpdateServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
+		if (authUser == null) {
+			//	리다이렉트
+			response.sendRedirect(request.getContextPath() + "/member/login");
+		} else {
+		
 		System.out.println("update: do Get");
 		String gNo = request.getParameter("gNo");
 		GroupDao dao = new GroupDao(dbuser, dbpass);
@@ -24,6 +33,7 @@ public class GroupUpdateServlet extends BaseServlet {
 		request.setAttribute("group", vo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/groupupdateform.jsp");
 		rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1323,7 +1323,6 @@
 a {
   cursor: pointer;
   text-decoration: none;
-  color: #007bff;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out; }

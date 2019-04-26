@@ -66,7 +66,7 @@ position:absolute;
  <% if (authUser == null) { %> 
 	<%@include file="sidebar.jsp" %>
  <% } else {%>
- 	<%@include file="sidebar2.jsp" %>
+ 	<jsp:include page="/sidebar" />
  <% }%>
 
     <!-- Sidebar -->

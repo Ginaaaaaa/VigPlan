@@ -23,7 +23,13 @@ public class GroupDeleteServlet extends BaseServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//	로그인 해야 함
+		HttpSession session = request.getSession();
+		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
 		
+		if (authUser == null) {
+			//	리다이렉트
+			response.sendRedirect(request.getContextPath() + "/member/login");
+		} else {
 		
 		
 		String gNo = request.getParameter("gNo");
@@ -33,6 +39,7 @@ public class GroupDeleteServlet extends BaseServlet {
 		request.setAttribute("group", vo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/group/groupdeleteform.jsp");
 		rd.forward(request, response);
+	}
 	}
 
 
