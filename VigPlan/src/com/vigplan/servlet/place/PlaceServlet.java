@@ -40,7 +40,8 @@ public class PlaceServlet extends BaseServlet {
 			req.setAttribute("list", list);
 			req.setAttribute("moim", moim);
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/place/place_main.jsp");
-			rd.forward(req, resp);
+//			rd.forward(req, resp);
+			rd.include(req, resp);
 
 		} else if ("form".equals(action)) {
 			String mNo = req.getParameter("mNo");

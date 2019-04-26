@@ -17,7 +17,7 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 <tr><td>소개</td><td><input type="text" name="mContent"></td></tr>
 <tr><td><input type="submit" value="모임 생성">
 <input type="reset" value="다시작성">
-<input type="button" value="목록보기" onclick="location.href='<%= request.getContextPath() %>/moim'"></td></tr>
+<input type="button" value="목록보기" onclick="location.href='<%= request.getContextPath() %>/group/select?gNo=<%=group.getgNo()%>'"></td></tr>
 </table>
 </form>
 <%@include file="../includes/footer.jsp" %>
