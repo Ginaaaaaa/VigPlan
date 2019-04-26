@@ -21,6 +21,14 @@
     /* max-height: 500px; */ 
 }
 
+.sidebar-fixed.position-fixed.sidebar-dark.bg-secondary a:visited {
+    color: black;
+}
+
+.sidebar-fixed.position-fixed.sidebar-dark.bg-secondary a:hover {
+    color: blue;
+}
+
 @media (min-width: 1200px) {
   .navbar,
   .page-footer,

@@ -13,7 +13,6 @@
 	<tr>
 		<td>회원번호</td>
 		<td>아이디</td>
-		<td>패스워드</td>
 		<td>닉네임</td>
 		<td>이메일</td>
 		<td>가입날짜</td>
@@ -21,7 +20,6 @@
 		<tr>
 <td> <%=authUser.getNo() %></td>
 <td> <%=authUser.getId() %></td>
-<td> <%=authUser.getPw() %></td>
 <td> <%=authUser.getNickname() %></td>
 <td> <%=authUser.getEmail() %></td>
 <td> <%=authUser.getRegdate() %></td>

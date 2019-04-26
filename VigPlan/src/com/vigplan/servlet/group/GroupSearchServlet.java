@@ -49,6 +49,7 @@ public class GroupSearchServlet extends BaseServlet {
 		
 		System.out.println("현재사용자:" + authUser);
 		
+		//	기본적으로 로그인 안된 사용자는 로그인 창으로 돌려보내기
 		if (authUser == null) {
 			//	리다이렉트
 			response.sendRedirect(request.getContextPath() + "/member/login");
@@ -60,8 +61,7 @@ public class GroupSearchServlet extends BaseServlet {
 		GroupDao gdao = new GroupDao(dbuser, dbpass);
 		GroupVo vo = gdao.selectOne(Long.valueOf(gNo));
 		request.setAttribute("group", vo);
-		
-		
+
 		MemberDao mdao = new MemberDao(dbuser, dbpass);
 		List<MemberVo> list = mdao.getAllinvite(authUser,searchid);
 		System.out.println(list);
@@ -71,7 +71,5 @@ public class GroupSearchServlet extends BaseServlet {
 		System.out.println(gNo);
 		
 		}
-		
 	}
-
 }

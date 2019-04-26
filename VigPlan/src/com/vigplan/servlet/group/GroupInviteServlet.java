@@ -27,6 +27,14 @@ public class GroupInviteServlet extends BaseServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		MemberVo authUser = (MemberVo)session.getAttribute("authUser");
+		
+		if (authUser == null) {
+			//	리다이렉트
+			response.sendRedirect(request.getContextPath() + "/member/login");
+		} else {
 		String gNo = request.getParameter("gNo");
 		String no = request.getParameter("no");
 		
@@ -43,6 +51,7 @@ public class GroupInviteServlet extends BaseServlet {
 		System.out.println("invite : do Post");
 		response.sendRedirect(request.getContextPath() + "/group/select?gNo=" + gNo);
 		
+	}
 	}
 
 }
