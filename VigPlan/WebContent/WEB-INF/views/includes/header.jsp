@@ -17,6 +17,9 @@
   <!-- Your custom styles (optional) -->
   <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet">
   <script src="<%= request.getContextPath() %>/js/jquery-3.3.1.min.js"></script>
+  <script src="<%= request.getContextPath() %>/js/popper.min.js"></script>
+  <script src="<%= request.getContextPath() %>/js/bootstrap.min.js"></script>
+  
   <style>
   
 

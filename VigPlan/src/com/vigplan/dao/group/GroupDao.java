@@ -338,6 +338,25 @@ public class GroupDao extends BaseDao {
 	  }
 	
 	
+	// group 삭제 시 moim bridge까지 삭제 
+	public void deleteMoimPlaceBridge(Long gNo) {
+		Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    int re = 0;
+	    String sql = " DELETE FROM mboard_place_bridge WHERE mno IN (SELECT m.mno FROM gboard g, mboard m, group_moim_bridge b WHERE g.gno=? AND b.group_gno=g.gno AND b.moim_mno=m.mno) ";
+	    try {
+	      conn = getConnection();
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setLong(1, gNo);
+	      ResultSet rs = pstmt.executeQuery();
+	      
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    } finally {
+	    	try {if(pstmt != null) pstmt.close();} catch(Exception e) {}
+			try {if(conn != null) conn.close();} catch(Exception e) {}
+	    }
+	  }
 	
 	
 	

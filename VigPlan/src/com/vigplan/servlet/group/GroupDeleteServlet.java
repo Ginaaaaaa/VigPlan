@@ -54,10 +54,11 @@ public class GroupDeleteServlet extends BaseServlet {
 			out.println("</script>");
 			
 		} else {
-		
+			
+			dao.deleteMoimPlaceBridge(Long.valueOf(gNo));		// group 내 moim 내 moim_place_bridge의 mNo 레코드 삭제
 			dao.deleteMoimInGroup(Long.valueOf(gNo));			// group 내 mboard 데이터 삭제
-			int d = dao.deleteGroupMoimBridge(Long.valueOf(gNo));	//group_moim bridge의 gNo 레코드 삭제
-			int r = dao.deleteMemberGroupBridge(Long.valueOf(gNo));	//member_group bridge의 gNo 레코드 삭제
+			int d = dao.deleteGroupMoimBridge(Long.valueOf(gNo));	//group_moim_bridge의 gNo 레코드 삭제
+			int r = dao.deleteMemberGroupBridge(Long.valueOf(gNo));	//member_group_bridge의 gNo 레코드 삭제
 			int i = dao.deleteGroup(Long.valueOf(gNo));	// group 데이터 삭제
 			
 			out.println("<script type=\"text/javascript\">");
