@@ -18,9 +18,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script language="javascript">
-
-
-
 	function checkForm(frm) {
 		var password = frm.password.value;
 		var id = frm.id.value;
