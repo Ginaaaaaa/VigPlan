@@ -34,7 +34,7 @@ MVo moim = (MVo)request.getAttribute("moim");	//	NULL
 				%>
 				<tr>
 					<td><a
-						href="<%=request.getContextPath()%>/place?a=content&pk=<%=vo.getPk()%>&mNo=<%=moim.getmNo() %>"><%=vo.getTitle()%><%--</a> --%></td>
+						href="<%=request.getContextPath()%>/place?a=content&pk=<%=vo.getPk()%>&mNo=<%=moim.getmNo() %>"><%=vo.getTitle()%></a></td>
 					
 					<td><%=vo.getLink()%></td>
 					<td><%=vo.getDescription()%></td>
@@ -43,6 +43,7 @@ MVo moim = (MVo)request.getAttribute("moim");	//	NULL
 					<td><%=vo.getRoadAddress() %></td>
 					<td><%=vo.getMapx() %></td>
 					<td><%=vo.getMapy() %></td>
+					<td><button>삭제</button></td>
 				</tr>
 
 				<%
