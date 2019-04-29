@@ -53,8 +53,8 @@ for(MemberVo vo: list){
 	</td>
 	</tr>
 	<tr><td> <button onclick="document.frmUpdate.submit();">그룹명 수정</button></td>
-	<td><a href="<%= request.getContextPath() %>/group/delete?gNo=<%=group.getgNo()%>"">그룹 삭제</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="<%= request.getContextPath() %>/group/search?gNo=<%=group.getgNo()%>"">맴버 초대하기</a></td></tr>
+	<td><a href="<%= request.getContextPath() %>/group/delete?gNo=<%=group.getgNo()%>">그룹 삭제</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="<%= request.getContextPath() %>/group/search?gNo=<%=group.getgNo()%>">맴버 초대하기</a></td></tr>
 
 </table>
 
@@ -117,7 +117,7 @@ $("#exampleModal").on("show.bs.modal", function(event) {
 	</tbody>
 	<form action="<%=request.getContextPath()%>/moim/write">
 		<input type="hidden" name="gNo" value=<%=group.getgNo()%>>
-		<button type="submit" class="btn btn-primary">모임 만들기</button>
+		<div style="text-align:right"><button type="submit" class="btn btn-secondary">모임 만들기</button></div>
 	</form>
 </table>
 <%@include file="../includes/footer.jsp"%>
