@@ -48,7 +48,7 @@ for(GroupVo vo: list){
 <br>
 
 <hr>
-<a href="">후기</a>
+<a href="<%= request.getContextPath()%>/board">후기</a>
       </div>
     </div>
   </div>

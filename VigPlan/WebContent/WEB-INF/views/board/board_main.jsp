@@ -44,7 +44,7 @@ MemberVo authUser = (MemberVo)session.getAttribute("authUser");%>
 
 	<div class="container">
 		<br> <br>
-		<h3><strong>전체글보기</strong></h3>
+		<h3><strong>후기 게시판</strong></h3>
 		<br> <br>
 		<table class="table">
 			<thead>

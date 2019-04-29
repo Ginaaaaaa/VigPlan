@@ -58,7 +58,7 @@ div.button {
 		<br> 
 		<br>
 		<div class="title">
-		<h3>새 글 작성</h3>
+		<h3>후기 작성</h3>
 		</div>
 		<br>
 		
