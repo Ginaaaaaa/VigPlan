@@ -26,13 +26,13 @@ public class KakaoApi {
 		static BufferedReader reader = null;
 		static InputStreamReader isr = null;
 
-		public static List<KakaoApiVo> searchPlace(String keyword, int size, int page){
+		public static List<KakaoApiVo> searchPlace(String keyword){
 		List<KakaoApiVo> list = null;
 		
 		try {
 		
 			String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
-			String LOCAL_SEARCH_API_URL = "https://dapi.kakao.com/v2/local/search/keyword.json?size=" + size + "&page=" + page +"&query=" ; 																												// 가능
+			String LOCAL_SEARCH_API_URL = "https://dapi.kakao.com/v2/local/search/keyword.json?query=" ; 																												// 가능
 			URL url = new URL(LOCAL_SEARCH_API_URL + encodedKeyword);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("GET");

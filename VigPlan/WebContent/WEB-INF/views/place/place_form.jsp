@@ -1,3 +1,7 @@
+<%@page import="com.vigplan.vo.KakaoApiVo" %>
+<%@page import="com.vigplan.vo.MemberVo" %>
+<%@page import="com.vigplan.vo.PlaceVo" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.vigplan.vo.MVo"%>
@@ -65,4 +69,40 @@ MVo moim = (MVo)request.getAttribute("moim");
 		</form>
 	</div>
 
+	<div id="searchList">
+	</div>
+
+	<script>
+	function searchKeyword(frm) {
+		
+		$.ajax({
+			url: "<%= request.getContextPath() %>/place/search",
+			data: {
+				"keyword": frm.keyword.value
+			}, 
+			success: function(data) {
+				$("#searchList").html(data);
+			}, 
+			error: function(request,response,error) {
+				console.err(error);
+			}
+			
+		});
+		
+	}
+	
+	$(document).ready(function() {
+		$("#searchList").load("<%= request.getContextPath() %>/place/search");
+
+
+	});
+	</script>
+	
+
 <%@include file="../includes/footer.jsp" %>
+
+
+
+
+
+
