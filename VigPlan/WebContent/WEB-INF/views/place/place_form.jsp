@@ -13,7 +13,7 @@ MVo moim = (MVo)request.getAttribute("moim");
 		<br> <br>
 		<h2>장소 등록</h2>
 		<br>
-		<form class="form-inline"
+		<form id="registerForm" class="form-inline"
 			action="<%=request.getContextPath()%>/place"
 			method="POST">
 			<input type="hidden" name="a" value="insert">
@@ -73,6 +73,15 @@ MVo moim = (MVo)request.getAttribute("moim");
 	</div>
 
 	<script>
+	function insertPlace(placeId) {
+		var sourceForm = document.getElementById("place_" + placeId);
+		var targetForm = document.getElementById("registerForm");
+		
+		//console.log(sourceForm.place_name.value);
+		//console.log(targetForm);
+		
+		targetForm.title.value = sourceForm.place_name.value;
+	}
 	function searchKeyword(frm) {
 		
 		$.ajax({

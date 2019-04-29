@@ -56,14 +56,13 @@ function callPage(pageNo) {
 							for (KakaoApiVo vo : list) {
 					%>
 					<tr>
-						<td><%=vo.getPlace_name()%></td>
+						<td><a href="#" onclick="insertPlace(<%= vo.getId() %>)"><%=vo.getPlace_name()%></a></td>
 						<td><%=vo.getPlace_url()%></td>
 						<td><%=vo.getPhone()%></td>
-						<td><%=vo.getAddress_name()%></td>
-					</tr>
-					<form>
+						<td><%=vo.getAddress_name()%>
+						<form id="place_<%= vo.getId() %>">
 						
-						<input type="hidden" name="place_name" value="<%= vo.getPlace_name() %>">
+
 						<input type="hidden" name="place_url" value="<%= vo.getPlace_url() %>">
 						<input type="hidden" name="place_name" value="<%= vo.getPlace_name() %>">
 						<input type="hidden" name="phone" value="<%= vo.getPhone() %>">
@@ -72,7 +71,11 @@ function callPage(pageNo) {
 						<input type="hidden" name="x" value="<%= vo.getX() %>">
 						<input type="hidden" name="y" value="<%= vo.getY() %>">
 						
-					</form>
+						</form>
+						</td>
+						
+					</tr>
+					
 					<%
 						}
 						}
