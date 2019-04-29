@@ -60,7 +60,7 @@ div.button {
 
 		<form class="form-inline"
 			action="<%=request.getContextPath()/*ServletStudy*/%>/board"
-			method="POST">
+			method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="a" value="write"> <input
 				type="hidden" name="writer" value="<%=authUser.getNickname()%>">
 			<input type="hidden" name="memberNo" value="<%=authUser.getNo()%>">
@@ -83,11 +83,10 @@ div.button {
 							</form></td> -->
 
 						 <td align="center">파일 첨부</td>
-					<td><form method="post" enctype="multipart/form-data"
-								action="imgup.jsp">
+					<td>
 								<input type="file" name="filename1" size=40> <input
 									type="submit" value="업로드">
-							</form></td>
+					</td>
 					</tr>
 					<tr>
 						<td align="center">비밀번호</td>
