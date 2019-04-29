@@ -57,7 +57,7 @@ function callPage(pageNo) {
 					%>
 					<tr>
 						<td><a href="#" onclick="insertPlace(<%= vo.getId() %>)"><%=vo.getPlace_name()%></a></td>
-						<td><%=vo.getPlace_url()%></td>
+						<td><a href="#" onclick="insertPlace(<%= vo.getId() %>)"><%=vo.getPlace_url()%></a></td>
 						<td><%=vo.getPhone()%></td>
 						<td><%=vo.getAddress_name()%>
 						<form id="place_<%= vo.getId() %>">

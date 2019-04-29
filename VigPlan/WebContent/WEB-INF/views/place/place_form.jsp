@@ -81,6 +81,7 @@ MVo moim = (MVo)request.getAttribute("moim");
 		//console.log(targetForm);
 		
 		targetForm.title.value = sourceForm.place_name.value;
+		targetForm.link.value = sourceForm.place_url.value;
 	}
 	function searchKeyword(frm) {
 		
