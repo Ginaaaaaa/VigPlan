@@ -51,10 +51,10 @@ public class GroupDeleteServlet extends BaseServlet {
 		GroupDao dao = new GroupDao(dbuser, dbpass);
 		PrintWriter out = response.getWriter();
 		
-		int gpw = dao.getGpw(Long.valueOf(gNo));		// 맞는 패스워드 호출
+		String gpw = dao.getGpw(Long.valueOf(gNo));		// 맞는 패스워드 호출
 		System.out.println(gpw);
 		
-		if(gpw != Integer.valueOf(pw)) {					// 입력한 패스워드와 맞는 패스워드 비교
+		if(gpw != String.valueOf(pw)) {					// 입력한 패스워드와 맞는 패스워드 비교
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('비밀번호가 틀립니다.');");
 			out.println("history.back();");

@@ -15,7 +15,7 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 	<th>수정할 그룹명</th>
 	<td><input type="text" name="gName" value="<%=group.getgName()%>"></td>
 </tr>
-<tr><td><input type="submit" value="수정하기" ></td></tr>
+<tr><td colspan="2" align="center"><input type="submit" class="btn btn-secondary btn-md" value="수정하기" ></td></tr>
 </table>
 </form>
 <%@include file="../includes/footer.jsp" %>

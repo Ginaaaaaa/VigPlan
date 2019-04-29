@@ -58,6 +58,7 @@ public class GroupSearchServlet extends BaseServlet {
 		System.out.println("search : do Post");
 		String gNo = request.getParameter("gNo");
 		String searchid = request.getParameter("searchid");
+		String a = request.getParameter("a");
 		GroupDao gdao = new GroupDao(dbuser, dbpass);
 		GroupVo vo = gdao.selectOne(Long.valueOf(gNo));
 		request.setAttribute("group", vo);

@@ -225,8 +225,8 @@ public class GroupDao extends BaseDao {
 	  }
 	
 	// pw delete check
-	public int getGpw(Long gNo) {
-	    int pw = 0;
+	public String getGpw(Long gNo) {
+		String pw = null;
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    ResultSet rs = null;
@@ -237,7 +237,7 @@ public class GroupDao extends BaseDao {
 	      pstmt.setLong(1, gNo);	      
 	      rs = pstmt.executeQuery();
 	      rs.next();
-	      pw = rs.getInt(1);
+	      pw = rs.getString(1);
 	      
 	      
 	    } catch (Exception e) {
