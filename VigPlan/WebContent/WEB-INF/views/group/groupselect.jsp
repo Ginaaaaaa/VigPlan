@@ -53,8 +53,8 @@ for(MemberVo vo: list){
 	</td>
 	</tr>
 	<tr><td> <button onclick="document.frmUpdate.submit();">그룹명 수정</button></td>
-	<td><a href="<%= request.getContextPath() %>/group/delete?gNo=<%=group.getgNo()%>"">그룹 삭제</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="<%= request.getContextPath() %>/group/search?gNo=<%=group.getgNo()%>"">맴버 초대하기</a></td></tr>
+	<td><a href="<%= request.getContextPath() %>/group/delete?gNo=<%=group.getgNo()%>">그룹 삭제</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="<%= request.getContextPath() %>/group/search?gNo=<%=group.getgNo()%>">맴버 초대하기</a></td></tr>
 
 </table>
 
