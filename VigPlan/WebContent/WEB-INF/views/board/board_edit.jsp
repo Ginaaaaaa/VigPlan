@@ -105,9 +105,12 @@ div.button {
 					<td><input type="text" size="40" name="title" value="<%= item.getTitle() %>"></td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea cols="100" rows="20" name="content"><%= item.getContent()%></textarea>
+					<td colspan="2"><textarea cols="100" rows="20" name="content"><%= item.getContent()%>
+					
+					</textarea>
 					</td>
 				</tr>
+		
 				<tr>
 					<td align="center">파일 첨부</td>
 					<td><input type="file" name="filename1" size=40 ></td>
