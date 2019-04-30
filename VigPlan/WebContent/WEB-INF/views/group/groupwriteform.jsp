@@ -47,8 +47,10 @@
 	<div>그룹명&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="gName"><br>
 		 비밀번호 : <input type="password" name="gPw"></div>
 		 비밀번호 확인 :<input type="password" name="gPw1"></div>
-
+		 <br>
+	<div style="text-align:center">
 	<input type="submit" value="그룹 생성">
-	<input type="button" value="목록보기" onclick="location.href='<%= request.getContextPath() %>/group'">
+	<input type="button" value="홈으로" onclick="location.href='<%= request.getContextPath() %>/'">
+	</div>
 </form>
 <%@include file="../includes/footer.jsp" %>
