@@ -8,7 +8,7 @@
       <div style="text-align:center">
       <a href="<%= request.getContextPath()%>/" class="logo-wrapper waves-effect" style="padding-bottom: 15px; padding-top: 20px;">
             <h3 style="text-align:center;"><strong>Vig Plan</strong></h3>
-          <img src="img/icon/high-five.png" class="img-fluid" alt="" width="120" height="200">
+          <img src="<%=request.getContextPath()%>/img/icon/high-five.png" class="img-fluid" alt="" width="120" height="200">
       </a>
     </div>
     <hr>
