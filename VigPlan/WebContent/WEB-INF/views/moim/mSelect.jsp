@@ -29,15 +29,15 @@ MVo moim = (MVo)request.getAttribute("moim");
 		<td>번호</td>
 		<td>모임명</td>
 		<td>모임날짜</td>
-		<td>모임소개</td>
+		<td colspan="3" align="left">모임소개</td>
 	</tr>
 	<tr>
 	<td> <%=moim.getmNo() %></td>
-	<td><%=moim.getmTitle() %></td>
+	<td> <%=moim.getmTitle() %></td>
 	<td> <%=moim.getmDate() %></td>
 	<td> <%=moim.getmContent() %></td>
-	<td> <a href="<%= request.getContextPath() %>/moim/update?mNo=<%=moim.getmNo()%>">수정</a>
-	<td> <a href="<%= request.getContextPath() %>/moim/delete?mNo=<%=moim.getmNo()%>" onclick="return cancel()">삭제</a>
+	<td> <a href="<%= request.getContextPath() %>/moim/update?mNo=<%=moim.getmNo()%>">수정</a></td>
+	<td> <a href="<%= request.getContextPath() %>/moim/delete?mNo=<%=moim.getmNo()%>" onclick="return cancel()">삭제</a></td>
 	</tr>
 	</table>
 

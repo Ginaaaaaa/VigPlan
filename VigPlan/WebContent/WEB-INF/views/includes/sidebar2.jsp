@@ -41,18 +41,18 @@
 List<GroupVo> list = (List<GroupVo>)request.getAttribute("sidebarGlist");
 for(GroupVo vo: list){					
 %>
-  <li><a href="<%= request.getContextPath()%>/group/select?gNo=<%=vo.getgNo()%>"><%=vo.getgName()%></a></li>
+  <li><a style="font-size:20px" href="<%= request.getContextPath()%>/group/select?gNo=<%=vo.getgNo()%>"><%=vo.getgName()%></a></li>
 <%
 }
 %>
 </ul>
 
-<a href="<%= request.getContextPath()%>/group/write">+그룹</a>
+<a style="font-size:20px" href="<%= request.getContextPath()%>/group/write">+그룹</a>
 </div>
 <br>
 
 <hr>
-<a href="<%= request.getContextPath()%>/board">후기</a>
+<a style="font-size:20px" href="<%= request.getContextPath()%>/board">후기</a>
       </div>
     </div>
   </div>

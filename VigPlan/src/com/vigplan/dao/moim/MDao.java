@@ -124,7 +124,7 @@ public class MDao extends BaseDao {
 		
 		try {
 			conn = getConnection();
-			String sql = " SELECT m.mno, m.mtitle, m.mdate FROM gboard g, mboard m, group_moim_bridge b WHERE g.gno=? AND b.group_gno = g.gNo AND m.mno = b.moim_mno ";
+			String sql = " SELECT m.mno, m.mtitle, m.mdate FROM gboard g, mboard m, group_moim_bridge b WHERE g.gno=? AND b.group_gno = g.gNo AND m.mno = b.moim_mno ORDER BY m.mdate DESC ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, gno);
 		    rs = pstmt.executeQuery();

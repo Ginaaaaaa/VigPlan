@@ -24,3 +24,5 @@ CREATE TABLE mboard_place_bridge (
   pk number(30),
   primary key (mno, pk) -- Optional
 );
+
+ALTER TABLE mboard modify(mdate varchar2(50));

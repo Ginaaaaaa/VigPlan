@@ -63,7 +63,7 @@ public class MWriteServlet extends BaseServlet {
 		vo.setmTitle(mTitle);
 		vo.setmDate(mDate);
 		vo.setmContent(mContent);
-
+		System.out.println(mDate);
 		MDao dao = new MDao(dbuser, dbpass);
 		int i = dao.insertMoim(vo);
 		dao.insertGroupMoimBridge(gvo, vo);
