@@ -2,8 +2,13 @@
 <%@ page import="com.vigplan.vo.MVo" %>
 <%@ page import="com.vigplan.dao.group.GroupDao" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.vigplan.dao.member.MemberDao"%>    
+<%@ page import="com.vigplan.vo.MemberVo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% 
+    MemberVo authUser = (MemberVo)session.getAttribute("authUser");
+  	 %>
 <div class="sidebar-fixed position-fixed sidebar-dark bg-secondary">
       <div style="text-align:center">
       <a href="<%= request.getContextPath()%>/" class="logo-wrapper waves-effect" style="padding-bottom: 15px; padding-top: 20px;">
@@ -12,10 +17,9 @@
       </a>
     </div>
     <hr>
-
         <br>
         <div class="round-button">
-            <a href="http://example.com"></a>
+		<%=authUser.getNickname() %>
         </div>
         <br>
         <div style="text-align : center">
