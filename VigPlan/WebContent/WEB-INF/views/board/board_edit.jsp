@@ -113,8 +113,7 @@ div.button {
 		
 				<tr>
 					<td align="center">파일 첨부</td>
-					<td><input type="file" name="filename1" size=40 ></td>
-					<td><input type="text" value="<%= item.getFilename1() %>"></td>
+					<td><input type="file" name="filename1" size=40 ><input type="text" value="<%= item.getFilename1() %>"></td>
 				</tr>
 				
 			</table>
