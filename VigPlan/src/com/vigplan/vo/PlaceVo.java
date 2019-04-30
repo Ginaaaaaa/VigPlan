@@ -9,8 +9,8 @@ public class PlaceVo {
 	private String telephone;
 	private String address;
 	private String roadAddress; 
-	private Integer mapx;
-	private Integer mapy;
+	private Double mapx;
+	private Double mapy;
 
 	public PlaceVo() {
 
@@ -72,19 +72,19 @@ public class PlaceVo {
 		this.roadAddress = roadAddress;
 	}
 
-	public Integer getMapx() {
+	public Double getMapx() {
 		return mapx;
 	}
 
-	public void setMapx(Integer mapx) {
+	public void setMapx(Double mapx) {
 		this.mapx = mapx;
 	}
 
-	public Integer getMapy() {
+	public Double getMapy() {
 		return mapy;
 	}
 
-	public void setMapy(Integer mapy) {
+	public void setMapy(Double mapy) {
 		this.mapy = mapy;
 	}
 

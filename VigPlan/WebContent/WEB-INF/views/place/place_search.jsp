@@ -63,8 +63,8 @@ function callPage(pageNo) {
 						<form id="place_<%= vo.getId() %>">
 						
 
-						<input type="hidden" name="place_url" value="<%= vo.getPlace_url() %>">
 						<input type="hidden" name="place_name" value="<%= vo.getPlace_name() %>">
+						<input type="hidden" name="place_url" value="<%= vo.getPlace_url() %>">
 						<input type="hidden" name="phone" value="<%= vo.getPhone() %>">
 						<input type="hidden" name="address_name" value="<%= vo.getAddress_name() %>">
 						<input type="hidden" name="road_address_name" value="<%= vo.getRoad_address_name() %>">

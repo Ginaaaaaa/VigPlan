@@ -105,8 +105,8 @@ public class PlaceServlet extends BaseServlet {
 			insertvo.setTelephone(telephone);
 			insertvo.setAddress(address);
 			insertvo.setRoadAddress(roadAddress);
-			insertvo.setMapx(Integer.valueOf(mapx));
-			insertvo.setMapy(Integer.valueOf(mapy));
+			insertvo.setMapx(Double.valueOf(mapx));
+			insertvo.setMapy(Double.valueOf(mapy));
 
 			
 
@@ -168,12 +168,12 @@ public class PlaceServlet extends BaseServlet {
 			}
 			if (mapx == null || mapx.length() == 0) {
 				mapx = String.valueOf(editvo.getMapx());
-				editvo.setMapx(Integer.valueOf(mapx));
+				editvo.setMapx(Double.valueOf(mapx));
 				
 			}
 			if (mapy == null || mapy.length() == 0) {
 				mapy = String.valueOf(editvo.getMapy());
-				editvo.setMapy(Integer.valueOf(mapy));
+				editvo.setMapy(Double.valueOf(mapy));
 			}
 			
 			
@@ -184,8 +184,8 @@ public class PlaceServlet extends BaseServlet {
 			editvo.setTelephone(telephone);
 			editvo.setAddress(address);
 			editvo.setRoadAddress(roadAddress);
-			editvo.setMapx(Integer.valueOf(mapx));
-			editvo.setMapy(Integer.valueOf(mapy));
+			editvo.setMapx(Double.valueOf(mapx));
+			editvo.setMapy(Double.valueOf(mapy));
 			
 			
 		  int result = editdao.updatePlace(editvo);

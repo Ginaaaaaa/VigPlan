@@ -14,3 +14,10 @@ CREATE TABLE place (
 CREATE SEQUENCE seq_place
 START WITH 1
 INCREMENT BY 1;
+
+alter table place modify (link varchar2(400) null);
+alter table place modify (description varchar2(4000) null);
+alter table place modify (roadaddress varchar2(128) null);
+alter table place modify (telephone varchar2(200) null);
+alter table place modify (mapx number(25, 15));
+alter table place modify (mapy number(25, 15));

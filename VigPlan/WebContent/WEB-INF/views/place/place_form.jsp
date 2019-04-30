@@ -82,6 +82,11 @@ MVo moim = (MVo)request.getAttribute("moim");
 		
 		targetForm.title.value = sourceForm.place_name.value;
 		targetForm.link.value = sourceForm.place_url.value;
+		targetForm.telephone.value = sourceForm.phone.value;
+		targetForm.address.value = sourceForm.address_name.value;
+		targetForm.roadAddress.value = sourceForm.road_address_name.value;
+		targetForm.mapx.value = sourceForm.x.value;
+		targetForm.mapy.value = sourceForm.y.value;
 	}
 	function searchKeyword(frm) {
 		

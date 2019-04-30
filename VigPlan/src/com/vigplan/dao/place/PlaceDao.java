@@ -42,8 +42,8 @@ public class PlaceDao extends BaseDao {
 				vo.setTelephone(rs.getString(5));
 				vo.setAddress(rs.getString(6));
 				vo.setRoadAddress(rs.getString(7));
-				vo.setMapx(rs.getInt(8));
-				vo.setMapy(rs.getInt(9));
+				vo.setMapx(rs.getDouble(8));
+				vo.setMapy(rs.getDouble(9));
 				list.add(vo);
 
 			}
@@ -91,8 +91,8 @@ public class PlaceDao extends BaseDao {
 			pstmt.setString(4, vo.getTelephone());
 			pstmt.setString(5, vo.getAddress());
 			pstmt.setString(6, vo.getRoadAddress());
-			pstmt.setInt(7, vo.getMapx());
-			pstmt.setInt(8, vo.getMapy());
+			pstmt.setDouble(7, vo.getMapx());
+			pstmt.setDouble(8, vo.getMapy());
 
 			pstmt.executeUpdate();
 
@@ -140,8 +140,8 @@ public class PlaceDao extends BaseDao {
 				line.setTelephone(rs.getString(4));
 				line.setAddress(rs.getString(5));
 				line.setRoadAddress(rs.getString(6));
-				line.setMapx(rs.getInt(7));
-				line.setMapy(rs.getInt(8));
+				line.setMapx(rs.getDouble(7));
+				line.setMapy(rs.getDouble(8));
 				
 
 			}
@@ -182,8 +182,8 @@ public class PlaceDao extends BaseDao {
 			pstmt.setString(4, vo.getTelephone());
 			pstmt.setString(5, vo.getAddress());
 			pstmt.setString(6, vo.getRoadAddress());
-			pstmt.setInt(7, vo.getMapx());
-			pstmt.setInt(8, vo.getMapy());
+			pstmt.setDouble(7, vo.getMapx());
+			pstmt.setDouble(8, vo.getMapy());
 			pstmt.setLong(9, vo.getPk());
 
 			result = pstmt.executeUpdate();
@@ -260,8 +260,8 @@ public class PlaceDao extends BaseDao {
 				vo.setTelephone(rs.getString(4));
 				vo.setAddress(rs.getString(5));
 				vo.setRoadAddress(rs.getString(6));
-				vo.setMapx(rs.getInt(7));
-				vo.setMapy(rs.getInt(8));
+				vo.setMapx(rs.getDouble(7));
+				vo.setMapy(rs.getDouble(8));
 				vo.setPk(rs.getLong(9));
 	
 				list.add(vo);

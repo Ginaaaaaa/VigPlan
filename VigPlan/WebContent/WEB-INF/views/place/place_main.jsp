@@ -30,19 +30,19 @@ MVo moim = (MVo)request.getAttribute("moim");	//	NULL
 			<tbody>
 				<%
 					List<PlaceVo> list = (List<PlaceVo>) request.getAttribute("list");
-					for (PlaceVo vo : list) {
+					for (PlaceVo pvo : list) {
 				%>
 				<tr>
 					<td><a
-						href="<%=request.getContextPath()%>/place?a=content&pk=<%=vo.getPk()%>&mNo=<%=moim.getmNo() %>"><%=vo.getTitle()%></a></td>
+						href="<%=request.getContextPath()%>/place?a=content&pk=<%=pvo.getPk()%>&mNo=<%=moim.getmNo() %>"><%=pvo.getTitle()%></a></td>
 					
-					<td><%=vo.getLink()%></td>
-					<td><%=vo.getDescription()%></td>
-					<td><%=vo.getTelephone() %></td>
-					<td><%=vo.getAddress() %></td>
-					<td><%=vo.getRoadAddress() %></td>
-					<td><%=vo.getMapx() %></td>
-					<td><%=vo.getMapy() %></td>
+					<td><%=pvo.getLink()%></td>
+					<td><%=pvo.getDescription()%></td>
+					<td><%=pvo.getTelephone() %></td>
+					<td><%=pvo.getAddress() %></td>
+					<td><%=pvo.getRoadAddress() %></td>
+					<td><%=pvo.getMapx() %></td>
+					<td><%=pvo.getMapy() %></td>
 					<td><button>삭제</button></td>
 				</tr>
 
