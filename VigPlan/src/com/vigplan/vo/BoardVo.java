@@ -10,10 +10,18 @@ public class BoardVo {
 	private Long view_cnt;
 	private String reg_date;
 	private Long memberNo;
-	
+	private String filename1;
 
 
 	
+	public String getFilename1() {
+		return filename1;
+	}
+
+	public void setFilename1(String filename1) {
+		this.filename1 = filename1;
+	}
+
 	public Long getId() {
 		return id;
 	}

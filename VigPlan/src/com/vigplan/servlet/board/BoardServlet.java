@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.vigplan.dao.board.BoardDao;
-import com.vigplan.dao.member.MemberDao;
 import com.vigplan.servlet.BaseServlet;
 import com.vigplan.vo.BoardVo;
 import com.vigplan.vo.MemberVo;
@@ -90,7 +90,8 @@ public class BoardServlet extends BaseServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String realFolder = req.getServletContext().getRealPath("img");
+		String realFolder = req.getServletContext().getRealPath("upload");
+		String filename1 = "";
 		int maxSize = 1024 * 1024 * 1024;
 		String encType = "UTF-8";
 		MultipartRequest multi = null;
@@ -123,12 +124,20 @@ public class BoardServlet extends BaseServlet {
 			String writer = multi.getParameter("writer");
 			String content = multi.getParameter("content");
 			String memberNo = multi.getParameter("memberNo");
+			
+			
+			Enumeration<?> files = multi.getFileNames();
+		     String file1 = (String)files.nextElement();
+		     filename1 = multi.getFilesystemName(file1);
+		     System.out.println(realFolder + "\\" + filename1);
+		     System.out.println(filename1);
 		
 
 			if (authUser == null) {
 				resp.sendRedirect(req.getContextPath() + "/member/login");
 				return;
 			}
+			
 			
 			BoardVo vo = new BoardVo();
 
@@ -137,9 +146,16 @@ public class BoardServlet extends BaseServlet {
 			vo.setWriter(writer);
 			vo.setContent(content);
 			vo.setMemberNo(Long.valueOf(memberNo));
+			vo.setFilename1(filename1);
+			
 			System.out.println(vo);
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 			/* int insertedCount = */dao.insertBoard(vo);
+			
+
+			  
+			      
+			 
 
 			
 
