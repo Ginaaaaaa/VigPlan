@@ -15,3 +15,7 @@ INCREMENT BY 1;
 -- 테이블 수정
 ALTER TABLE vigteam_board 
   ADD (member_no NUMBER);
+
+-- 테이블 수정(4/30)
+ALTER TABLE vigteam_board 
+  ADD (filename1 VARCHAR2(30));

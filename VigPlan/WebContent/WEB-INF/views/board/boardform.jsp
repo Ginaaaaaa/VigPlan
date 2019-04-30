@@ -75,18 +75,11 @@ div.button {
 						<td colspan="2"><textarea cols="100" rows="20" name="content"></textarea>
 						</td>
 					</tr>
-					<tr>
-						<!-- <td><form method="post" enctype="multipart/form-data"
-								action="imgup.jsp">
-								<input type="file" name="filename1" size=40> <input
-									type="submit" value="업로드">
-							</form></td> -->
 
-						 <td align="center">파일 첨부</td>
-					<td>
-								<input type="file" name="filename1" size=40> <input
-									type="submit" value="업로드">
-					</td>
+					<tr>
+						<td align="center">파일 첨부</td>
+
+						<td><input type="file" name="filename1" size=40></td>
 					</tr>
 					<tr>
 						<td align="center">비밀번호</td>
