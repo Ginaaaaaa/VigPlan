@@ -47,8 +47,8 @@
 					alert("비밀번호 맞지 않음");
 					frm.password.focus();
 				}
-			error: function(request,response,error) {
 			},
+			error: function(request,response,error) {
 				alert("Error:" + error)
 			}
 		});

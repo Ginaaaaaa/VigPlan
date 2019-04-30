@@ -1,6 +1,7 @@
 package com.vigplan.servlet.board;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.vigplan.dao.board.BoardDao;
 import com.vigplan.dao.member.MemberDao;
 import com.vigplan.servlet.BaseServlet;
@@ -87,27 +90,46 @@ public class BoardServlet extends BaseServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String realFolder = req.getServletContext().getRealPath("img");
+		int maxSize = 1024 * 1024 * 1024;
+		String encType = "UTF-8";
+		MultipartRequest multi = null;
+		String action = null;
+		
 		req.setCharacterEncoding("UTF-8");
-
-		String action = req.getParameter("a");
+		
+		System.out.println("CONTENT TYPE:" + req.getContentType());
+		
+		if (req.getContentType() != null &&
+				req.getContentType().indexOf("multipart/form-data") > -1) {
+			//	멀티파트일 때
+			multi = new MultipartRequest(req, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
+			action = multi.getParameter("a");
+		} else {
+			//	멀티파트 아닐 때
+			action = req.getParameter("a");
+		}
+		
+//		String action = req.getParameter("a");
+		System.out.println("action:" + action);
 
 		HttpSession session = req.getSession();
 		MemberVo authUser = (MemberVo) session.getAttribute("authUser");
 
 		// boardform 수행시 parameter
 		if ("write".equals(action)) {
-			String password = req.getParameter("password");
-			String title = req.getParameter("title");
-			String writer = req.getParameter("writer");
-			String content = req.getParameter("content");
-			String memberNo = req.getParameter("memberNo");
+			String password = multi.getParameter("password");
+			String title = multi.getParameter("title");
+			String writer = multi.getParameter("writer");
+			String content = multi.getParameter("content");
+			String memberNo = multi.getParameter("memberNo");
 		
 
 			if (authUser == null) {
 				resp.sendRedirect(req.getContextPath() + "/member/login");
 				return;
 			}
-//			if(authUser != null) {
+			
 			BoardVo vo = new BoardVo();
 
 			vo.setPassword(password);
@@ -119,7 +141,7 @@ public class BoardServlet extends BaseServlet {
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 			/* int insertedCount = */dao.insertBoard(vo);
 
-//			}
+			
 
 			// System.out.println("SUCCESS?:" + (insertedCount == 1));
 
