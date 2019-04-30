@@ -94,7 +94,7 @@ div.button {
 		
 		<form class="form-inline"
 			action="<%=request.getContextPath()/*ServletStudy*/%>/board"
-			method="POST">
+			method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="a" value="editer">
 			<input type="hidden" name="id" value="<%= item.getId() %>">
 			<div class="table">
@@ -110,7 +110,8 @@ div.button {
 				</tr>
 				<tr>
 					<td align="center">파일 첨부</td>
-					<td><input type="file" name="fileName"></td>
+					<td><input type="file" name="filename1" size=40 ></td>
+					<td><input type="text" value="<%= item.getFilename1() %>"></td>
 				</tr>
 				
 			</table>

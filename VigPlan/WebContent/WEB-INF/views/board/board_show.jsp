@@ -75,6 +75,7 @@
 					<th>작성자</th>
 					<th>내용</th>
 					<th>날짜</th>
+					<th>사진</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -89,6 +90,7 @@
 					<td><%=item.getWriter()%></td>
 					<td><%=item.getContent()%></td>
 					<td><%=item.getReg_date()%></td>
+					<td><img src="<%=request.getContextPath() %>/upload/<%=item.getFilename1()%>"/></td>
 				</tr>
 
 

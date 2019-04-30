@@ -122,7 +122,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 		try {
 			conn = getConnection();
 
-			String sql = "SELECT title, writer, reg_date, content, member_no FROM vigteam_board where id = ?";
+			String sql = "SELECT title, writer, reg_date, content, member_no, filename1 FROM vigteam_board where id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, id);
 			rs = pstmt.executeQuery();
@@ -136,6 +136,7 @@ public class BoardDao extends BaseDao implements IBoardDao {
 				line.setReg_date(rs.getString(3));
 				line.setContent(rs.getString(4));
 				line.setMemberNo(rs.getLong(5));
+				line.setFilename1(rs.getString(6));
 
 			}
 
@@ -170,12 +171,13 @@ public class BoardDao extends BaseDao implements IBoardDao {
 
 		try {
 			conn = getConnection();
-			String sql = "UPDATE vigteam_board SET title = ?, content = ?, view_cnt = view_cnt + 1 WHERE id = ? ";
+			String sql = "UPDATE vigteam_board SET title = ?, content = ?, filename1 = ?, view_cnt = view_cnt + 1 WHERE id = ? ";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
-			pstmt.setLong(3, vo.getId());
+			pstmt.setString(3, vo.getFilename1());
+			pstmt.setLong(4, vo.getId());
 
 			result = pstmt.executeUpdate();
 

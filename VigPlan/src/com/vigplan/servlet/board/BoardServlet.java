@@ -172,13 +172,14 @@ public class BoardServlet extends BaseServlet {
 
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 			BoardVo vo = dao.getBoardItem(Long.valueOf(id));
-
+			System.out.println(vo);
 			String password1 = dao.checkPw(Long.valueOf(id));
 			System.out.println(password1);
 
 			if (password.equals(password1)) {
 				// id의 값을 string으로 받아오니까
 				req.setAttribute("item", vo);
+				
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
 				// RequestDispatcher rd =
 				// req.getRequestDispatcher("/WEB-INF/views/board/board_edit.jsp");
@@ -195,10 +196,15 @@ public class BoardServlet extends BaseServlet {
 		} else if ("editer".equals(action)) {
 			BoardDao dao = new BoardDao(dbuser, dbpass);
 
-			String id = req.getParameter("id");
-			String title = req.getParameter("title");
-			String content = req.getParameter("content");
-
+			String id = multi.getParameter("id");
+			String title = multi.getParameter("title");
+			String content = multi.getParameter("content");
+			
+			Enumeration<?> files = multi.getFileNames();
+		     String file1 = (String)files.nextElement();
+		     filename1 = multi.getFilesystemName(file1);
+		    
+		     
 			BoardVo vo = dao.getBoardItem(Long.valueOf(id));
 
 			if (title == null || title.length() == 0) {
@@ -211,6 +217,7 @@ public class BoardServlet extends BaseServlet {
 			vo.setId(Long.valueOf(id));
 			vo.setTitle(title);
 			vo.setContent(content);
+			vo.setFilename1(filename1);
 
 			System.out.println(vo.toString());
 			// vo.setWriter(writer);
