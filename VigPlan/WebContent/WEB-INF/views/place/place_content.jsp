@@ -44,7 +44,7 @@
 				%>
 				<tr>
 					<td><%=item.getTitle()%></td>
-					<td><%=item.getLink()%></td>
+					<td><a href="<%=item.getLink()%>"><%=item.getLink()%></a></td>
 					<td><%=item.getDescription()%></td>
 					<td><%=item.getTelephone()%></td>
 					<td><%=item.getAddress()%></td>
