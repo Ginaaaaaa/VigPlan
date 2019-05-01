@@ -119,5 +119,8 @@ $("#exampleModal").on("show.bs.modal", function(event) {
 		<input type="hidden" name="gNo" value=<%=group.getgNo()%>>
 		<div style="text-align:right"><button type="submit" class="btn btn-secondary">모임 만들기</button></div>
 	</form>
+	
+	
+	
 </table>
 <%@include file="../includes/footer.jsp"%>
