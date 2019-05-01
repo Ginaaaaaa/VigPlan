@@ -23,8 +23,7 @@
         		return true;
         	}
         }
-        
-        
+
         
             $(function () {
                 $('#datetimepicker2').datetimepicker({
@@ -36,11 +35,9 @@
             });
         </script>
 
-
-
-<br> <br>
+		<br><br>
 		<h3><strong>모임 만들기</strong></h3>
-		<br> <br>
+		<br><br>
 <%
 GroupVo group = (GroupVo) request.getAttribute("group");
 %>
@@ -50,10 +47,12 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 <tr><td>모임명</td><td><input class="form-control" type="text" name="mTitle"></td></tr>
 <tr><td>날짜</td><td><div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                     <input type="text" name="mDate" id="datetimepicker2" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
-                    <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div></td></tr>
+                    	<div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                    		<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    	</div>
+                	</div>
+             	</td>
+</tr>
 <tr><td>소개</td><td><input class="form-control" type="text" name="mContent"></td></tr>
 <tr><td><input type="submit" value="모임 생성" onclick="return check(this.form)">
 <input type="reset" value="다시작성">

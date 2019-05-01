@@ -8,8 +8,8 @@
 GroupVo group = (GroupVo) request.getAttribute("group");
 %>
 <script>
-	function search(frm){
-		
+	function search(){
+		frm = document.invite;
 		var gNo = frm.gNo.value;
 		var searchid = frm.searchid.value;
 		
@@ -31,15 +31,30 @@ GroupVo group = (GroupVo) request.getAttribute("group");
 			}
 		});
 	}
+	
+	$(document).ready(function() {
+		console.log("load");
+		$('#searchid').on("keypress", function(event) {
+		    if (event.keyCode == 13) {
+		        event.preventDefault();
+		        search();
+		    } else {
+		    	
+		    }
+		});	
+	});
+	
+
+	
 </script>
 
 		<br> <br>
 		<h3><strong>멤버 그룹 초대하기</strong></h3>
 		<br> <br>
-<form name="invite" method="post" action="<%= request.getContextPath() %>/group/search">
+<form id=invite name="invite" method="post" action="<%= request.getContextPath() %>/group/search" >
 	<input type="hidden" name="gNo" value="<%=group.getgNo() %>">
-	<input type="text" name="searchid" placeholder="초대하고 싶은 아이디 입력">
-	<button type="button" onclick="return search(this.form)">검색</button>
+	<input id="searchid" type="text" name="searchid" placeholder="초대하고 싶은 아이디 입력">
+	<button type="button" onclick="return search()">검색</button>
 </form>
 
 <div id="searchList">
