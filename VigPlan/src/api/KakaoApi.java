@@ -19,7 +19,7 @@ import com.vigplan.vo.KakaoApiVo;
 
 public class KakaoApi {
 	private static final String CLIENT_ID = "dd4d3097d3505db8a32dc36cafd99fe1"; 
-	private static final String AUTHORIZATION_CODE = "KakaoAK dd4d3097d3505db8a32dc36cafd99fe1"; // 로그인 과정중 얻은 authorization code 값
+	private static final String AUTHORIZATION_CODE = "KakaoAK " + CLIENT_ID; // 로그인 과정중 얻은 authorization code 값
 
 
 		OutputStreamWriter writer = null;
