@@ -56,6 +56,50 @@
 		</table>
 
 
+
+
+	<div id="map" style="width:500px;height:400px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79f8a4193cedf5ef5e69deb539dcb601"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new daum.maps.LatLng(<%=item.getMapy()%>, <%=item.getMapx()%>),
+			level: 3
+		};
+
+		var map = new daum.maps.Map(container, options);
+		
+		var markerPosition  = new daum.maps.LatLng(<%=item.getMapy()%>, <%=item.getMapx()%>); 
+
+		// 마커를 생성합니다
+		var marker = new daum.maps.Marker({
+		    position: markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map)
+		
+		
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<%-- 			<a href="<%=request.getContextPath()%>/board?a=edit&id=<%=item.getId()%>"
 			class="btn btn-secondary btn-sm" >수정</a>
 			
