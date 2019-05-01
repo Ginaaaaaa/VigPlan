@@ -43,7 +43,7 @@ MVo moim = (MVo)request.getAttribute("moim");	//	NULL
 					<td><%=pvo.getRoadAddress() %></td>
 					<td><%=pvo.getMapx() %></td>
 					<td><%=pvo.getMapy() %></td>
-					<td><button>삭제</button></td>
+					<td style = "width: 52px;"><button style="width: 56px;"><a href="<%=request.getContextPath()%>/place?a=delete&pk=<%=pvo.getPk()%>&mNo=<%=moim.getmNo()%>">삭제</a></button></td>
 				</tr>
 
 				<%
