@@ -20,43 +20,42 @@ MVo moim = (MVo)request.getAttribute("moim");
 			<input type="hidden" name="mNo" value="<%=moim.getmNo()%>">
 			<div class="form-group">
 				<label for="title" class="mb-2 mr-sm-2">제목</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="title">
+					type="text" disabled class="form-control mb-2 mr-sm-2" name="title">
 			</div>
 			<br> <br>
-
 			<div class="form-group">
 				<label for="link" class="mb-2 mr-sm-2">링크</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="link">
+					type="text" disabled class="form-control mb-2 mr-sm-2" name="link">
 			</div>
 
 			<div class="form-group">
-				<label for="description" class="mb-2 mr-sm-2">설명</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="description">
+				<label for="description" class="mb-2 mr-sm-2"></label> <input
+					type="hidden" class="form-control mb-2 mr-sm-2" name="description">
 			</div>
-
+			
 			<div class="form-group">
 				<label for="telephone" class="mb-2 mr-sm-2">전화</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="telephone">
+					type="text" disabled class="form-control mb-2 mr-sm-2" name="telephone">
 			</div>
 			
 			<div class="form-group">
 				<label for="address" class="mb-2 mr-sm-2">주소</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="address">
+					type="text" disabled class="form-control mb-2 mr-sm-2" name="address">
 			</div>
 			
 			<div class="form-group">
-				<label for="roadAddress" class="mb-2 mr-sm-2">도로명 주소</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="roadAddress">
+				<label for="roadAddress" class="mb-2 mr-sm-2"></label> <input
+					type="hidden" class="form-control mb-2 mr-sm-2" name="roadAddress">
 			</div>
 			
 			<div class="form-group">
-				<label for="mapx" class="mb-2 mr-sm-2">x좌표</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="mapx">
+				<label for="mapx" class="mb-2 mr-sm-2"></label> <input
+					type="hidden" class="form-control mb-2 mr-sm-2" name="mapx">
 			</div>
 			
 			<div class="form-group">
-				<label for="mapy" class="mb-2 mr-sm-2">y좌표</label> <input
-					type="text" class="form-control mb-2 mr-sm-2" name="mapy">
+				<label for="mapy" class="mb-2 mr-sm-2"></label> <input
+					type="hidden" class="form-control mb-2 mr-sm-2" name="mapy">
 			</div>
 
 

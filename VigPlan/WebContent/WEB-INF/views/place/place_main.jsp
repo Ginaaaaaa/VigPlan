@@ -18,12 +18,9 @@ MVo moim = (MVo)request.getAttribute("moim");	//	NULL
 				
 					<th>제목</th>
 					<th>링크</th>
-					<th>설명</th>
 					<th>전화번호</th>
 					<th>주소</th>
-					<th>도로명 주소</th>
-					<th>x좌표</th>
-					<th>y좌표</th>
+
 					
 				</tr>
 			</thead>
@@ -37,12 +34,9 @@ MVo moim = (MVo)request.getAttribute("moim");	//	NULL
 						href="<%=request.getContextPath()%>/place?a=content&pk=<%=pvo.getPk()%>&mNo=<%=moim.getmNo() %>"><%=pvo.getTitle()%></a></td>
 					
 					<td><%=pvo.getLink()%></td>
-					<td><%=pvo.getDescription()%></td>
 					<td><%=pvo.getTelephone() %></td>
 					<td><%=pvo.getAddress() %></td>
-					<td><%=pvo.getRoadAddress() %></td>
-					<td><%=pvo.getMapx() %></td>
-					<td><%=pvo.getMapy() %></td>
+
 					<td style = "width: 52px;"><button style="width: 56px;"><a href="<%=request.getContextPath()%>/place?a=delete&pk=<%=pvo.getPk()%>&mNo=<%=moim.getmNo()%>">삭제</a></button></td>
 				</tr>
 

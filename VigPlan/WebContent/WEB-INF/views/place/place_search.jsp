@@ -13,7 +13,21 @@ function callPage(pageNo) {
 	//alert("new start pos:" + newStart);
 	frm.page.value = newPage;
 	frm.submit();
+	
+	
 }
+$(document).ready(function() {
+	console.log("load");
+	$('#searchid').on("keypress", function(event) {
+	    if (event.keyCode == 13) {
+	        event.preventDefault();
+	        searchKeyword(this.form);
+	    } else {
+	    	
+	    }
+	});	
+});
+
 </script>
 
 		<form name='frm' method='GET'
@@ -26,8 +40,7 @@ function callPage(pageNo) {
 			<h3>
 				<strong>검색</strong>
 			</h3>
-			<aside style='float: right;'> <input type='text'
-				name='keyword' 
+			 <input id='searchid' type='text' name='keyword' 
 				<% if (request.getParameter("keyword") != null) { %>
 				value='<%= request.getParameter("keyword") %>'
 				<% } %>

@@ -27,12 +27,9 @@
 				<tr>
 					<th>제목</th>
 					<th>링크</th>
-					<th>설명</th>
 					<th>전화</th>
 					<th>주소</th>
-					<th>도로명 주소</th>
-					<th>x좌표</th>
-					<th>y좌표</th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -45,12 +42,9 @@
 				<tr>
 					<td><%=item.getTitle()%></td>
 					<td><a href="<%=item.getLink()%>"><%=item.getLink()%></a></td>
-					<td><%=item.getDescription()%></td>
 					<td><%=item.getTelephone()%></td>
 					<td><%=item.getAddress()%></td>
-					<td><%=item.getRoadAddress()%></td>
-					<td><%=item.getMapx()%></td>
-					<td><%=item.getMapy()%></td>
+
 				</tr>
 			</tbody>
 		</table>
